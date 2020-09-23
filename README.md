@@ -1,3 +1,3 @@
-# rig-presiden
+# GEC-PRESIDENCE
 
 Gestion Electronique des Courriers
