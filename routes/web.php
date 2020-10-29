@@ -16,7 +16,14 @@ use Illuminate\Support\Facades\Route;
 // Route::any('(.*)', function () {
 //     return view('welcome');
 // });
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login');
+
 
 Route::fallback(function () {
     return view('welcome');
 });
+
+
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

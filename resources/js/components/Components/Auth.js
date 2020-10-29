@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useIterable } from '../Helpers/Hooks';
 import { SET_AUTH } from '../Store/Actions';
+import axios from 'axios';
 
 export default function () {
 
@@ -24,13 +25,22 @@ export default function () {
     
   }, []);
 
-
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   function handleSubmit(e) {
     e.preventDefault();
-
-    let data = useIterable(new FormData(e.target));
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:8000/sanctum/csrf-cookie").then(Response =>{
+      axios.post('http://localhost:8000/login',{
+        email: email,
+        password: password
+      }).then(res => {
+          console.log(res.data);
+      });
+    });
+    //let data = useIterable(new FormData(e.target));
     
-    let meta = document.head.querySelector('[name="csrf-token"]');
+    //let meta = document.head.querySelector('[name="csrf-token"]');
     // fetch('/login', {
     //   method: 'POST',
     //   headers: {
@@ -44,10 +54,10 @@ export default function () {
     //     console.log(response)
     // })
 
-    dispatch({
+  /*  dispatch({
       type: SET_AUTH,
       data: {}
-    });
+    });*/
   }
   
   
@@ -64,10 +74,18 @@ export default function () {
       {/* form */}
       <form onSubmit={handleSubmit}>
         <div className="form-group" >
-          <input type="text" className="form-control" name="email" placeholder="Utilisateur" required autoFocus />
+          <input type="text" className="form-control" name="email" 
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Utilisateur" required autoFocus 
+          />
         </div>
         <div className="form-group">
-          <input type="password" className="form-control" name="password" placeholder="Mot de passe" required />
+          <input type="password" className="form-control" 
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          name="password" placeholder="Mot de passe" required 
+        />
         </div>
         {/* <div className="form-group d-flex justify-content-between">
           <div className="custom-control custom-checkbox">
