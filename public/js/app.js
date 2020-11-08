@@ -96712,8 +96712,13 @@ if(false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! /home/lahiyata/projects/laravel/eig-presidence/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/lahiyata/projects/laravel/eig-presidence/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! D:\Moussa Doc\labs\laravel\eig-presidence\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Moussa Doc\labs\laravel\eig-presidence\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 84bd9c2152a84455c268a4d1c7798bc29ad79a9c
 =======
 __webpack_require__(/*! D:\Moussa Doc\labs\laravel\eig-presidence\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\Moussa Doc\labs\laravel\eig-presidence\resources\sass\app.scss */"./resources/sass/app.scss");
