@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Route::any('(.*)', function () {
 //     return view('welcome');
 // });
+Route::post('/register', [App\Http\Controllers\Resgisterontroller::class, 'register'])->name('register');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'login'])->name('login');
+Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 
 Route::fallback(function () {
