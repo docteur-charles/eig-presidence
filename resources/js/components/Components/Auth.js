@@ -31,7 +31,7 @@ export default function () {
     e.preventDefault();
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:8000/sanctum/csrf-cookie").then(Response =>{
-      axios.post('http://localhost:8000/login',{
+      axios.post('http://localhost:8000/api/login',{
         email: email,
         password: password
       }).then(res => {
