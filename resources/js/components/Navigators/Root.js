@@ -38,9 +38,14 @@ export default function Root() {
     }
   }
 
+  useEffect(() => {
+    let $ = window.$;
+    $('body .layout-wrapper').niceScroll();
+  }, [])
+
   return (
     <>
-      <div className="layout-wrapper">
+      <div className="layout-wrapper" style={{overflow: 'hidden', outline: 'none'}}>
 
         <Header full={expand} />
 
@@ -50,7 +55,7 @@ export default function Root() {
           
           <div className="content-body">
 
-            <div className="content" style={expand ? ({paddingRight: 0}): ({})}>
+            <div className="content" style={expand ? ({paddingRight: 0,position: 'relative'}): ({position: 'relative'})}>
               <Switch>
                 <Route path="/" exact render={() => <Redirect to="/dashboard" />} />
                 <Route path='/dashboard' component={Dashboard} />

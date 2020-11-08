@@ -112,7 +112,7 @@ export default function Usage() {
     <div className="row">
       <div className="col-md-12">
         <h4>Usage mensuel</h4>
-        <div id="daily-usage" />
+        <div id="daily-usage"/>
       </div>
     </div>
   )

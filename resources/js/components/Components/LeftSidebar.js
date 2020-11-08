@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
 export default function () {
+
+
+  useEffect(() => {
+    let $ = window.$;
+    $('.navigation .header-list').niceScroll();
+  }, []);
+  
 
   return (
     <div className="navigation">
@@ -11,7 +18,7 @@ export default function () {
           <img src="/assets/images/logo.png" width="100px" alt="logo" />
         </Link>
       </div>
-      <ul style={{overflow: 'auto'}}>
+      <ul className="header-list">
         <li className="gec-dashboard">
           <Link to="/dashboard">
             <i className="nav-link-icon ti-pie-chart" />

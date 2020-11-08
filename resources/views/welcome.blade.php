@@ -51,6 +51,16 @@
     <script src="{{asset('vendors/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('assets/js/app.min.js')}}"></script>
     <script src="/js/app.js"></script>
+    <script>
+        toastr.options = {
+            timeOut: 3000,
+            progressBar: true,
+            showMethod: "slideDown",
+            hideMethod: "slideUp",
+            showDuration: 200,
+            hideDuration: 200
+        };
+    </script>
 </body>
 
 </html>
