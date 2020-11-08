@@ -8,21 +8,21 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function Resgister( Resquest $request) {
+    public function Resgister(Request $request)
+    {
 
-        $request->validate ([
+        $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'id_role' => ['required'],
             'password' => ['required'],
         ]);
-        User:: create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'id_role' => $request->id_role,
             'password' => Hash::make($request->password)
 
         ]);
-
     }
 }
