@@ -16,7 +16,7 @@ class LoginController extends Controller
         if(Auth::attempt($request->only('email', 'password'))) {
             return response()->json(Auth::user(),200);
         } else {
-            return  response()->json(['error'=>"login ou mot de passe invalide"],500);
+            return  response()->json(['error'=>"login ou mot de passe invalides"],422);
         }
     }
     public function logout() {
