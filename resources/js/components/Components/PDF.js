@@ -20,8 +20,9 @@ export default function PDF({url, pagination = false}) {
   }
 
   return (
-    <div style={{position: 'relative', height: '80%'}}>
+    <div style={{position: 'relative'}}>
       <Document
+        renderMode="svg"
         file={url}
         onLoadSuccess={onDocumentLoadSuccess}
       >

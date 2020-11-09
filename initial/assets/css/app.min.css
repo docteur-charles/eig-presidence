@@ -4825,8 +4825,8 @@ a.btn[href="#previous"]:not(:disabled):not(.disabled):active,
 a.btn[href="#next"]:not(:disabled):not(.disabled).active,
 a.btn[href="#previous"]:not(:disabled):not(.disabled).active {
   cursor: pointer;
-  background: #ff1f1f;
-  border-color: #ff1f1f;
+  background: #fa7d00;
+  border-color: #fa7d00;
 }
 
 .btn.btn-primary:not(:disabled):not(.disabled):focus,
@@ -4849,7 +4849,7 @@ a.btn[href="#previous"]:hover {
 }
 
 .btn.btn-gradient-primary {
-  background: linear-gradient(20deg, #ff9f9f, #ff1f1f);
+  background: linear-gradient(20deg, #ff9f9f, #fa7d00);
   border-color: transparent;
   color: white;
 }
@@ -4858,7 +4858,7 @@ a.btn[href="#previous"]:hover {
 .btn.btn-gradient-primary:not(:disabled):not(.disabled):focus,
 .btn.btn-gradient-primary:not(:disabled):not(.disabled):active,
 .btn.btn-gradient-primary:not(:disabled):not(.disabled).active {
-  background: linear-gradient(20deg, #fa7d00, #ff1f1f);
+  background: linear-gradient(20deg, #fa7d00, #fa7d00);
   border-color: transparent;
 }
 

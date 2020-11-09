@@ -67,6 +67,20 @@ Author URL: https://themeforest.net/user/laborasyon/portfolio
 
 --------------------------------------------------------------------- */
 
+@font-face {
+  font-family: "Product-Sans-Regular";
+  src: url(/fonts/product-sans-regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Product-Sans-Bold";
+  src: url(/fonts/product-sans-bold.ttf) format("truetype");
+}
+
+body {
+  font-family: "Product-Sans-Regular" !important;
+}
+
 .m-0 {
   margin: 0px !important;
 }
@@ -4702,8 +4716,8 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-primary:not(:disabled):not(.disabled):hover, a.btn[href="#next"]:not(:disabled):not(.disabled):hover, a.btn[href="#previous"]:not(:disabled):not(.disabled):hover, .btn.btn-primary:not(:disabled):not(.disabled):focus, a.btn[href="#next"]:not(:disabled):not(.disabled):focus, a.btn[href="#previous"]:not(:disabled):not(.disabled):focus, .btn.btn-primary:not(:disabled):not(.disabled):active, a.btn[href="#next"]:not(:disabled):not(.disabled):active, a.btn[href="#previous"]:not(:disabled):not(.disabled):active, .btn.btn-primary:not(:disabled):not(.disabled).active, a.btn[href="#next"]:not(:disabled):not(.disabled).active, a.btn[href="#previous"]:not(:disabled):not(.disabled).active {
   cursor: pointer;
-  background: #ff1f1f;
-  border-color: #ff1f1f;
+  background: #fa7d00;
+  border-color: #fa7d00;
 }
 
 .btn.btn-primary:not(:disabled):not(.disabled):focus, a.btn[href="#next"]:not(:disabled):not(.disabled):focus, a.btn[href="#previous"]:not(:disabled):not(.disabled):focus {
@@ -4720,13 +4734,13 @@ a.btn:hover, a.btn:active, a.btn:focus {
 }
 
 .btn.btn-gradient-primary {
-  background: linear-gradient(20deg, #ff9f9f, #ff1f1f);
+  background: linear-gradient(20deg, #ff9f9f, #fa7d00);
   border-color: transparent;
   color: white;
 }
 
 .btn.btn-gradient-primary:not(:disabled):not(.disabled):hover, .btn.btn-gradient-primary:not(:disabled):not(.disabled):focus, .btn.btn-gradient-primary:not(:disabled):not(.disabled):active, .btn.btn-gradient-primary:not(:disabled):not(.disabled).active {
-  background: linear-gradient(20deg, #fa7d00, #ff1f1f);
+  background: linear-gradient(20deg, #fa7d00, #fa7d00);
   border-color: transparent;
 }
 
@@ -10235,4 +10249,15 @@ span.select2.select2-container .select2-selection {
   font-size: 0.875rem;
   border-radius: 0.25rem;
   background: none;
+}
+
+.react-pdf__Document .react-pdf__Page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.react-pdf__Page__svg, .react-pdf__Page__svg svg {
+  height: auto !important;
+  width: 100% !important;
 }

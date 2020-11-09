@@ -38,10 +38,10 @@ export default function Root() {
     }
   }
 
-  useEffect(() => {
-    let $ = window.$;
-    $('body .layout-wrapper').niceScroll();
-  }, [])
+  // useEffect(() => {
+  //   let $ = window.$;
+  //   $('body .layout-wrapper').niceScroll();
+  // }, [])
 
   return (
     <>

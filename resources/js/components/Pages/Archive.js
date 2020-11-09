@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Resultat from '../Components/Resultat';
+import SearchInput from '../Components/SearchInput';
 
 export default function Archive() {
 
 
   let [showResult, setResult] = useState(false);
+  let [isLoading, setLoading] = useState(false);
 
   function showResults(e) {
+
     e.preventDefault();
     setResult(true);
+    
+    // Rechercher dans la base de données.
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
   }
 
   function inputChange(e) {
@@ -17,25 +27,23 @@ export default function Archive() {
       setResult(false);
     }
   }
-  
+
   return (
     <div className="container-fluid mb-4">
-      <div className="row justify-content-center">
-        <div className="text-center col-12">
-          <Link to="/">
-            <img src="/assets/images/logo_transparent.png" width="200px" alt="logo" />
-          </Link>
-          <form className="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-xl-6 offset-xl-3" onSubmit={showResults}>
-            <div className="form-group">
-              <input required type="search" onChange={inputChange} style={{textAlign: 'center', borderRadius: 10, fontSize: 20, lineHeight: 20}} placeholder="Rechercher un courrier" className="input-lg form-control pd-md-3 pd-lg-4 pd-xl-5" aria-label="Text input with dropdown button" />
-            </div>
-            <button type="submit" class="btn btn-lg rounded-pill btn-primary w-50 justify-content-center">Rechercher</button>
+      <div className="row">
+        <div className="text-center col-12 d-flex flex-column align-items-center ">
+          <img src="/assets/images/logo_transparent.png" width="200px" alt="logo" />
+          <form className="col-lg-8 col-md-10 col-xl-8" onSubmit={showResults}>
+            <SearchInput onChange={inputChange} />
+            <button type="button" class="btn m-t-20 w-50 btn-warning btn-uppercase p-3 justify-content-center btn-rounded">
+              <i class="ti-search mr-2"></i>RECHERCHER
+        </button>
           </form>
         </div>
       </div>
 
       {showResult && (
-        <Resultat />
+        <Resultat isLoading={isLoading} />
       )}
 
     </div>
