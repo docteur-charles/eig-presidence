@@ -35,8 +35,8 @@ export default function Archive() {
           <img src="/assets/images/logo_transparent.png" width="200px" alt="logo" />
           <form className="col-lg-8 col-md-10 col-xl-8" onSubmit={showResults}>
             <SearchInput onChange={inputChange} />
-            <button type="button" class="btn m-t-20 w-50 btn-warning btn-uppercase p-3 justify-content-center btn-rounded">
-              <i class="ti-search mr-2"></i>RECHERCHER
+            <button type="button" className="btn m-t-20 w-50 btn-warning btn-uppercase p-3 justify-content-center btn-rounded">
+              <i className="ti-search mr-2"></i>RECHERCHER
         </button>
           </form>
         </div>

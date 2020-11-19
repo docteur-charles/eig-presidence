@@ -1,11 +1,19 @@
 .conteneur {
+  cursor: pointer;
   position: relative;
   width: 80%;
-  margin: 10px auto;
-  height: 300px;
-  background: #ddd;
-  border-radius: 6px;
-  box-shadow: 0px 0px 3px #000;
+  max-width: 800px;
+  margin: 15px 0;
+  height: 200px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 4px orange;
+  overflow: hidden;
+  user-select: none;
+}
+
+.conteneur:active {
+  opacity: .7;
 }
 
 .conteneur>.courrier {
@@ -15,7 +23,6 @@
   z-index: 0;
   color: black;
   overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .conteneur>.cover {
@@ -25,7 +32,7 @@
   top: 0;
   right: 0px;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 3px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   z-index: 100;
@@ -38,23 +45,21 @@
   bottom: 0;
   left: 0;
   background: #fff;
-  z-index: 900;
-  border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 3px;
 }
 
 .conteneur>.shadow>.flip-over {
   position: absolute;
   box-sizing: border-box;
   transform: rotate(-45deg);
-  z-index: 1000;
-  border: 140px solid transparent;
-  border-top-color: #c94548;
+  border: 140.75px solid transparent;
+  border-top-color: #acdda0;
 }
 
 .conteneur>.shadow {
   position: absolute;
   box-shadow: 0px 0px 3px #000;
-  border-top-left-radius: 6px;
+  border-top-left-radius: 3px;
   top: 0;
   left: 0;
   z-index: 1000;

@@ -5,6 +5,7 @@ export default function ({full = false}) {
   return (
     <div className="header d-print-none" style={{
       transition: '0.2s all',
+      zIndex: 99999,
       ...(full ? ({ right: 0 }) : ({}))
     }} >
       <div className="header-container col-12">
@@ -152,14 +153,9 @@ export default function ({full = false}) {
           </div>
         </div>
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item header-toggler">
-            <a href="index.html#" className="nav-link">
-              <i className="ti-arrow-down" />
-            </a>
-          </li>
           <li className="nav-item sidebar-toggler">
             <a href="index.html#" className="nav-link">
-              <i className="ti-cloud" />
+              <i className="fa fa-cloud-upload" />
             </a>
           </li>
         </ul>

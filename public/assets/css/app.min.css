@@ -3657,7 +3657,7 @@ body.error-page:before {
   font-size: 12rem;
   line-height: 14rem;
   margin-left: -2rem;
-  text-shadow: -5px 1px 0px #ff3939;
+  text-shadow: -5px 1px 0px orange;
 }
 
 .error-page .error-page-item:nth-child(2) {
@@ -4784,7 +4784,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 .btn.btn-outline-primary {
   background: none;
   border-color: #fa7d00;
-  color: #ff3939;
+  color: orange;
   border-width: 1px;
 }
 
@@ -10240,8 +10240,8 @@ input:valid, select:valid, textarea:valid, .select2-container--default .select2-
   color: #000 !important;
 }
 
-span.select2-container .select2-selection--single {
-  height: auto !important;
+span.select2-container .select2-selection--single, input:not(.select2-search__field):not(.archives), .select2-selection .select2-selection--single .select2-selection__rendered {
+  height: 38px !important;
 }
 
 span.select2.select2-container .select2-selection {
@@ -10249,6 +10249,18 @@ span.select2.select2-container .select2-selection {
   font-size: 0.875rem;
   border-radius: 0.25rem;
   background: none;
+  display: flex;
+  align-items: center;
+  min-height: 38px !important;
+}
+
+.select2-selection__placeholder, input.select2-search__field {
+  font-weight: normal !important;
+}
+
+.select2-selection__choice {
+  margin: 2px 5px !important;
+  font-weight: bold !important;
 }
 
 .react-pdf__Document .react-pdf__Page {
@@ -10260,4 +10272,27 @@ span.select2.select2-container .select2-selection {
 .react-pdf__Page__svg, .react-pdf__Page__svg svg {
   height: auto !important;
   width: 100% !important;
+}
+
+.content-hr:before {
+  content: ' ';
+  position: absolute;
+  top: 50px;
+  left: -6px;
+  width: 10px;
+  height: 10px;
+  background: orange;
+  border-radius: 50%;
+  -webkit-animation: notify-pulse 1s infinite;
+}
+
+.floating_action_buttons .button h5 {
+  transition: 0.1s;
+  visibility: hidden;
+  z-index: -100;
+}
+
+.floating_action_buttons .button:hover h5 {
+  visibility: visible;
+  z-index: initial;
 }

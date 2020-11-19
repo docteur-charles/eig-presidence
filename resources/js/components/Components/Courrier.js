@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/Courrier.css';
 
 import PDF from './PDF';
 
-export default function Courrier({id}) {
+export default function Courrier({ id = 1, mention, typeContenu }) {
 
-
+  let [conteneur, setConteneur] = useState(null);
+  let [isLoading, setLoading] = useState(true);
+  
   function getWidth(element) {
     let width = element.offsetWidth;
     return width || 0;
@@ -22,56 +25,72 @@ export default function Courrier({id}) {
 
   useEffect(() => {
 
-    let conteneur = document.querySelector('.conteneur');
-    let flipOver = document.querySelector('.flip-over');
-    let rempl = document.querySelector('.rempl');
-    let shadow = document.querySelector('.shadow');
-    let cover = document.querySelector('.cover');
+    if (conteneur) {
 
-    function init() {
-      let hypo = getWidth(flipOver);
-      let contWidth = getWidth(conteneur);
-      let contHeight = getHeight(conteneur);
-      let cote = getCote(hypo);
+      let flipOver = conteneur.querySelector('.flip-over');
+      let rempl = conteneur.querySelector('.rempl');
+      let shadow = conteneur.querySelector('.shadow');
+      let cover = conteneur.querySelector('.cover');
 
-      flipOver.style.top = `${cote - (hypo / 2)}px`;
-      flipOver.style.left = `${cote - (hypo / 2)}px`;
+      function init() {
 
-      rempl.style.height = `${contHeight - cote}px`;
-      rempl.style.width = `${cote}px`;
+        let hypo = getWidth(flipOver);
+        let contWidth = getWidth(conteneur);
+        let contHeight = getHeight(conteneur);
+        let cote = getCote(hypo);
 
-      shadow.style.width = `${cote}px`;
-      shadow.style.height = `${cote}px`;
+        flipOver.style.top = `${cote - (hypo / 2)}px`;
+        flipOver.style.left = `${cote - (hypo / 2 + 0.5)}px`;
 
-      cover.style.width = `${contWidth - cote + 1}px`;
+        rempl.style.height = `${contHeight - cote}px`;
+        rempl.style.width = `${cote}px`;
+
+        shadow.style.width = `${cote}px`;
+        shadow.style.height = `${cote}px`;
+
+        cover.style.width = `${contWidth - cote + 1}px`;
+
+      }
+
+      init();
+
+      window.addEventListener('resize', init);
+
+      return () => {
+        window.removeEventListener('resize', init);
+      };
+
     }
 
-    init();
+  }, [conteneur]);
 
-    window.onresize = init;
-
-    return () => {
-      window.resize = null;
-    }
-
-  });
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, [])
 
   return (
-    <div className="conteneur" id={`courrier_${id}`}>
-      <div className="courrier">
+    <Link to={`/courriers/${id}`} className="conteneur" id={`courrier_${id}`} ref={ref => setConteneur(ref)}>
+      <div className="courrier" style={{ transition: '0.3s', opacity: (isLoading ? 0 : 1) }}>
         <PDF url="/documents/cahier_de_charges.pdf" />
       </div>
       <div className="shadow">
         <div className="flip-over" />
+
       </div>
       <div className="rempl" />
       <div className="cover d-flex align-items-center justify-content-center">
-        <blockquote class="blockquote mb-0 p-4">
-          <h2 className="text-uppercase" title="objet">Demande d'acquisition de la nationalité nigérienne</h2>
-          <footer class="blockquote-footer text-uppercase"><cite title="Provénance"><small>Ministère des affaires étrangères</small></cite></footer>
+        <blockquote className="blockquote mb-0 p-4">
+          <div className="position-absolute" style={{ right: '10px', top: '-0px' }}>
+            <div className="badge badge-success">Ordinaire</div>&nbsp;
+            <div className="badge badge-light">Confidentiel</div>
+          </div>
+          <h4 className="text-uppercase" title="Objet du courrier">Demande d'acquisition de la nationalité nigérienne</h4>
+          <footer className="blockquote-footer text-uppercase"><cite title="Provénance du courrier"><small>Ministère des affaires étrangères</small></cite></footer>
         </blockquote>
       </div>
-    </div>
+    </Link>
   );
 
 }

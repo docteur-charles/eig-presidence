@@ -47,3 +47,8 @@ export function isExtraLarge() {
   let width = window.$(window).width();
   return (width >= 1440);
 }
+
+export function fromExtraLarge() {
+  let width = window.$(window).width();
+  return (width >= 1440);
+}
