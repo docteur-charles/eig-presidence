@@ -94641,7 +94641,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     e.preventDefault();
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.withCredentials = true;
     axios__WEBPACK_IMPORTED_MODULE_4___default.a.get("http://localhost:8000/sanctum/csrf-cookie").then(function (Response) {
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('http://localhost:8000/login', {
+      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('http://localhost:8000/api/login', {
         email: email,
         password: password
       }).then(function (res) {

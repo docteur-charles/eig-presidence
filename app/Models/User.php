@@ -39,6 +39,10 @@ class User extends Authenticatable
         'two_factor_recovery_codes',
         'two_factor_secret',
     ];
+    
+    public function roles() {
+        return $this->belongsToMany('App\Models\Role');
+    }
 
     /**
      * The attributes that should be cast to native types.
