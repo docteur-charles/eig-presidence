@@ -318,9 +318,12 @@ function Archive() {
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid mb-4"
+    className: "container-fluid"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
+    className: "row",
+    style: {
+      paddingTop: !showResult ? '20%' : '5%'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "text-center col-12 d-flex flex-column align-items-center "
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -337,7 +340,7 @@ function Archive() {
     className: "btn m-t-20 w-50 btn-warning btn-uppercase p-3 justify-content-center btn-rounded"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "ti-search mr-2"
-  }), "RECHERCHER")))), showResult && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Resultat__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), " RECHERCHER")))), showResult && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Resultat__WEBPACK_IMPORTED_MODULE_2__["default"], {
     isLoading: isLoading
   }));
 }

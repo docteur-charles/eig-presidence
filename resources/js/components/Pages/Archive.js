@@ -29,15 +29,15 @@ export default function Archive() {
   }
 
   return (
-    <div className="container-fluid mb-4">
-      <div className="row">
+    <div className="container-fluid">
+      <div className="row" style={{paddingTop: (!showResult ? '20%':'5%')}}>
         <div className="text-center col-12 d-flex flex-column align-items-center ">
           <img src="/assets/images/logo_transparent.png" width="200px" alt="logo" />
           <form className="col-lg-8 col-md-10 col-xl-8" onSubmit={showResults}>
             <SearchInput onChange={inputChange} />
             <button type="button" className="btn m-t-20 w-50 btn-warning btn-uppercase p-3 justify-content-center btn-rounded">
-              <i className="ti-search mr-2"></i>RECHERCHER
-        </button>
+              <i className="ti-search mr-2"></i> RECHERCHER
+            </button>
           </form>
         </div>
       </div>

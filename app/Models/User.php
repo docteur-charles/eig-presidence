@@ -40,6 +40,13 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
+    public function roles() {
+        return $this->belongsToMany('App\Models\Role');
+    }
+    public function hasAnyRole(array $roles) {
+        return $this->roles()->whereIn('name',$roles);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
