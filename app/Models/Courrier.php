@@ -20,6 +20,8 @@ class Courrier extends Model
         'etat',
         'observation',
         'url_fichier',
-        'destinataire'
+        'destinataire_id',
+        'destinateur_id',
+        'etape_actuelle'
     ];
 }

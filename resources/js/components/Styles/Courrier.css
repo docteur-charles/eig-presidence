@@ -1,8 +1,7 @@
 .conteneur {
   cursor: pointer;
   position: relative;
-  width: 80%;
-  max-width: 800px;
+  width: 80% !important;
   margin: 15px 0;
   height: 200px;
   background: #fff;

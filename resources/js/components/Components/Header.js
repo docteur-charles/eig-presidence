@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ({full = false}) {
+export default function ({full = false, auth:{nom, prenom, photo}}) {
 
   return (
     <div className="header d-print-none" style={{
@@ -137,9 +137,9 @@ export default function ({full = false}) {
               </li>
               <li className="nav-item dropdown">
                 <a href="index.html#" className="nav-link profile-nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
-                  <span className="mr-2 d-sm-inline d-none">Team MOUSSA</span>
+                  <span className="mr-2 d-sm-inline d-none">{nom} {prenom}</span>
                   <figure className="avatar avatar-sm">
-                    <img src="/assets/images/user.jpeg" className="rounded-circle" alt="avatar" />
+                    <img src={photo || "/assets/images/user.jpeg"} className="rounded-circle" alt="avatar" />
                   </figure>
                 </a>
                 <div className="dropdown-menu dropdown-menu-right dropdown-menu-big">

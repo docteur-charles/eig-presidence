@@ -9,7 +9,6 @@ import Store from './Store/Store';
 
 
 import PreLoader from './Components/PreLoader';
-import FileInput from './Components/FileInput';
 import Auth from './Components/Auth';
 import Root from './Navigators/Root';
 
@@ -26,6 +25,23 @@ function App() {
   }
 
   useEffect(() => {
+    window.toastr.options = {
+        closeButton: true,
+        debug: false,
+        newestOnTop: false,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        timeOut: "5000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        progressBar: true,
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 200,
+        hideDuration: 200
+    };
     setLoading(false);
   }, [auth]);
 
@@ -35,10 +51,9 @@ function App() {
       if (auth) {
         console.log('Session initiale:', auth);
         checkSession(auth.token).then(({ isValid }) => {
+          setFetching(false);
           console.log(isValid)
-          if (isValid) {
-            console.log('La session est valide !');
-          } else {
+          if (!isValid) {
             localStorage.removeItem('auth');
             dispatch({
               type: SET_AUTH,
@@ -46,10 +61,7 @@ function App() {
             });
             console.log("Session invalide !");
           }
-          setFetching(false);
         });
-        setLoading(false);
-        setFetching(false);
       } else {
         console.log('Pas de session initiale !', auth);
         setFetching(false);

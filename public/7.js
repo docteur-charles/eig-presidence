@@ -12,7 +12,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".conteneur {\n  cursor: pointer;\n  position: relative;\n  width: 80%;\n  max-width: 800px;\n  margin: 15px 0;\n  height: 200px;\n  background: #fff;\n  border-radius: 3px;\n  box-shadow: 0px 0px 4px orange;\n  overflow: hidden;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.conteneur:active {\n  opacity: .7;\n}\n\n.conteneur>.courrier {\n  height: 100%;\n  box-sizing: border-box;\n  padding: 5px;\n  z-index: 0;\n  color: black;\n  overflow: hidden;\n}\n\n.conteneur>.cover {\n  background: rgba(255, 255, 255, 0.993);\n  position: absolute;\n  box-sizing: border-box;\n  top: 0;\n  right: 0px;\n  height: 100%;\n  border-radius: 3px;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  z-index: 100;\n  padding: 10px;\n  overflow: auto;\n}\n\n.conteneur>.rempl {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background: #fff;\n  border-bottom-left-radius: 3px;\n}\n\n.conteneur>.shadow>.flip-over {\n  position: absolute;\n  box-sizing: border-box;\n  transform: rotate(-45deg);\n  border: 140.75px solid transparent;\n  border-top-color: #acdda0;\n}\n\n.conteneur>.shadow {\n  position: absolute;\n  box-shadow: 0px 0px 3px #000;\n  border-top-left-radius: 3px;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}", ""]);
+exports.push([module.i, ".conteneur {\n  cursor: pointer;\n  position: relative;\n  width: 80% !important;\n  margin: 15px 0;\n  height: 200px;\n  background: #fff;\n  border-radius: 3px;\n  box-shadow: 0px 0px 4px orange;\n  overflow: hidden;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n\n.conteneur:active {\n  opacity: .7;\n}\n\n.conteneur>.courrier {\n  height: 100%;\n  box-sizing: border-box;\n  padding: 5px;\n  z-index: 0;\n  color: black;\n  overflow: hidden;\n}\n\n.conteneur>.cover {\n  background: rgba(255, 255, 255, 0.993);\n  position: absolute;\n  box-sizing: border-box;\n  top: 0;\n  right: 0px;\n  height: 100%;\n  border-radius: 3px;\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  z-index: 100;\n  padding: 10px;\n  overflow: auto;\n}\n\n.conteneur>.rempl {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  background: #fff;\n  border-bottom-left-radius: 3px;\n}\n\n.conteneur>.shadow>.flip-over {\n  position: absolute;\n  box-sizing: border-box;\n  transform: rotate(-45deg);\n  border: 140.75px solid transparent;\n  border-top-color: #acdda0;\n}\n\n.conteneur>.shadow {\n  position: absolute;\n  box-shadow: 0px 0px 3px #000;\n  border-top-left-radius: 3px;\n  top: 0;\n  left: 0;\n  z-index: 1000;\n}", ""]);
 
 // exports
 
@@ -67,6 +67,11 @@ function Courrier(_ref) {
       isLoading = _useState4[0],
       setLoading = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isFetching = _useState6[0],
+      setFetching = _useState6[1];
+
   function getWidth(element) {
     var width = element.offsetWidth;
     return width || 0;
@@ -82,7 +87,7 @@ function Courrier(_ref) {
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (conteneur) {
+    if (conteneur && !isFetching) {
       var init = function init() {
         var hypo = getWidth(flipOver);
         var contWidth = getWidth(conteneur);
@@ -97,36 +102,41 @@ function Courrier(_ref) {
         cover.style.width = "".concat(contWidth - cote + 1, "px");
       };
 
-      var flipOver = conteneur.querySelector('.flip-over');
-      var rempl = conteneur.querySelector('.rempl');
-      var shadow = conteneur.querySelector('.shadow');
-      var cover = conteneur.querySelector('.cover');
-      init();
-      window.addEventListener('resize', init);
+      var flipOver = conteneur.querySelector(".flip-over");
+      var rempl = conteneur.querySelector(".rempl");
+      var shadow = conteneur.querySelector(".shadow");
+      var cover = conteneur.querySelector(".cover");
+      setTimeout(function () {
+        init();
+      }, 200);
+      window.addEventListener("resize", init);
       return function () {
-        window.removeEventListener('resize', init);
+        window.removeEventListener("resize", init);
       };
     }
-  }, [conteneur]);
+  }, [conteneur, isFetching]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     setTimeout(function () {
-      setLoading(false);
+      if (!isFetching) setLoading(false);
     }, 500);
-  }, []);
+  }, [isFetching]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/courriers/".concat(id),
+    to: isLoading ? '' : "/courriers/".concat(id),
     className: "conteneur",
+    style: {
+      transition: "opacity 0.3s",
+      opacity: isLoading ? 0 : 1
+    },
     id: "courrier_".concat(id),
     ref: function ref(_ref2) {
       return setConteneur(_ref2);
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "courrier",
-    style: {
-      transition: '0.3s',
-      opacity: isLoading ? 0 : 1
-    }
+    className: "courrier"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PDF__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onLoaded: function onLoaded() {
+      return setFetching(false);
+    },
     url: "/documents/cahier_de_charges.pdf"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "shadow"
@@ -141,8 +151,8 @@ function Courrier(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "position-absolute",
     style: {
-      right: '10px',
-      top: '-0px'
+      right: "10px",
+      top: "-0px"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "badge badge-success"
@@ -193,7 +203,9 @@ react_pdf__WEBPACK_IMPORTED_MODULE_1__["pdfjs"].GlobalWorkerOptions.workerSrc = 
 function PDF(_ref) {
   var url = _ref.url,
       _ref$pagination = _ref.pagination,
-      pagination = _ref$pagination === void 0 ? false : _ref$pagination;
+      pagination = _ref$pagination === void 0 ? false : _ref$pagination,
+      _ref$onLoaded = _ref.onLoaded,
+      handleLoaded = _ref$onLoaded === void 0 ? function () {} : _ref$onLoaded;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -214,6 +226,7 @@ function PDF(_ref) {
     var numPages = _ref2.numPages;
     setNumPages(numPages);
     setPagination(true);
+    handleLoaded();
   }
 
   function suivant() {
@@ -226,7 +239,7 @@ function PDF(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      position: 'relative'
+      position: "relative"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "border m-b-30"
@@ -271,11 +284,14 @@ function Courriers(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "timeline"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-container h-100p ml-3 position-relative"
+    className: "timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-uppercase"
   }, "Liste des courriers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-data d-flex flex-column pt-4"
+    className: "timeline-data d-flex flex-column pt-4 position-relative",
+    style: {
+      maxWidth: '950px'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       marginLeft: '-30px',
@@ -315,7 +331,10 @@ function Courriers(props) {
   }, "12", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "d-inline"
   }, "H"), "14")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_1__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-data d-flex flex-column"
+    className: "timeline-data d-flex flex-column position-relative",
+    style: {
+      maxWidth: '950px'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       marginLeft: '-30px',

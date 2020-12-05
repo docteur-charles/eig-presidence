@@ -5,11 +5,11 @@ export default function Courriers(props) {
 
   return (
     <div className="timeline">
-      <div className="timeline-container h-100p ml-3 position-relative">
+      <div className="timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative">
 
         <h4 className="text-uppercase">Liste des courriers</h4>
         
-        <div className="timeline-data d-flex flex-column pt-4">
+        <div className="timeline-data d-flex flex-column pt-4 position-relative" style={{maxWidth: '950px'}}>
 
           <div style={{ marginLeft: '-30px', fontWeight: 'bold' }} className="shadow timeline-date p-2 align-self-start rounded-circle border-warning border">
             <span>24 Déc</span>
@@ -40,7 +40,7 @@ export default function Courriers(props) {
           </div>
 
         </div>
-        <div className="timeline-data d-flex flex-column">
+        <div className="timeline-data d-flex flex-column position-relative" style={{maxWidth: '950px'}}>
 
           <div style={{ marginLeft: '-30px', fontWeight: 'bold' }} className="shadow stimeline-date p-2 align-self-start rounded-circle border-warning border">
             <span>23 Déc</span>

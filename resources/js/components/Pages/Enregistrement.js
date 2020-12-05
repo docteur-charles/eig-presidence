@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FileInput from '../Components/FileInput';
 import PDF from '../Components/PDF';
-import { fromDesktop, fromLarge, fromTablet, fromExtraLarge, isExtraLarge } from '../Helpers/Layout';
+import { fromDesktop, fromLarge, fromTablet, fromExtraLarge, isExtraLarge, isMobileLandscape, isMobile } from '../Helpers/Layout';
 
 export default function Enregistrement() {
 
@@ -78,8 +78,7 @@ export default function Enregistrement() {
 
           (preview && !register) ? (
 
-            <div className="container-fluid row position-relative justify-content-center" style={{
-              paddingTop: '70px',
+            <div className="container-fluid row position-relative align-items-center justify-content-center" style={{
               overflow: 'hidden'
             }} >
               <div className="button-continue shadow d-flex justify-content-end align-items-start" style={{
@@ -155,7 +154,7 @@ export default function Enregistrement() {
                       </div>
                     </div>
                     <div className={`d-flex align-items-start m-t-20 ${!fromTablet() ? 'flex-column' : ''}`}>
-                      <p>Vous êtes garant de l'exactitude des informations que vous renseignez. Elles doivent toutes figurer sur le fichier.</p>
+                      <p>Vous êtes garant de l'exactitude des informations que vous renseignez; elles doivent figurer sur le courrier physique.</p>
                       <button type="submit" className={`btn ${fromTablet() ? 'col-4' : 'col-12'} btn-outline-primary btn-lg btn-block`}>Enregistrer</button>
                     </div>
                   </div>

@@ -10,95 +10,128 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        User::truncate();
-        DB::table('role_user')->truncate();
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
 
-        $directeur = User::create([
-            'name' => 'DIR',
-            'email' => 'dir@presidence.ne',
-            'password' => Hash::make('Dir123'),
-        ]);
-        $Bur_ordre = User::create([
-            'name' => 'BUR_ORDRE',
-            'email' => 'Bur_ordre@presidence.ne',
-            'password' => Hash::make('BurOrdre123'),
-        ]);
-        $Dir_courrier = User::create([
-            'name' => 'DIR_COURRIER',
-            'email' => 'Dir_Courrier@presidence.ne',
-            'password' => Hash::make('DirCourrier123'),
-        ]);
-        $Sgpa = User::create([
-            'name' => 'SGPA',
-            'email' => 'sgpa@presidence.ne',
-            'password' => Hash::make('Sgpa123'),
-        ]);
-        $Sgp = User::create([
-            'name' => 'SGP',
-            'email' => 'sgp@presidence.ne',
-            'password' => Hash::make('Sgp123'),
-        ]);
-        $Dircaba2 = User::create([
-            'name' => 'DIRCABA2',
-            'email' => 'dircaba2@presidence.ne',
-            'password' => Hash::make('Dircaba2123'),
-        ]);
-        $Dircaba1 = User::create([
-            'name' => 'DIRCABA1',
-            'email' => 'dircaba1@presidence.ne',
-            'password' => Hash::make('Dircaba1123'),
-        ]);
-        $Dircab = User::create([
-            'name' => 'DIRCAB',
-            'email' => 'dircab@presidence.ne',
-            'password' => Hash::make('Dircab123'),
-        ]);
-        $Prn = User::create([
-            'name' => 'PRN',
-            'email' => 'prn@presidence.ne',
-            'password' => Hash::make('Prn123'),
-        ]);
-        $Admin = User::create([
-            'name' => 'ADMIN',
-            'email' => 'admin@presidence.ne',
-            'password' => Hash::make('Admin123'),
-        ]);
-        $Root = User::create([
-            'name' => 'ROOT',
-            'email' => 'root@presidence.ne',
-            'password' => Hash::make('Root123'),
-        ]);
-        $directeurRole = Role::where('nom','DIR')->first();
-        $Bur_ordreRole = Role::where('nom','BUR_ORDRE')->first();
-        $Dir_courrierRole = Role::where('nom','DIR_COURRIER')->first();
-        $SgpaRole = Role::where('nom','SGPA')->first();
-        $SgpRole = Role::where('nom','SGP')->first();
-        $Dircaba1Role = Role::where('nom','DIRCABA1')->first();
-        $Dircaba2Role = Role::where('nom','DIRCABA2')->first();
-        $DircabRole = Role::where('nom','DIRCAB')->first();
-        $PrnRole = Role::where('nom','PRN')->first();
-        $AdminRole = Role::where('nom','ADMIN')->first();
-        $RootRole = Role::where('nom','ROOT')->first();
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		User::truncate();
+		DB::table('role_user')->truncate();
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 
-        //attacher les roles au differents utilisateurs 
-        $directeur->roles()->attach($directeurRole);
-        $Bur_ordre->roles()->attach($Bur_ordreRole);
-        $Dir_courrier->roles()->attach($Dir_courrierRole);
-        $Sgpa->roles()->attach($SgpaRole);
-        $Sgp->roles()->attach($SgpRole);
-        $Dircaba2->roles()->attach($Dircaba2Role);
-        $Dircaba1->roles()->attach($Dircaba1Role);
-        $Dircab->roles()->attach($DircabRole);
-        $Prn->roles()->attach($PrnRole);
-        $Admin->roles()->attach($AdminRole);
-        $Root->roles()->attach($RootRole);
-    }
+
+		if ($dirRole = Role::where('nom', 'DIR')->first())
+			User::create([
+				'nom' => 'DIRECTEUR',
+				'prenom' => 'INFORMATIQUE',
+				'role_id' => $dirRole->id,
+				'email' => 'dir@presidence.ne',
+				'password' => Hash::make('Dir123'),
+			]);
+
+
+		if ($burOrdreRole = Role::where('nom', 'BUR_ORDRE')->first())
+			User::create([
+				'nom' => 'AGENT',
+				'prenom' => 'DU BUREAU D\'ORDRE',
+				'role_id' => $burOrdreRole->id,
+				'email' => 'bur_ordre@presidence.ne',
+				'password' => Hash::make('BurOrdre123'),
+			]);
+
+
+		if ($dirCourrierRole = Role::where('nom', 'DIR_COURRIER')->first())
+			User::create([
+				'nom' => 'DIRECTRICE',
+				'prenom' => 'DES COURRIERS',
+				'role_id' => $dirCourrierRole->id,
+				'email' => 'dir_Courrier@presidence.ne',
+				'password' => Hash::make('DirCourrier123'),
+			]);
+
+
+		if ($sgpaRole = Role::where('nom', 'SGPA')->first())
+			User::create([
+				'nom' => 'SGP',
+				'prenom' => 'ADJOINT',
+				'role_id' => $sgpaRole->id,
+				'email' => 'sgpa@presidence.ne',
+				'password' => Hash::make('Sgpa123'),
+			]);
+
+
+		if ($sgpRole = Role::where('nom', 'SGP')->first())
+			User::create([
+				'nom' => 'SECRETAIRE GENERAL',
+				'prenom' => 'ADJOINT',
+				'role_id' => $sgpRole->id,
+				'email' => 'sgp@presidence.ne',
+				'password' => Hash::make('Sgp123'),
+			]);
+
+
+		if ($dirCab2 = Role::where('nom', 'DIRCABA2')->first())
+			User::create([
+				'nom' => 'DIRECTEUR DE CABINET',
+				'prenom' => 'AJOINT EN SECOND',
+				'role_id' => $dirCab2->id,
+				'email' => 'dircaba2@presidence.ne',
+				'password' => Hash::make('Dircaba2123'),
+			]);
+
+
+		if ($dirCab1 = Role::where('nom', 'DIRCABA1')->first())
+			User::create([
+				'nom' => 'DIRECTEUR DE CABINET',
+				'prenom' => 'ADJOINT',
+				'role_id' => $dirCab1->id,
+				'email' => 'dircaba1@presidence.ne',
+				'password' => Hash::make('Dircaba1123'),
+			]);
+
+
+		if ($dirCab = Role::where('nom', 'DIRCAB')->first())
+			User::create([
+				'nom' => 'DIRECTEUR',
+				'prenom' => 'DE CABINET',
+				'role_id' => $dirCab->id,
+				'email' => 'dircab@presidence.ne',
+				'password' => Hash::make('Dircab123'),
+			]);
+
+
+		if ($prnRole = Role::where('nom', 'PRN')->first())
+			User::create([
+				'nom' => 'PRESIDENT',
+				'prenom' => 'DE LA REPUBLIQUE',
+				'role_id' => $prnRole->id,
+				'email' => 'prn@presidence.ne',
+				'password' => Hash::make('Prn123'),
+			]);
+
+
+		if ($adminRole = Role::where('nom', 'ADMIN')->first())
+			echo 'ADMIN OK' && User::create([
+				'nom' => 'AGENT',
+				'prenom' => 'ADMINISTRATEUR',
+				'role_id' => $adminRole->id,
+				'email' => 'admin@presidence.ne',
+				'password' => Hash::make('Admin123'),
+			]);
+
+
+		if ($rootRole = Role::where('nom', 'ROOT')->first())
+			echo 'ROOT OK' && User::create([
+				'nom' => 'ADMINISTRATEUR',
+				'prenom' => 'DU SYSTEME',
+				'role_id' => $rootRole->id,
+				'email' => 'root@presidence.ne',
+				'password' => Hash::make('Root123'),
+			]);
+	}
 }

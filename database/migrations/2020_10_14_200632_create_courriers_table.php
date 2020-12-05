@@ -26,6 +26,7 @@ class CreateCourriersTable extends Migration
             $table->text('observation');
             $table->string('url_fichier');
             $table->integer('destinataire');
+            $table->integer('etape_actuelle');
             $table->timestamps();
         });
     }

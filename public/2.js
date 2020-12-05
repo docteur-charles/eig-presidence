@@ -1,5 +1,138 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
+/***/ "./resources/js/components/Components/FileInput.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Components/FileInput.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FileInput; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+function FileInput(_ref) {
+  var _ref$_id = _ref._id,
+      _id = _ref$_id === void 0 ? 0 : _ref$_id,
+      onLoaded = _ref.onLoaded;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      file = _useState2[0],
+      setFile = _useState2[1];
+
+  function onFileChange(e) {
+    var _e$target$files = _slicedToArray(e.target.files, 1),
+        f = _e$target$files[0];
+
+    if (['application/pdf', 'image/jpg', 'image/bitmap', 'image/jpeg', 'image/png'].includes(f.type)) {
+      if (f) setFile(f);
+      var reader = new FileReader();
+
+      reader.onload = function () {
+        if (onLoaded && typeof onLoaded === 'function') {
+          onLoaded(f, this.result);
+        }
+      };
+
+      reader.readAsDataURL(f);
+    }
+  }
+
+  function onBlur(e) {
+    e.currentTarget.style.borderColor = '#ffa50080';
+
+    if (file) {
+      window.$(e.currentTarget).find('b').css({
+        color: '#000'
+      });
+    }
+  }
+
+  function onFocus(e) {
+    if (!file) {
+      e.currentTarget.style.borderColor = '#ffa50070';
+    } else {
+      window.$(e.currentTarget).find('b').css({
+        color: '#ffa500f0'
+      });
+      ;
+    }
+  }
+
+  function onClick(e) {
+    var input = document.querySelector('input');
+    input.click();
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row flex-column align-items-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input_".concat(_id, " d-flex flex-column col-12 p-2 p-xl-3 align-items-center justify-content-center shadow-sm rounded-pill"),
+    style: {
+      cursor: 'pointer',
+      border: '2px solid #ffa50080'
+    },
+    onClick: onClick,
+    onMouseOver: onFocus,
+    onMouseOut: onBlur
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "file",
+    onChange: onFileChange,
+    hidden: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    style: {
+      cursor: 'pointer',
+      userSelect: 'none',
+      color: !file ? 'lightgrey' : 'black',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      width: '100%'
+    },
+    className: "d-none d-xl-flex font-size-18 align-items-center justify-content-center m-0"
+  }, file ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "Courrier charg\xE9:"))), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+    className: "font-size-22"
+  }, file.name)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "align-self-center"
+  }, "PDF, PNG, JPG, JPEG, BITMAP")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    style: {
+      cursor: 'pointer',
+      userSelect: 'none',
+      color: !file ? 'lightgrey' : 'black',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      width: '100%'
+    },
+    className: "d-flex d-xl-none align-items-center justify-content-center m-0"
+  }, file ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "d-none d-md-inline"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "Courrier charg\xE9:"))), "\xA0\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
+    className: "font-size-20"
+  }, file.name)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "align-self-center"
+  }, "PDF, PNG, JPG, JPEG, BITMAP"))), !file && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "form-text d-inline d-md-none text-center pr-2 pl-2 text-muted"
+  }, "Cliquez dans la zone de texte pour commencer."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "form-text d-none d-md-inline text-center pr-2 pl-2 text-muted"
+  }, "Cliquez dans la zone de texte et chargez le courrier \xE0 enregistrer depuis un espace de stockage.")));
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/Components/PDF.js":
 /*!***************************************************!*\
   !*** ./resources/js/components/Components/PDF.js ***!
@@ -33,7 +166,9 @@ react_pdf__WEBPACK_IMPORTED_MODULE_1__["pdfjs"].GlobalWorkerOptions.workerSrc = 
 function PDF(_ref) {
   var url = _ref.url,
       _ref$pagination = _ref.pagination,
-      pagination = _ref$pagination === void 0 ? false : _ref$pagination;
+      pagination = _ref$pagination === void 0 ? false : _ref$pagination,
+      _ref$onLoaded = _ref.onLoaded,
+      handleLoaded = _ref$onLoaded === void 0 ? function () {} : _ref$onLoaded;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -54,6 +189,7 @@ function PDF(_ref) {
     var numPages = _ref2.numPages;
     setNumPages(numPages);
     setPagination(true);
+    handleLoaded();
   }
 
   function suivant() {
@@ -66,7 +202,7 @@ function PDF(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      position: 'relative'
+      position: "relative"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "border m-b-30"
@@ -267,9 +403,8 @@ function Enregistrement() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "ti-plus mr-2"
   }), "Enregistrer le courrier"))) : preview && !register ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid row position-relative justify-content-center",
+    className: "container-fluid row position-relative align-items-center justify-content-center",
     style: {
-      paddingTop: '70px',
       overflow: 'hidden'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -379,7 +514,7 @@ function Enregistrement() {
     value: "TRES_URGENT"
   }, "Tr\xE8s urgent")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex align-items-start m-t-20 ".concat(!Object(_Helpers_Layout__WEBPACK_IMPORTED_MODULE_4__["fromTablet"])() ? 'flex-column' : '')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Vous \xEAtes garant de l'exactitude des informations que vous renseignez. Elles doivent toutes figurer sur le fichier."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Vous \xEAtes garant de l'exactitude des informations que vous renseignez; elles doivent figurer sur le courrier physique."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
     className: "btn ".concat(Object(_Helpers_Layout__WEBPACK_IMPORTED_MODULE_4__["fromTablet"])() ? 'col-4' : 'col-12', " btn-outline-primary btn-lg btn-block")
   }, "Enregistrer"))))));

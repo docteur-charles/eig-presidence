@@ -1,6 +1,6 @@
 import { SET_AUTH } from "../Actions";
 
-let initialState = localStorage.getItem('auth') || {};
+let initialState = JSON.parse(localStorage.getItem("auth")) || null;
 
 export default function (state = initialState, action) {
   switch (action.type) {
