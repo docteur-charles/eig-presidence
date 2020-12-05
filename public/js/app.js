@@ -72900,18 +72900,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Store_Actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Store/Actions */ "./resources/js/components/Store/Actions.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
+/* harmony import */ var _Store_Actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Store/Actions */ "./resources/js/components/Store/Actions.js");
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
   var privileges = _ref.auth.role.privileges;
-  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])(); // Les privilèges donnant droit d'enregistrer un courrier.
-
-  var REGISTER_COURRIER = ["ENREGIST_COURRIER_ORDINAIRE", "ENREGIST_COURRIER_CONFIDENT", "ENREGIST_LETTRE_PRESIDENT"]; // Les privilèges donnant droit de gérer les utilisateurs.
-
-  var MANAGE_USERS = ["TOUT_ADMIN", "TOUT_ROOT"];
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var $ = window.$;
     $(".navigation .header-list").niceScroll();
@@ -72919,17 +72917,17 @@ __webpack_require__.r(__webpack_exports__);
 
   function logout(e) {
     e.preventDefault();
-    fetch('/logout', {
-      method: 'GET'
+    fetch("/logout", {
+      method: "GET"
     }).then(function (res) {
       if (res.ok && res.status === 200) {
         localStorage.clear();
         dispatch({
-          type: _Store_Actions__WEBPACK_IMPORTED_MODULE_3__["SET_AUTH"],
+          type: _Store_Actions__WEBPACK_IMPORTED_MODULE_4__["SET_AUTH"],
           data: null
         });
       } else {
-        toastr['error']("Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !", "Erreur interne");
+        toastr["error"]("Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !", "Erreur interne");
       }
     });
   }
@@ -72957,7 +72955,7 @@ __webpack_require__.r(__webpack_exports__);
   }, "T. de bord"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "badge badge-danger badge-small"
   }, "2"))), privileges.some(function (privilege) {
-    return REGISTER_COURRIER.includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_3__["REGISTER_COURRIER"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "gec-enreg-courriers"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -72967,7 +72965,9 @@ __webpack_require__.r(__webpack_exports__);
     className: "nav-link-icon ti-file"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "nav-link-label"
-  }, "Enreg. courriers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, "Enreg. courriers"))), privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_3__["LIST_COURRIER"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "gec-courriers"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/courriers"
@@ -72984,7 +72984,7 @@ __webpack_require__.r(__webpack_exports__);
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "nav-link-label"
   }, "Statistiques"))), privileges.some(function (privilege) {
-    return console.log(privilege) || MANAGE_USERS.includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_3__["MANAGE_USERS"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "gec-utilisateurs"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -72993,7 +72993,9 @@ __webpack_require__.r(__webpack_exports__);
     className: "nav-link-icon ti-user"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "nav-link-label"
-  }, "Utilisateurs"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, "Utilisateurs"))), privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_3__["LIST_ARCHIV"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "gec-archives"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/archives"
@@ -73278,32 +73280,36 @@ function RightSidebar() {
 /*!**************************************************!*\
   !*** ./resources/js/components/Helpers/Const.js ***!
   \**************************************************/
-/*! exports provided: Locale, Toolbar */
+/*! exports provided: Locale, Toolbar, REGISTER_COURRIER, LIST_ARCHIV, LIST_COURRIER, MANAGE_USERS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Locale", function() { return Locale; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Toolbar", function() { return Toolbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REGISTER_COURRIER", function() { return REGISTER_COURRIER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIST_ARCHIV", function() { return LIST_ARCHIV; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LIST_COURRIER", function() { return LIST_COURRIER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MANAGE_USERS", function() { return MANAGE_USERS; });
 var Locale = {
-  defaultLocale: 'fr',
+  defaultLocale: "fr",
   locales: [{
-    name: 'fr',
+    name: "fr",
     options: {
-      months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-      shortMonths: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
-      days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-      shortDays: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+      months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      shortMonths: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+      days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      shortDays: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
       toolbar: {
-        download: '',
-        exportToSVG: 'Exporter en SVG',
-        exportToPNG: 'Exporter en PNG',
-        selection: 'Sélectionner',
-        selectionZoom: 'Zoomer la sélection',
-        zoomIn: 'Zoom +',
-        zoomOut: 'Zoom -',
-        pan: 'Panoramique',
-        reset: 'Réinitialiser le zoom'
+        download: "",
+        exportToSVG: "Exporter en SVG",
+        exportToPNG: "Exporter en PNG",
+        selection: "Sélectionner",
+        selectionZoom: "Zoomer la sélection",
+        zoomIn: "Zoom +",
+        zoomOut: "Zoom -",
+        pan: "Panoramique",
+        reset: "Réinitialiser le zoom"
       }
     }
   }]
@@ -73325,15 +73331,23 @@ var Toolbar = {
   "export": {
     csv: {
       filename: undefined,
-      columnDelimiter: ',',
-      headerCategory: 'category',
-      headerValue: 'value',
+      columnDelimiter: ",",
+      headerCategory: "category",
+      headerValue: "value",
       dateFormatter: function dateFormatter(timestamp) {
         return new Date(timestamp).toISOString();
       }
     }
   }
-};
+}; // Les privilèges donnant droit d'enregistrer un courrier.
+
+var REGISTER_COURRIER = ["ENREGIST_COURRIER_ORDINAIRE", "ENREGIST_COURRIER_CONFIDENT", "ENREGIST_LETTRE_PRESIDENT"]; // Les archives.
+
+var LIST_ARCHIV = ["CONSULT_ARCHIVE_PERSO", "CONSULT_ARCH_ORDINAIRE", "CONSULT_ARCH_CONFIDENT"]; // Les courriers reçus.
+
+var LIST_COURRIER = ["CONSULT_COURRIER_DIRECTION", "CONSULT_COURRIER_RECU"]; // Les privilèges donnant droit de gérer les utilisateurs.
+
+var MANAGE_USERS = ["TOUT_ADMIN", "TOUT_ROOT"];
 
 /***/ }),
 
@@ -73455,6 +73469,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FullRoute__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FullRoute */ "./resources/js/components/Navigators/FullRoute.js");
 /* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
 /* harmony import */ var _Pages_Statistiques__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Pages/Statistiques */ "./resources/js/components/Pages/Statistiques.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -73476,12 +73491,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Root(_ref) {
   var auth = _ref.auth;
-  // Les privilèges donnant droit d'enregistrer un courrier.
-  var REGISTER_COURRIER = ["ENREGIST_COURRIER_ORDINAIRE", "ENREGIST_COURRIER_CONFIDENT", "ENREGIST_LETTRE_PRESIDENT"]; // Les privilèges donnant droit de gérer les utilisateurs.
-
-  var MANAGE_USERS = ["TOUT_ADMIN", "TOUT_ROOT"];
   var Dashboard = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
     return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../Pages/Dashboard */ "./resources/js/components/Pages/Dashboard.js"));
   });
@@ -73563,7 +73575,9 @@ function Root(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/dashboard",
     component: Dashboard
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+  }), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_9__["LIST_COURRIER"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/courriers",
     component: Courriers
@@ -73571,7 +73585,9 @@ function Root(_ref) {
     path: "/courriers/:courrier",
     component: CourrierDetail,
     showSidebar: toggleSidebar
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FullRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_9__["LIST_ARCHIV"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FullRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
     path: "/archives",
     component: Archive,
     showSidebar: toggleSidebar
@@ -73579,13 +73595,13 @@ function Root(_ref) {
     path: "/statistiques",
     component: _Pages_Statistiques__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), auth.role.privileges.some(function (privilege) {
-    return REGISTER_COURRIER.includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_9__["REGISTER_COURRIER"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FullRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
     path: "/enregistrements",
     component: Enregistrement,
     showSidebar: toggleSidebar
   }), auth.role.privileges.some(function (privilege) {
-    return MANAGE_USERS.includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_9__["MANAGE_USERS"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FullRoute__WEBPACK_IMPORTED_MODULE_6__["default"], {
     path: "/utilisateurs",
     component: Utilisateurs,

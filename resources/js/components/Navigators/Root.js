@@ -8,20 +8,14 @@ import RightSidebar from "../Components/RightSidebar";
 import FullRoute from "./FullRoute";
 import Loader from "../Components/Loader";
 import Statistiques from "../Pages/Statistiques";
+import {
+    LIST_ARCHIV,
+    LIST_COURRIER,
+    MANAGE_USERS,
+    REGISTER_COURRIER
+} from "../Helpers/Const";
 
 export default function Root({ auth }) {
-    // Les privilèges donnant droit d'enregistrer un courrier.
-    const REGISTER_COURRIER = [
-        "ENREGIST_COURRIER_ORDINAIRE",
-        "ENREGIST_COURRIER_CONFIDENT",
-        "ENREGIST_LETTRE_PRESIDENT"
-    ];
-
-    // Les privilèges donnant droit de gérer les utilisateurs.
-    const MANAGE_USERS = [
-        "TOUT_ADMIN", "TOUT_ROOT"
-    ];
-
     let Dashboard = React.lazy(() => import("../Pages/Dashboard"));
     let Archive = React.lazy(() => import("../Pages/Archive"));
     let Enregistrement = React.lazy(() => import("../Pages/Enregistrement"));
@@ -91,21 +85,29 @@ export default function Root({ auth }) {
                                         path="/dashboard"
                                         component={Dashboard}
                                     />
-                                    <Route
-                                        exact
-                                        path="/courriers"
-                                        component={Courriers}
-                                    />
+                                    {auth.role.privileges.some(privilege =>
+                                        LIST_COURRIER.includes(privilege)
+                                    ) && (
+                                        <Route
+                                            exact
+                                            path="/courriers"
+                                            component={Courriers}
+                                        />
+                                    )}
                                     <FullRoute
                                         path="/courriers/:courrier"
                                         component={CourrierDetail}
                                         showSidebar={toggleSidebar}
                                     />
-                                    <FullRoute
-                                        path="/archives"
-                                        component={Archive}
-                                        showSidebar={toggleSidebar}
-                                    />
+                                    {auth.role.privileges.some(privilege =>
+                                        LIST_ARCHIV.includes(privilege)
+                                    ) && (
+                                        <FullRoute
+                                            path="/archives"
+                                            component={Archive}
+                                            showSidebar={toggleSidebar}
+                                        />
+                                    )}
                                     <Route
                                         path="/statistiques"
                                         component={Statistiques}

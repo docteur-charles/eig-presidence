@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+    LIST_ARCHIV,
+    LIST_COURRIER,
+    MANAGE_USERS,
+    REGISTER_COURRIER
+} from "../Helpers/Const";
 import { SET_AUTH } from "../Store/Actions";
 
 export default function({
@@ -8,43 +14,33 @@ export default function({
         role: { privileges }
     }
 }) {
-
-	let dispatch = useDispatch();
-	
-    // Les privilèges donnant droit d'enregistrer un courrier.
-    const REGISTER_COURRIER = [
-        "ENREGIST_COURRIER_ORDINAIRE",
-        "ENREGIST_COURRIER_CONFIDENT",
-        "ENREGIST_LETTRE_PRESIDENT"
-    ];
-
-    // Les privilèges donnant droit de gérer les utilisateurs.
-    const MANAGE_USERS = ["TOUT_ADMIN", "TOUT_ROOT"];
+    let dispatch = useDispatch();
 
     useEffect(() => {
         let $ = window.$;
         $(".navigation .header-list").niceScroll();
-	}, []);
-	
-	function logout(e) {
+    }, []);
 
-		e.preventDefault();
-		
-		fetch('/logout', {
-			method: 'GET'
-		}).then(res => {
-			if (res.ok && res.status === 200) {
-				localStorage.clear();
-				dispatch({
-					type: SET_AUTH,
-					data: null
-				});
-			} else {
-				toastr['error']("Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !","Erreur interne");
-			}
-		})
-		
-	}
+    function logout(e) {
+        e.preventDefault();
+
+        fetch("/logout", {
+            method: "GET"
+        }).then(res => {
+            if (res.ok && res.status === 200) {
+                localStorage.clear();
+                dispatch({
+                    type: SET_AUTH,
+                    data: null
+                });
+            } else {
+                toastr["error"](
+                    "Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !",
+                    "Erreur interne"
+                );
+            }
+        });
+    }
 
     return (
         <div className="navigation">
@@ -79,12 +75,16 @@ export default function({
                         </Link>
                     </li>
                 )}
-                <li className="gec-courriers">
-                    <Link to="/courriers">
-                        <i className="nav-link-icon ti-file" />
-                        <span className="nav-link-label">Courriers</span>
-                    </Link>
-                </li>
+                {privileges.some(privilege =>
+                    LIST_COURRIER.includes(privilege)
+                ) && (
+                    <li className="gec-courriers">
+                        <Link to="/courriers">
+                            <i className="nav-link-icon ti-file" />
+                            <span className="nav-link-label">Courriers</span>
+                        </Link>
+                    </li>
+                )}
                 <li className="gec-statistiques">
                     <Link to="/statistiques">
                         <i className="nav-link-icon ti-pulse" />
@@ -92,7 +92,7 @@ export default function({
                     </Link>
                 </li>
                 {privileges.some(privilege =>
-                    console.log(privilege) || MANAGE_USERS.includes(privilege)
+                    MANAGE_USERS.includes(privilege)
                 ) && (
                     <li className="gec-utilisateurs">
                         <Link to="/utilisateurs">
@@ -101,12 +101,16 @@ export default function({
                         </Link>
                     </li>
                 )}
-                <li className="gec-archives">
-                    <Link to="/archives">
-                        <i className="nav-link-icon ti-layers" />
-                        <span className="nav-link-label">Archives</span>
-                    </Link>
-                </li>
+                {privileges.some(privilege =>
+                    LIST_ARCHIV.includes(privilege)
+                ) && (
+                    <li className="gec-archives">
+                        <Link to="/archives">
+                            <i className="nav-link-icon ti-layers" />
+                            <span className="nav-link-label">Archives</span>
+                        </Link>
+                    </li>
+                )}
                 <li className="flex-grow-1 gec-params">
                     <Link to="/params">
                         <i className="nav-link-icon ti-settings" />
