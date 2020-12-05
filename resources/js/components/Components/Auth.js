@@ -34,7 +34,7 @@ export default function() {
                 justifyContent: ''
             });
         };
-    }, []);I
+    }, []);
 
     function handleSubmit(e) {
         e.preventDefault();

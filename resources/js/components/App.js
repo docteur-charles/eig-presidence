@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, useSelector } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 
 
 import { SET_AUTH } from './Store/Actions';
@@ -14,6 +14,8 @@ import Root from './Navigators/Root';
 
 
 function App() {
+
+	let {pathname} = useLocation();
 
   let [isLoading, setLoading] = useState(true);
   let [isFetching, setFetching] = useState(true);
@@ -69,6 +71,10 @@ function App() {
     }
 
   }, [isLoading]);
+
+	useEffect(() => {
+		window.$(window).scrollTop(0);
+	}, [pathname]);
 
 
   return (isFetching || isLoading) ? (

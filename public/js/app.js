@@ -72427,6 +72427,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App() {
+  var _useLocation = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useLocation"])(),
+      pathname = _useLocation.pathname;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
       isLoading = _useState2[0],
@@ -72491,6 +72494,9 @@ function App() {
       }
     }
   }, [isLoading]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    window.$(window).scrollTop(0);
+  }, [pathname]);
   return isFetching || isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_PreLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, !auth ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Auth__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigators_Root__WEBPACK_IMPORTED_MODULE_8__["default"], {
     auth: auth
   }));
@@ -72571,7 +72577,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       });
     };
   }, []);
-  I;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -73490,7 +73495,7 @@ function Root(_ref) {
     return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../Pages/Utilisateurs */ "./resources/js/components/Pages/Utilisateurs.js"));
   });
   var Courriers = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ../Pages/Courriers */ "./resources/js/components/Pages/Courriers.js"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(7)]).then(__webpack_require__.bind(null, /*! ../Pages/Courriers */ "./resources/js/components/Pages/Courriers.js"));
   });
   var CourrierDetail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
     return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../Pages/CourrierDetail */ "./resources/js/components/Pages/CourrierDetail.js"));
