@@ -22,4 +22,10 @@ class LoginController extends Controller
     public function logout() {
         Auth::logout();
     }
+    public function checkSession() {
+        if (Auth::check()) {
+            return true;
+        }
+        return false;
+    }
 }
