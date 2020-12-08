@@ -191,7 +191,8 @@ function PDF(_ref) {
     var numPages = _ref2.numPages;
     setNumPages(numPages);
     setPagination(true);
-    handleLoaded();
+    handleLoaded(); // setTimeout(() => {
+    // }, 5000);
   }
 
   function suivant() {
@@ -351,13 +352,15 @@ function Enregistrement() {
       dataURL = _useState8[0],
       setDataURL = _useState8[1];
 
+  var $ = window.$;
+
   function onFileLoaded(f, data) {
     setFile(f);
     setDataURL(data);
   }
 
   function onFileExtensionNotMatch() {
-    window.toastr['error']("Ce type de fichier n'est pas géré !", "Fichier invalide");
+    window.toastr["error"]("Ce type de fichier n'est pas valide !", "Fichier non gérée");
   }
 
   function showPreview() {
@@ -371,7 +374,6 @@ function Enregistrement() {
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var $ = window.$;
     $(window).scrollTop(0);
 
     if (preview && !register) {
@@ -389,7 +391,11 @@ function Enregistrement() {
         placeholder: "Sélectionnez une mention"
       });
     }
-  }, [preview, register]);
+  }, [preview, register]); // useEffect(() => {
+  //     $(".header.d-print-none").css("z-index", "99999");
+  //     return () => $(".header.d-print-none").css("z-index", "");
+  // }, []);
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, !preview && !register ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mt-3 mt-lg-4 mt-xl-5 col-8 offset-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
@@ -410,10 +416,7 @@ function Enregistrement() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "ti-plus mr-2"
   }), "Enregistrer le courrier"))) : preview && !register ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid row position-relative align-items-center justify-content-center",
-    style: {
-      overflow: "hidden"
-    }
+    className: "container-fluid row position-relative align-items-center justify-content-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "button-continue shadow d-flex justify-content-end align-items-start",
     style: {
@@ -437,7 +440,10 @@ function Enregistrement() {
   }, file.type !== "application/pdf" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: dataURL,
     width: "100%",
-    height: "auto"
+    height: "auto",
+    style: {
+      display: 'inline-block'
+    }
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_PDF__WEBPACK_IMPORTED_MODULE_3__["default"], {
     url: dataURL
     /* || '/documents/cahier_de_charges.pdf' */

@@ -36,4 +36,10 @@ class LoginController extends Controller
 		Auth::logout();
 		return response()->json('success', 200);
     }
+    public function checkSession() {
+        if (Auth::check()) {
+            return true;
+        }
+        return false;
+    }
 }

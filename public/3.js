@@ -56,7 +56,8 @@ function PDF(_ref) {
     var numPages = _ref2.numPages;
     setNumPages(numPages);
     setPagination(true);
-    handleLoaded();
+    handleLoaded(); // setTimeout(() => {
+    // }, 5000);
   }
 
   function suivant() {

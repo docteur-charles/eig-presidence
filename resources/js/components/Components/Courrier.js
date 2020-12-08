@@ -48,9 +48,9 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
                 cover.style.width = `${contWidth - cote + 1}px`;
             }
 
-          setTimeout(() => {
-            init();
-          }, 200);
+            setTimeout(() => {
+                init();
+            }, 200);
 
             window.addEventListener("resize", init);
 
@@ -68,41 +68,64 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
 
     return (
         <Link
-            to={isLoading ? '':`/courriers/${id}`}
-            className="conteneur"
-            style={{ transition: "opacity 0.3s", opacity: isLoading ? 0 : 1 }}
+            to={isLoading ? "" : `/courriers/${id}`}
+            className="conteneur position-relative box"
+            style={{ width: "100%" }}
             id={`courrier_${id}`}
             ref={ref => setConteneur(ref)}
         >
-            <div className="courrier">
-                <PDF
-                    onLoaded={() => setFetching(false)}
-                    url="/documents/cahier_de_charges.pdf"
-                />
-            </div>
-            <div className="shadow">
-                <div className="flip-over" />
-            </div>
-            <div className="rempl" />
-            <div className="cover d-flex align-items-center justify-content-center">
-                <blockquote className="blockquote mb-0 p-4">
-                    <div
-                        className="position-absolute"
-                        style={{ right: "10px", top: "-0px" }}
-                    >
-                        <div className="badge badge-success">Ordinaire</div>
-                        &nbsp;
-                        <div className="badge badge-light">Confidentiel</div>
-                    </div>
-                    <h4 className="text-uppercase" title="Objet du courrier">
-                        Demande d'acquisition de la nationalité nigérienne
-                    </h4>
-                    <footer className="blockquote-footer text-uppercase">
-                        <cite title="Provénance du courrier">
-                            <small>Ministère des affaires étrangères</small>
-                        </cite>
-                    </footer>
-                </blockquote>
+            {isFetching && (
+                <>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </>
+            )}
+            <div
+                style={{
+                    transition: "opacity 0.3s",
+                    opacity: isLoading ? 0 : 1,
+                    width: "100%",
+                    height: "100%"
+				}}
+				className="box_content"
+            >
+                <div className="courrier">
+                    <PDF
+                        onLoaded={() => setFetching(false)}
+                        url="/documents/cahier_de_charges.pdf"
+                    />
+                </div>
+                <div className="shadow">
+                    <div className="flip-over" />
+                </div>
+                <div className="rempl" />
+                <div className="cover d-flex align-items-center justify-content-center">
+                    <blockquote className="blockquote mb-0 p-4">
+                        <div
+                            className="position-absolute"
+                            style={{ right: "10px", top: "-0px" }}
+                        >
+                            <div className="badge badge-success">Ordinaire</div>
+                            &nbsp;
+                            <div className="badge badge-light">
+                                Confidentiel
+                            </div>
+                        </div>
+                        <h4
+                            className="text-uppercase text-left"
+                            title="Objet du courrier"
+                        >
+                            Demande d'acquisition de la nationalité nigérienne
+                        </h4>
+                        <footer className="blockquote-footer text-uppercase">
+                            <cite title="Provénance du courrier">
+                                <small>Ministère des affaires étrangères</small>
+                            </cite>
+                        </footer>
+                    </blockquote>
+                </div>
             </div>
         </Link>
     );

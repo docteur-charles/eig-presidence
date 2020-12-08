@@ -25,7 +25,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'DIR',
             'grade' => 0,
             'privileges' => 'ENVOI_COURRIER$ENVOI_COURRIER_A_UN_DIRECTEUR$CONSULT_COURRIER_DIRECTION$CONSULT_COURRIER_RECU$CONSULT_ARCHIVE_PERSO$CONSULT_STAT_PERSO',
-            'description' => 'DIRECTEURS DES DEPARTEMENTS',
+            'description' => 'Directeur de cellule',
         ]);
 
 
@@ -33,7 +33,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'BUR_ORDRE',
             'grade' => 1,
             'privileges' => 'ENREGIST_COURRIER_ORDINAIRE$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_ORDINAIRE$CONSULT_ARCH_ORDINAIRE',
-            'description' => 'BUREAU D\'ORDRE',
+            'description' => "Agent du bureau d'ordre",
         ]);
 
 
@@ -41,7 +41,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'DIR_COURRIER',
             'grade' => 2,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ENREGIST_COURRIER_CONFIDENT$ENREGIST_LETTRE_PRESIDENT$VALIDAT_REJET_COURRIER$CONSULT_ARCH_CONFIDENT',
-            'description' => 'RESPONSABLE DU SERVICE COURRIER',
+            'description' => 'Responsable du service courrier',
         ]);
 
 
@@ -49,7 +49,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'SGPA',
             'grade' => 3,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$VALIDAT_NIVEAU_SUP$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'SECRETAIRE GENERAL ADJOINT DE LA PRESIDENCE',
+            'description' => 'Sécrétaire général adjoint de la Présidence',
         ]);
 
 
@@ -57,7 +57,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'SGP',
             'grade' => 4,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$VALIDAT_NIVEAU_SUP$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'SECRETAIRE GENERAL DE LA PRESIDENCE',
+            'description' => 'Sécrétaire général de la Présidence',
         ]);
 
 
@@ -65,7 +65,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'DIRCABA2',
             'grade' => 5,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$VALIDAT_NIVEAU_SUP$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'DIRECTEUR DE CABINET ADJOINT EN SECOND',
+            'description' => 'Directeur de Cabinet adjoint en second de la Présidence',
         ]);
 
 
@@ -73,7 +73,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'DIRCABA1',
             'grade' => 6,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$VALIDAT_NIVEAU_SUP$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'DIRECTEUR DE CABINET ADJOINT',
+            'description' => 'Directeur de Cabinet adjoint de la Présidence',
         ]);
 
 
@@ -81,7 +81,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'DIRCAB',
             'grade' => 7,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$VALIDAT_NIVEAU_SUP$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'DIRECTEUR DE CABINET',
+            'description' => 'Directeur de Cabinet de la Présidence',
         ]);
 
 
@@ -89,7 +89,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'PRN',
             'grade' => 8,
             'privileges' => 'SUIVRE_COURRIER_CONFIDENT$SUIVRE_COURRIER_ORDINAIRE$CONSUTL_STAT_CONFIDENT$ANNOT_COURRIER$IMPUTAT_COURRIER$RENVOI_COURRIER$ARRET_TRAIT_COURRIER',
-            'description' => 'PRESIDENT DE LA REPUBLIQUE',
+            'description' => 'Président de la République',
         ]);
 
 
@@ -97,7 +97,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'ADMIN',
             'grade' => 254,
             'privileges' => 'TOUT_ADMIN',
-            'description' => 'AGENT CHARGE D\'ADMINISTRER LE SYSTEME',
+            'description' => 'Agent chargé d\'administrer le système',
         ]);
 
 
@@ -105,7 +105,7 @@ class RolesTableSeeder extends Seeder
             'nom' => 'ROOT',
             'grade' => 255,
             'privileges' => 'TOUT_ROOT',
-            'description' => 'ADMINISTRATEUR SYSTEME PRINCIPAL',
+            'description' => 'Administrateur système principal',
         ]);
 
 

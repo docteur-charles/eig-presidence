@@ -7,25 +7,29 @@ import {
     fromLarge,
     fromTablet,
     fromExtraLarge,
-    isExtraLarge,
-    isMobileLandscape,
-    isMobile
+    isExtraLarge
 } from "../Helpers/Layout";
 
 export default function Enregistrement() {
+
     let [preview, setPreview] = useState(false);
     let [register, setRegister] = useState(false);
     let [file, setFile] = useState(null);
     let [dataURL, setDataURL] = useState(null);
+
+    let $ = window.$;
 
     function onFileLoaded(f, data) {
         setFile(f);
         setDataURL(data);
     }
 
-	function onFileExtensionNotMatch() {
-		window.toastr['error']("Ce type de fichier n'est pas géré !", "Fichier invalide");
-	}
+    function onFileExtensionNotMatch() {
+        window.toastr["error"](
+            "Ce type de fichier n'est pas valide !",
+            "Fichier non gérée"
+        );
+    }
 
     function showPreview() {
         if (file) setPreview(true);
@@ -38,8 +42,6 @@ export default function Enregistrement() {
     }
 
     useEffect(() => {
-        let $ = window.$;
-
         $(window).scrollTop(0);
 
         if (preview && !register) {
@@ -61,6 +63,11 @@ export default function Enregistrement() {
         }
     }, [preview, register]);
 
+    // useEffect(() => {
+    //     $(".header.d-print-none").css("z-index", "99999");
+    //     return () => $(".header.d-print-none").css("z-index", "");
+    // }, []);
+
     return (
         <form>
             {!preview && !register ? (
@@ -74,7 +81,10 @@ export default function Enregistrement() {
                             />
                         </Link>
                     </h4>
-                    <FileInput onLoaded={onFileLoaded} onExtensionNotMatch={onFileExtensionNotMatch} />
+                    <FileInput
+                        onLoaded={onFileLoaded}
+                        onExtensionNotMatch={onFileExtensionNotMatch}
+                    />
                     <div className="row m-t-25 m-b-25 justify-content-center">
                         <button
                             type="button"
@@ -89,9 +99,6 @@ export default function Enregistrement() {
             ) : preview && !register ? (
                 <div
                     className="container-fluid row position-relative align-items-center justify-content-center"
-                    style={{
-                        overflow: "hidden"
-                    }}
                 >
                     <div
                         className="button-continue shadow d-flex justify-content-end align-items-start"
@@ -126,7 +133,7 @@ export default function Enregistrement() {
                     </div>
                     <div className="col-md-10 pl-2">
                         {file.type !== "application/pdf" ? (
-                            <img src={dataURL} width="100%" height="auto" />
+                            <img src={dataURL} width="100%" height="auto" style={{display: 'inline-block'}} />
                         ) : (
                             <PDF
                                 url={

@@ -15,9 +15,9 @@ export default function({
     }
 }) {
     let dispatch = useDispatch();
+	let $ = window.$;
 
     useEffect(() => {
-        let $ = window.$;
         $(".navigation .header-list").niceScroll();
     }, []);
 

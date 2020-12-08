@@ -17,7 +17,9 @@ export default function PDF({
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
         setPagination(true);
-        handleLoaded();
+		handleLoaded();
+		// setTimeout(() => {
+		// }, 5000);
     }
 
     function suivant() {

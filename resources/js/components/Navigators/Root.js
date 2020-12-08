@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
+import '../Styles/App.css';
+
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import LeftSidebar from "../Components/LeftSidebar";
 import RightSidebar from "../Components/RightSidebar";
 import FullRoute from "./FullRoute";
 import Loader from "../Components/Loader";
-import Statistiques from "../Pages/Statistiques";
 import {
     LIST_ARCHIV,
     LIST_COURRIER,
@@ -15,14 +16,15 @@ import {
     REGISTER_COURRIER
 } from "../Helpers/Const";
 
-export default function Root({ auth }) {
-    let Dashboard = React.lazy(() => import("../Pages/Dashboard"));
-    let Archive = React.lazy(() => import("../Pages/Archive"));
-    let Enregistrement = React.lazy(() => import("../Pages/Enregistrement"));
-    let Utilisateurs = React.lazy(() => import("../Pages/Utilisateurs"));
-    let Courriers = React.lazy(() => import("../Pages/Courriers"));
-    let CourrierDetail = React.lazy(() => import("../Pages/CourrierDetail"));
+let Dashboard = React.lazy(() => import("../Pages/Dashboard"));
+let Archive = React.lazy(() => import("../Pages/Archive"));
+let Enregistrement = React.lazy(() => import("../Pages/Enregistrement"));
+let Utilisateurs = React.lazy(() => import("../Pages/Utilisateurs"));
+let Courriers = React.lazy(() => import("../Pages/Courriers"));
+let CourrierDetail = React.lazy(() => import("../Pages/CourrierDetail"));
+let Statistiques = React.lazy(() => import("../Pages/Statistiques"));
 
+export default function Root({ auth }) {
     let [sidebar, setSidebar] = useState(true);
     let [expand, setExpand] = useState(false);
 
@@ -44,21 +46,17 @@ export default function Root({ auth }) {
         } else {
             hideSidebar();
         }
-    }
-
-    // useEffect(() => {
-    //   let $ = window.$;
-    //   $('body .layout-wrapper').niceScroll();
-    // }, [])
+	}
+	
+	// useEffect(() => {
+    //     let $ = window.$;
+    //     $("body").niceScroll();
+    // }, []);
 
     return (
         <>
             <div
                 className="layout-wrapper"
-                style={{
-                    overflow: "hidden",
-                    outline: "none"
-                }}
             >
                 <Header full={expand} auth={auth} />
 

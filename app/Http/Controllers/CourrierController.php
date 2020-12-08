@@ -109,8 +109,15 @@ class CourrierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+
+    //methode permettant de connaitre le nombre de courriers entrants traités par un utilisateur
+    public function statCourrierEntrants() {
+            $user = Auth::user();
+            $userRole = Role::find($user->role_id);
+
+            if( $userRole->role_id == 1  | $user->role_id == 2) {
+                return response()->json(Courrier::where('etat','>=', 1)->count());
+            }
+            return  response()->json(Courrier::where('etape_actuelle','>', $userRole->grade)->count());
     }
 }
