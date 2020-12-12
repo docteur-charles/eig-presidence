@@ -19,16 +19,19 @@ class CreateCourriersTable extends Migration
             $table->string('origine');
             $table->string('type_contenu');
             $table->string('type_courrier');
-            $table->string('reference');
+            $table->integer('reference');
             $table->string('mention');
-            $table->dateTimeTz('date_retour');
-            $table->string('etat');
-            $table->text('observation');
+            $table->dateTimeTz('date_retour')->nullable();
+            $table->string('etat')->default('ATTENTE');
+            $table->string('statut')->default('OUVERT');
+            $table->text('observation')->nullable();
             $table->string('url_fichier');
-            $table->integer('destinataire');
+            $table->integer('destinataire')->nullable();
+            $table->integer('destinateur')->nullable();
             $table->integer('etape_actuelle');
             $table->timestamps();
-        });
+		});
+		
     }
 
     /**

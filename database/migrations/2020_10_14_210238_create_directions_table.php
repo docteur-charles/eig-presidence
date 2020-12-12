@@ -16,8 +16,7 @@ class CreateDirectionsTable extends Migration
         Schema::create('directions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
-            $table->integer('id_directeur');
-            $table->integer('rattachement');
+            $table->integer('directeur_id');
             $table->timestamps();
         });
     }

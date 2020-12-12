@@ -79,7 +79,7 @@ function Demo() {
   }, "Faites un tour !"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "text-muted"
   }, "Nous avons pr\xE9par\xE9 pour vous un outil pour une prise en main rapide de l'interface utilisateur."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    href: "dashboard.html#",
+    href: "",
     className: "small"
   }, "Fermer")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex-shrink-0 ml-3"
@@ -193,15 +193,23 @@ function Usage() {
           show: true
         }
       };
-      var chart = new window.ApexCharts(document.querySelector("#daily-usage"), options);
-      chart.render();
+      var el = document.querySelector("#daily-usage");
+
+      if (el) {
+        var chart = new window.ApexCharts(document.querySelector("#daily-usage"), options);
+        chart.render();
+        return chart;
+      }
     }
 
-    dailyUsage();
+    return dailyUsage();
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    initialize();
+    var apex = initialize();
+    return function () {
+      apex && apex.destroy();
+    };
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"

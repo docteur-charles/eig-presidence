@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import FileInput from "../Components/FileInput";
 import PDF from "../Components/PDF";
+import { getToken, manageResponse } from "../Helpers/Func";
 import {
     fromDesktop,
     fromLarge,
@@ -11,13 +13,17 @@ import {
 } from "../Helpers/Layout";
 
 export default function Enregistrement() {
-
     let [preview, setPreview] = useState(false);
     let [register, setRegister] = useState(false);
+    let [isLoading, setLoading] = useState(false);
     let [file, setFile] = useState(null);
     let [dataURL, setDataURL] = useState(null);
 
     let $ = window.$;
+    let swal = window.swal;
+
+    let history = useHistory();
+    const dispatch = useDispatch();
 
     function onFileLoaded(f, data) {
         setFile(f);
@@ -39,6 +45,38 @@ export default function Enregistrement() {
         if (preview) {
             setRegister(true);
         }
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+        let formData = new FormData(e.target);
+        getToken().then(async token => {
+            let response = await fetch("/registerIncoming", {
+                method: "POST",
+                headers: {
+                    Accept: "Application/json",
+                    "X-CSRF-TOKEN": token
+                },
+                body: formData
+            }).then(async res => ({
+                status: res.status,
+                ...(await res.json())
+            }));
+            setLoading(false);
+            if (response.success) {
+                swal(
+                    "Enregistrement terminé",
+                    response.message,
+                    "success"
+                ).then(() => {
+                    swal.close();
+                    history.push(`/courriers/${response.courrier}`);
+                });
+            } else {
+                manageResponse(response, dispatch);
+            }
+        });
     }
 
     useEffect(() => {
@@ -69,37 +107,37 @@ export default function Enregistrement() {
     // }, []);
 
     return (
-        <form>
-            {!preview && !register ? (
-                <div className="mt-3 mt-lg-4 mt-xl-5 col-8 offset-2">
-                    <h4 className="text-center text-warning text-uppercase mb-3">
-                        <Link>
-                            <img
-                                src="/assets/images/logo_transparent.png"
-                                width="200px"
-                                alt="logo"
-                            />
-                        </Link>
-                    </h4>
-                    <FileInput
-                        onLoaded={onFileLoaded}
-                        onExtensionNotMatch={onFileExtensionNotMatch}
-                    />
-                    <div className="row m-t-25 m-b-25 justify-content-center">
-                        <button
-                            type="button"
-                            onClick={showPreview}
-                            className="btn col-4 btn-warning btn-uppercase p-3 justify-content-center btn-rounded"
-                        >
-                            <i className="ti-plus mr-2"></i>Enregistrer le
-                            courrier
-                        </button>
-                    </div>
+        <form onSubmit={handleSubmit}>
+            <div
+                style={{ display: !preview && !register ? "" : "none" }}
+                className="mt-3 mt-lg-4 mt-xl-5 col-8 offset-2"
+            >
+                <h4 className="text-center text-warning text-uppercase mb-3">
+                    <Link to="">
+                        <img
+                            src="/assets/images/logo_transparent.png"
+                            width="200px"
+                            alt="logo"
+                        />
+                    </Link>
+                </h4>
+                <FileInput
+                    onLoaded={onFileLoaded}
+                    name="courrier"
+                    onExtensionNotMatch={onFileExtensionNotMatch}
+                />
+                <div className="row m-t-25 m-b-25 justify-content-center">
+                    <button
+                        type="button"
+                        onClick={showPreview}
+                        className="btn col-4 btn-warning btn-uppercase p-3 justify-content-center btn-rounded"
+                    >
+                        <i className="ti-plus mr-2"></i>Enregistrer le courrier
+                    </button>
                 </div>
-            ) : preview && !register ? (
-                <div
-                    className="container-fluid row position-relative align-items-center justify-content-center"
-                >
+            </div>
+            {preview && !register ? (
+                <div className="container-fluid row position-relative align-items-center justify-content-center">
                     <div
                         className="button-continue shadow d-flex justify-content-end align-items-start"
                         style={{
@@ -133,7 +171,12 @@ export default function Enregistrement() {
                     </div>
                     <div className="col-md-10 pl-2">
                         {file.type !== "application/pdf" ? (
-                            <img src={dataURL} width="100%" height="auto" style={{display: 'inline-block'}} />
+                            <img
+                                src={dataURL}
+                                width="100%"
+                                height="auto"
+                                style={{ display: "inline-block" }}
+                            />
                         ) : (
                             <PDF
                                 url={
@@ -144,6 +187,8 @@ export default function Enregistrement() {
                         )}
                     </div>
                 </div>
+            ) : !register ? (
+                ""
             ) : (
                 <div
                     className={`row col-12 ${
@@ -171,6 +216,7 @@ export default function Enregistrement() {
                                     <label>Type de contenu</label>
                                     <select
                                         required
+                                        name="type_contenu"
                                         defaultValue=""
                                         className="select2-contenu"
                                     >
@@ -196,6 +242,7 @@ export default function Enregistrement() {
                                     <label>Type de courrier</label>
                                     <select
                                         required
+                                        name="type_courrier"
                                         defaultValue=""
                                         className="select2-courrier"
                                     >
@@ -213,6 +260,7 @@ export default function Enregistrement() {
                                 <input
                                     type="text"
                                     required
+                                    name="objet"
                                     className="form-control"
                                     placeholder="Objet du courrier"
                                 />
@@ -223,6 +271,7 @@ export default function Enregistrement() {
                                     <input
                                         type="text"
                                         required
+                                        name="origine"
                                         className="form-control"
                                         placeholder="Provénance du courrier"
                                     />
@@ -231,6 +280,7 @@ export default function Enregistrement() {
                                     <label>Mention du courrier</label>
                                     <select
                                         required
+                                        name="mention"
                                         className="select2-mention"
                                         multiple
                                     >
@@ -257,13 +307,26 @@ export default function Enregistrement() {
                                     informations que vous renseignez; elles
                                     doivent figurer sur le courrier physique.
                                 </p>
+
                                 <button
                                     type="submit"
                                     className={`btn ${
                                         fromTablet() ? "col-4" : "col-12"
                                     } btn-outline-primary btn-lg btn-block`}
+                                    disabled={isLoading}
                                 >
-                                    Enregistrer
+                                    {isLoading ? (
+                                        <>
+                                            <span
+                                                className="spinner-border spinner-border-sm mr-2"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            Enregisrement...
+                                        </>
+                                    ) : (
+                                        "Enregister"
+                                    )}
                                 </button>
                             </div>
                         </div>

@@ -49,7 +49,8 @@ class User extends Authenticatable
 
 	public function hasPrivilege($privilege)
 	{
-		$privileges = explode('$', $this->role()->privileges);
+		$privileges = explode('$', $this->role->privileges);
+		// echo json_encode($privileges);
 		return in_array($privilege, $privileges);
 	}
 
@@ -57,7 +58,7 @@ class User extends Authenticatable
 	public function hasOneOf(array $privileges)
 	{
 		return array_reduce($privileges, function ($hasPrivilege, $privilege) {
-			$privilegs = explode('$', $this->role()->privileges);
+			$privilegs = explode('$', $this->role->privileges);
 			return $hasPrivilege || in_array($privilege, $privilegs);
 		});
 	}

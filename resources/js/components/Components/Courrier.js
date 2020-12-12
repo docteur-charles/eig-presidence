@@ -4,7 +4,17 @@ import "../Styles/Courrier.css";
 
 import PDF from "./PDF";
 
-export default function Courrier({ id = 1, mention, typeContenu }) {
+export default function Courrier({
+    id = 1,
+    reference,
+	mention,
+	etat,
+    type_contenu,
+    type_courrier,
+    url_fichier,
+    objet,
+    origine
+}) {
     let [conteneur, setConteneur] = useState(null);
     let [isLoading, setLoading] = useState(true);
     let [isFetching, setFetching] = useState(true);
@@ -21,7 +31,13 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
 
     function getCote(hypo) {
         return Math.sqrt(Math.pow(hypo, 2) / 2);
-    }
+	}
+	
+	useEffect(() => {
+		if (url_fichier.substr(-4).toString() !== ".pdf") {
+			setFetching(false);
+		}
+	}, []);
 
     useEffect(() => {
         if (conteneur && !isFetching) {
@@ -69,7 +85,7 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
     return (
         <Link
             to={isLoading ? "" : `/courriers/${id}`}
-            className="conteneur position-relative box"
+            className={"conteneur position-relative box" + ' ' + etat.toLowerCase()}
             style={{ width: "100%" }}
             id={`courrier_${id}`}
             ref={ref => setConteneur(ref)}
@@ -88,16 +104,54 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
                     opacity: isLoading ? 0 : 1,
                     width: "100%",
                     height: "100%"
-				}}
-				className="box_content"
+                }}
+                className="box_content"
             >
                 <div className="courrier">
-                    <PDF
-                        onLoaded={() => setFetching(false)}
-                        url="/documents/cahier_de_charges.pdf"
-                    />
+                    {url_fichier.substr(-4).toString() === ".pdf" ? (
+                        <PDF
+                            onLoaded={() => setFetching(false)}
+                            url={url_fichier.replace(/^public/, "/storage")}
+                        />
+                    ) : (
+                        <img
+								src={url_fichier.replace(/^public/, "/storage")}
+								width='100%'
+                        />
+                    )}
                 </div>
                 <div className="shadow">
+                    <div
+                        className="d-flex flex-column align-items-end"
+                        style={{
+                            position: "absolute",
+                            bottom: "10px",
+                            right: "10px",
+                            zIndex: 2
+                        }}
+                    >
+                        <span
+                            style={{
+                                fontSize: "16px",
+                                textDecoration: "underline"
+                            }}
+                        >
+                            N° d'ordre
+                        </span>
+                        <span style={{ fontSize: "26px" }}>
+                            {reference < 10
+                                ? `00000${reference}`
+                                : reference < 100
+                                ? `0000${reference}`
+                                : reference < 1000
+                                ? `000${reference}`
+                                : reference < 10000
+                                ? `00${reference}`
+                                : reference < 100000
+                                ? `0${reference}`
+                                : reference}
+                        </span>
+                    </div>
                     <div className="flip-over" />
                 </div>
                 <div className="rempl" />
@@ -107,21 +161,25 @@ export default function Courrier({ id = 1, mention, typeContenu }) {
                             className="position-absolute"
                             style={{ right: "10px", top: "-0px" }}
                         >
-                            <div className="badge badge-success">Ordinaire</div>
-                            &nbsp;
-                            <div className="badge badge-light">
-                                Confidentiel
+                            <div className="badge badge-success">
+                                {type_contenu}
                             </div>
+                            &nbsp;
+                            <div className="badge badge-warning">
+                                {type_courrier}
+                            </div>
+                            &nbsp;
+                            <div className="badge badge-light">{mention}</div>
                         </div>
                         <h4
                             className="text-uppercase text-left"
                             title="Objet du courrier"
                         >
-                            Demande d'acquisition de la nationalité nigérienne
+                            {objet}
                         </h4>
                         <footer className="blockquote-footer text-uppercase">
                             <cite title="Provénance du courrier">
-                                <small>Ministère des affaires étrangères</small>
+                                <small>{origine}</small>
                             </cite>
                         </footer>
                     </blockquote>

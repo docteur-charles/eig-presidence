@@ -54,8 +54,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Courrier(_ref) {
   var _ref$id = _ref.id,
       id = _ref$id === void 0 ? 1 : _ref$id,
+      reference = _ref.reference,
       mention = _ref.mention,
-      typeContenu = _ref.typeContenu;
+      etat = _ref.etat,
+      type_contenu = _ref.type_contenu,
+      type_courrier = _ref.type_courrier,
+      url_fichier = _ref.url_fichier,
+      objet = _ref.objet,
+      origine = _ref.origine;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -86,6 +92,11 @@ function Courrier(_ref) {
     return Math.sqrt(Math.pow(hypo, 2) / 2);
   }
 
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (url_fichier.substr(-4).toString() !== ".pdf") {
+      setFetching(false);
+    }
+  }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (conteneur && !isFetching) {
       var init = function init() {
@@ -122,7 +133,7 @@ function Courrier(_ref) {
   }, [isFetching]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: isLoading ? "" : "/courriers/".concat(id),
-    className: "conteneur position-relative box",
+    className: "conteneur position-relative box" + ' ' + etat.toLowerCase(),
     style: {
       width: "100%"
     },
@@ -140,14 +151,34 @@ function Courrier(_ref) {
     className: "box_content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "courrier"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PDF__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, url_fichier.substr(-4).toString() === ".pdf" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PDF__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onLoaded: function onLoaded() {
       return setFetching(false);
     },
-    url: "/documents/cahier_de_charges.pdf"
+    url: url_fichier.replace(/^public/, "/storage")
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: url_fichier.replace(/^public/, "/storage"),
+    width: "100%"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "shadow"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-column align-items-end",
+    style: {
+      position: "absolute",
+      bottom: "10px",
+      right: "10px",
+      zIndex: 2
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "16px",
+      textDecoration: "underline"
+    }
+  }, "N\xB0 d'ordre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: "26px"
+    }
+  }, reference < 10 ? "00000".concat(reference) : reference < 100 ? "0000".concat(reference) : reference < 1000 ? "000".concat(reference) : reference < 10000 ? "00".concat(reference) : reference < 100000 ? "0".concat(reference) : reference)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flip-over"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "rempl"
@@ -163,16 +194,18 @@ function Courrier(_ref) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "badge badge-success"
-  }, "Ordinaire"), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, type_contenu), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "badge badge-warning"
+  }, type_courrier), "\xA0", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "badge badge-light"
-  }, "Confidentiel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, mention)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "text-uppercase text-left",
     title: "Objet du courrier"
-  }, "Demande d'acquisition de la nationalit\xE9 nig\xE9rienne"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+  }, objet), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
     className: "blockquote-footer text-uppercase"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("cite", {
     title: "Prov\xE9nance du courrier"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Minist\xE8re des affaires \xE9trang\xE8res")))))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, origine)))))));
 }
 
 /***/ }),
@@ -238,6 +271,7 @@ function PDF(_ref) {
   }
 
   function suivant() {
+    window.$(window).scrollTop(0);
     setPageNumber(pageNumber + 1);
   }
 
@@ -250,11 +284,20 @@ function PDF(_ref) {
       position: "relative"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "border m-b-30"
+    className: "border m-b-30",
+    style: {
+      minHeight: '500px',
+      justifyContent: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pdf__WEBPACK_IMPORTED_MODULE_1__["Document"], {
     renderMode: "svg",
     file: url,
-    loading: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], null),
+    loading: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      normal: "50px"
+    }),
     onLoadSuccess: onDocumentLoadSuccess
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pdf__WEBPACK_IMPORTED_MODULE_1__["Page"], {
     pageNumber: pageNumber
@@ -283,139 +326,179 @@ function PDF(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Courriers; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Components_Courrier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Courrier */ "./resources/js/components/Components/Courrier.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Components_Courrier__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/Courrier */ "./resources/js/components/Components/Courrier.js");
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
+/* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
 
 
-function Courriers(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+function Courriers() {
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      _useState2 = _slicedToArray(_useState, 2),
+      courriers = _useState2[0],
+      setCourriers = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isLoading = _useState4[0],
+      setLoading = _useState4[1];
+
+  function getCourriers() {
+    return fetch("/consultExternalReceived").then( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.t0 = _objectSpread;
+                _context.t1 = {
+                  status: res.status
+                };
+                _context.next = 4;
+                return res.json();
+
+              case 4:
+                _context.t2 = _context.sent;
+                return _context.abrupt("return", (0, _context.t0)(_context.t1, _context.t2));
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    setLoading(true);
+    getCourriers().then(function (response) {
+      if (!response.success) {
+        return Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
+      }
+
+      setCourriers(Object.values(response.courriers).reduce(function ($c, courrier) {
+        var date = new Date(courrier.updated_at);
+        var d = "".concat(date.getDate(), " ").concat(_Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["MOIS"][date.getMonth()], " ").concat(date.getFullYear());
+
+        if (!$c[d] || !Array.isArray($c[d])) {
+          $c[d] = [_objectSpread({
+            heures: date.getHours(),
+            minutes: date.getMinutes()
+          }, courrier)];
+        } else {
+          $c[d].push(_objectSpread({
+            heures: date.getHours(),
+            minutes: date.getMinutes()
+          }, courrier));
+        }
+
+        $c[d].sort(function (c1, c2) {
+          return c1.updated_at < c2.updated_at ? 1 : c1.updated_at == c2.updated_at ? 0 : -1;
+        });
+        return $c;
+      }, {}));
+      setLoading(false);
+    });
+  }, []);
+  return isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    normal: "40px"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "timeline"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", {
     className: "text-uppercase"
-  }, "Liste des courriers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-data d-flex flex-column pt-4 position-relative",
-    style: {
-      width: "100%",
-      maxWidth: "950px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      marginLeft: "-30px",
-      fontWeight: "bold"
-    },
-    className: "shadow timeline-date p-2 align-self-start rounded-circle border-warning"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "24 D\xE9c")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-content d-flex align-items-start position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-hr border-bottom border-warning",
-    style: {
-      width: "150px",
-      marginTop: "-1px",
-      paddingLeft: "30px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    style: {
-      fontSize: "2.5em",
-      fontFamily: "monospace",
-      fontWeight: "bold",
-      position: "relative"
-    }
-  }, "12", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "d-inline-block position-absolute",
-    style: {
-      top: "5px",
-      fontWeight: "normal",
-      fontSize: "0.4em"
-    }
-  }, "14"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-content d-flex align-items-start position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-hr border-bottom border-warning",
-    style: {
-      width: "150px",
-      marginTop: "-1px",
-      paddingLeft: "30px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    style: {
-      fontSize: "2.5em",
-      fontFamily: "monospace",
-      fontWeight: "bold",
-      position: "relative"
-    }
-  }, "12", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "d-inline-block position-absolute",
-    style: {
-      top: "5px",
-      fontWeight: "normal",
-      fontSize: "0.4em"
-    }
-  }, "14"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_1__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-data d-flex flex-column position-relative",
-    style: {
-      width: "100%",
-      maxWidth: "950px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      marginLeft: "-30px",
-      fontWeight: "bold"
-    },
-    className: "shadow stimeline-date p-2 align-self-start rounded-circle border-warning border"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "23 D\xE9c")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-content d-flex align-items-start position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-hr border-bottom border-warning",
-    style: {
-      width: "150px",
-      marginTop: "-1px",
-      paddingLeft: "30px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    style: {
-      fontSize: "2.5em",
-      fontFamily: "monospace",
-      fontWeight: "bold",
-      position: "relative"
-    }
-  }, "12", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "d-inline-block position-absolute",
-    style: {
-      top: "5px",
-      fontWeight: "normal",
-      fontSize: "0.4em"
-    }
-  }, "14"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "timeline-content d-flex align-items-start position-relative"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "content-hr border-bottom border-warning",
-    style: {
-      width: "150px",
-      marginTop: "-1px",
-      paddingLeft: "30px"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-    style: {
-      fontSize: "2.5em",
-      fontFamily: "monospace",
-      fontWeight: "bold",
-      position: "relative"
-    }
-  }, "12", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "d-inline-block position-absolute",
-    style: {
-      top: "5px",
-      fontWeight: "normal",
-      fontSize: "0.4em"
-    }
-  }, "14"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_1__["default"], null))))));
+  }, "Liste des courriers"), Object.keys(courriers).length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "alert alert-warning mt-5",
+    role: "alert"
+  }, "Vous n'avez pas de nouveaux courriers."), Object.keys(courriers).map(function (jour, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+      key: i + 1,
+      className: "timeline-data d-flex flex-column pt-4 position-relative",
+      style: {
+        width: "100%",
+        maxWidth: "950px"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+      style: {
+        marginLeft: "-30px",
+        fontWeight: "bold"
+      },
+      className: "shadow timeline-date p-2 align-self-start rounded-circle border-warning"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", null, jour)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+      className: "timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4"
+    }, courriers[jour].map(function (courrier, index) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        key: index + 1,
+        className: "timeline-content d-flex align-items-start position-relative"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "content-hr border-bottom border-warning",
+        style: {
+          width: "150px",
+          marginTop: "-1px",
+          paddingLeft: "30px"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("small", {
+        style: {
+          fontSize: "2.5em",
+          fontFamily: "monospace",
+          fontWeight: "bold",
+          position: "relative"
+        }
+      }, courrier.heures < 10 ? "0".concat(courrier.heures) : courrier.heures, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", {
+        className: "d-inline-block position-absolute",
+        style: {
+          top: "5px",
+          fontWeight: "normal",
+          fontSize: "0.4em"
+        }
+      }, courrier.minutes < 10 ? "0".concat(courrier.minutes) : courrier.minutes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_4__["default"], courrier));
+    })));
+  })));
 }
 
 /***/ }),

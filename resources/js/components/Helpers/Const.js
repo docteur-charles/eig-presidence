@@ -102,8 +102,63 @@ export const LIST_ARCHIV = [
 // Les courriers reçus.
 export const LIST_COURRIER = [
     "CONSULT_COURRIER_DIRECTION",
-    "CONSULT_COURRIER_RECU"
+    "CONSULT_COURRIER_RECU",
+    "CONSULT_RECEIV_CONFIDENT"
 ];
+
+// Les courriers reçus.
+
+export const VALID_REJET = ["VALIDAT_REJET_COURRIER"];
+
+export const TRANSM_COURRIER = ["VALIDAT_NIVEAU_SUP"];
+
+export const RENVOI_ENVOYEUR = ["RENVOI_COURRIER"];
+
+export const IMPUT_COURRIER = ["IMPUTAT_COURRIER"];
+
+export const TERM_COURRIER = ["ARRET_TRAIT_COURRIER"];
+
+export const SUIV_COURRIER = [
+    "SUIVRE_COURRIER_CONFIDENT",
+    "SUIVRE_COURRIER_ORDINAIRE"
+];
+
+export const STAT_COURRIER = [
+    "CONSUTL_STAT_CONFIDENT",
+    "CONSUTL_STAT_ORDINAIRE",
+    "CONSUTL_STAT_PERSO"
+];
+
 
 // Les privilèges donnant droit de gérer les utilisateurs.
 export const MANAGE_USERS = ["TOUT_ADMIN", "TOUT_ROOT"];
+
+export const MOIS = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre"
+];
+
+export const SVGPATHS = ["/dashboard", "/statistiques"];
+
+export const ANNOTATIONS = [
+    "Pour études et observations",
+    "Pour donner suite",
+    "Pour disposition à donner",
+    "Pour synthèse",
+    "Pour y assister",
+    "Pour exploitation",
+    "Pour projet de réponse",
+    "Pour avis",
+    "M'en parler",
+    "Pour saisir le(s) Ministère(s)"
+];

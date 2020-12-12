@@ -29,10 +29,11 @@ export default function({
         }).then(res => {
             if (res.ok && res.status === 200) {
                 localStorage.clear();
+				document.location.replace('/');
                 dispatch({
                     type: SET_AUTH,
                     data: null
-                });
+				});
             } else {
                 toastr["error"](
                     "Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !",

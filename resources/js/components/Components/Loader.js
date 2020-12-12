@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Loader({ id = 0, bordered = false, style = {}, spinnerColor='orange', normal='' }) {
+export default function Loader({ id = 0, bordered = false, style = {}, spinnerColor='orange', normal='50px' }) {
     let [height, setHeight] = useState("100%");
     let [width, setWidth] = useState("100%");
     let [element, setElement] = useState(null);
@@ -37,7 +37,7 @@ export default function Loader({ id = 0, bordered = false, style = {}, spinnerCo
     }, []);
 
     return (
-		<div
+        <div
             ref={ref => setElement(ref)}
             className={` ${
                 bordered ? "border border-success" : ""
@@ -56,7 +56,7 @@ export default function Loader({ id = 0, bordered = false, style = {}, spinnerCo
             }}
         >
             <div
-                className="spinner-grow"
+                className="spinner-border spinner-border-sm"
                 title="Chargement en cours, veuillez patienter !"
                 style={{ color: spinnerColor, width: normal, height: normal }}
                 role="status"

@@ -8,7 +8,7 @@ export default function Resultat({ isLoading = false }) {
     <div className="row" style={{minHeight: '150px'}}>
 
       {isLoading ? (
-        <Loader padding={50} />
+        <Loader normal={50} style={{marginTop: '20px'}} />
       ) : (
           <>
             <div className="col-12 mt-5 d-flex align-items-center justify-content-center">

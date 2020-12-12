@@ -22,7 +22,8 @@ export default function PDF({
 		// }, 5000);
     }
 
-    function suivant() {
+	function suivant() {
+		window.$(window).scrollTop(0);
         setPageNumber(pageNumber + 1);
     }
 
@@ -32,11 +33,11 @@ export default function PDF({
 
     return (
         <div style={{ position: "relative" }}>
-            <div className="border m-b-30">
+			<div className="border m-b-30" style={{minHeight: '500px', justifyContent: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
                 <Document
                     renderMode="svg"
                     file={url}
-                    loading={<Loader />}
+                    loading={<Loader normal="50px" />}
                     onLoadSuccess={onDocumentLoadSuccess}
                 >
                     <Page pageNumber={pageNumber} />

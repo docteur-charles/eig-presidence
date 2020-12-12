@@ -64,7 +64,7 @@ export default function Demo() {
               <div className="mr-3">
                 <h4 className="mb-3">Faites un tour !</h4>
                 <p className="text-muted">Nous avons préparé pour vous un outil pour une prise en main rapide de l'interface utilisateur.</p>
-                <a href="dashboard.html#" className="small">Fermer</a>
+                <a href="" className="small">Fermer</a>
               </div>
               <div className="flex-shrink-0 ml-3">
                 <button className="btn btn-outline-primary btn-lg2" onClick={faireLeTour}>Démarrer maintenant</button>

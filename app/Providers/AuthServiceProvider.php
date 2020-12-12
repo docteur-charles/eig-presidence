@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Direction;
+use App\Models\Operation;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -29,16 +31,16 @@ class AuthServiceProvider extends ServiceProvider
 		$this->registerPolicies();
 
 		// Droit sur la gestion des utilisateurs.
-		Gate::define('canManageUsers', function ($user) {
+		Gate::define('ManageUsers', function ($user) {
 			return $user->hasOneOf(['TOUT_ADMIN', 'TOUT_ROOT']);
 		});
 
 
 		// Enregistrement d'un courrier.
-		Gate::define('canRegister', function ($user, $courrier) {
-			if ($courrier->typeContenu === 'LETTRE_DU_PRESIDENT') {
+		Gate::define('Register', function ($user, $courrier) {
+			if ($courrier->type_contenu === 'LETTRE_DU_PRESIDENT') {
 				return $user->hasPrivilege('ENREGIST_LETTRE_PRESIDENT');
-			} else if (in_array($courrier->typeContenu, ['LETTRE_ORDINAIRE', 'ARRETE', 'BORDEREAU_DENVOI', 'DECISION'])) {
+			} else if (in_array($courrier->type_contenu, ['LETTRE_ORDINAIRE', 'ARRETE', 'BORDEREAU_DENVOI', 'DECISION'])) {
 				if ($courrier->mention === 'CONFIDENTIEL') {
 					return $user->hasPrivilege('ENREGIST_COURRIER_CONFIDENT');
 				}
@@ -49,67 +51,67 @@ class AuthServiceProvider extends ServiceProvider
 
 
 		// Envoyer un courrier au Bureau d'Ordre ou à la Directrice des Courriers.
-		Gate::define('canSendOnCircuit', function ($user, $courrier) {
+		Gate::define('SendOnCircuit', function ($user, $courrier) {
 			return ($courrier->typeCourrier === 'INTERNE') && $user->hasPrivilege('ENVOI_COURRIER');
 		});
 
 
 		// Envoyer un courrier à un directeur.
-		Gate::define('canSendToOthers', function ($user, $courrier) {
+		Gate::define('SendToOthers', function ($user, $courrier) {
 			return ($courrier->typeCourrier === 'INTERNE') && $user->hasPrivilege('ENVOI_COURRIER_A_UN_DIRECTEUR');
 		});
 
 
 		// Valider ou rejeter un courrier.
-		Gate::define('canValidateOrReject', function ($user) {
+		Gate::define('ValidateOrReject', function ($user) {
 			return $user->hasPrivilege('VALIDAT_REJET_COURRIER');
 		});
 
 
 		// Retourner un courrier à l'enregistreur.
-		Gate::define('canReturnTo', function ($user) {
+		Gate::define('ReturnTo', function ($user) {
 			return $user->hasPrivilege('RENVOI_COURRIER');
 		});
 
 
 		// Valider au niveau supérieur.
-		Gate::define('canForwardTo', function ($user) {
+		Gate::define('ForwardTo', function ($user) {
 			return $user->hasPrivilege('VALIDAT_NIVEAU_SUP');
 		});
 
 
 		// Imputation d'un courrier.
-		Gate::define('canImputeTo', function ($user) {
+		Gate::define('ImputeTo', function ($user) {
 			return $user->hasPrivilege('IMPUTAT_COURRIER');
 		});
 
 
 		// Annotation d'un courrier.
-		Gate::define('canAnnotate', function ($user) {
+		Gate::define('Annotate', function ($user) {
 			return $user->hasPrivilege('ANNOT_COURRIER');
 		});
 
 
 		// Arreter le traitement d'un courrier.
-		Gate::define('canTerminate', function ($user) {
+		Gate::define('Terminate', function ($user) {
 			return $user->hasPrivilege('ARRET_TRAIT_COURRIER');
 		});
 
 
-		// Suivre l'état de traitement d'un courrier.
-		Gate::define('canTrack', function ($user, $courrier) {
+		// Suivre l'état de traitement des courriers confidentiels.
+		Gate::define('TrackConfidential', function ($user) {
+			return $user->hasPrivilege('SUIVRE_COURRIER_CONFIDENT');
+		});
 
-			// Si confidentiel ou lettre du président.
-			if (($courrier->mention === 'CONFIDENTIEL') || ($courrier->typeContenu === 'LETTRE_DU_PRESIDENT')) {
-				return $user->hasPrivilege('SUIVRE_COURRIER_CONFIDENT');
-			} else {
-				return $user->hasPrivilege('SUIVRE_COURRIER_ORDINAIRE');
-			}
+
+		// Suivre l'état de traitement des.
+		Gate::define('TrackOrdinary', function ($user) {
+			return $user->hasPrivilege('SUIVRE_COURRIER_ORDINAIRE');
 		});
 
 
 		//  Consulter des statistiques liées à un courrier.
-		Gate::define('canConsultStat', function ($user, $courrier) {
+		Gate::define('ConsultStat', function ($user, $courrier) {
 
 			// Si le courrier est interne et on en est propriétaire.
 			if (($courrier->typeCourrier === 'INTERNE') && (($courrier->destinateur_id == $user->id) || ($courrier->destinataire_id == $user->id))) {
@@ -125,32 +127,66 @@ class AuthServiceProvider extends ServiceProvider
 		});
 
 
+		//  Consulter des statistiques liées à un courrier.
+		Gate::define('Consult', function ($user, $courrier) {
+
+			// Si le courrier est interne et on en est propriétaire.
+			// if (($courrier->type_courrier === 'INTERNE') && (($courrier->destinateur_id == $user->id) || ($courrier->destinataire_id == $user->id))) {
+			// 	return $user->hasPrivilege('CONSULT_COURRIER_RECU');
+			// }
+
+			if ($courrier->etat === 'IMPUTE') {
+				$operation = Operation::where([
+					['courrier_id', '=', $courrier->id],
+					['type', '=', 'ImputeTo']
+				])->first();
+				if ($operation) {
+					$direction = Direction::whereIn('id', explode('$', $operation->donnees))->where('directeur_id', $user->id)->get();
+					return !$direction->isEmpty() && $user->hasPrivilege('CONSULT_COURRIER_DIRECTION');
+				}
+			}
+
+			// Si confidentiel ou lettre du président (directrice des courriers).
+			if (($courrier->mention === 'CONFIDENTIEL') || ($courrier->type_contenu === 'LETTRE_DU_PRESIDENT')) {
+				return $user->hasPrivilege('CONSULT_RECEIV_CONFIDENT');
+			} else { // Si c'est le bureau d'autre.
+				return $user->hasPrivilege('COURRIER_CIRCUIT');
+			}
+		});
+
+
 		//  Consulter les archives personnelles (directeur).
-		Gate::define('canConsultPersonalArchiv', function ($user) {
+		Gate::define('ConsultPersonalArchiv', function ($user) {
 			return $user->hasPrivilege('CONSULT_ARCHIVE_PERSO');
 		});
 
 
 		//  Consulter les archives confidentielles (responsables et directrice des courriers).
-		Gate::define('canConsultConfidentialArchiv', function ($user) {
+		Gate::define('ConsultConfidentialArchiv', function ($user) {
 			return $user->hasPrivilege('CONSULT_ARCH_CONFIDENT');
 		});
 
 
 		//  Consulter les archives ordinaires (responsables et directrice des courriers).
-		Gate::define('canConsultArchiv', function ($user) {
+		Gate::define('ConsultArchiv', function ($user) {
 			return $user->hasPrivilege('CONSULT_ARCH_ORDINAIRE');
 		});
 
 
 		// Consulter les fichiers reçus des autres directeurs.
-		Gate::define('canConsultReceived', function ($user) {
-			return $user->hasPrivilege('CONSULT_COURRIER_RECU');
+		Gate::define('ConsultReceived', function ($user) {
+			return $user->hasOneOf(['CONSULT_COURRIER_RECU','COURRIER_CIRCUIT']);
+		});
+
+
+		// Consulter les fichiers confidentiels reçus des autres directeurs.
+		Gate::define('ConsultConfidential', function ($user) {
+			return $user->hasPrivilege('CONSULT_RECEIV_CONFIDENT');
 		});
 
 
 		// Consulter les fichiers imputés à sa direction.
-		Gate::define('canConsultImputed', function ($user) {
+		Gate::define('ConsultImputed', function ($user) {
 			return $user->hasPrivilege('CONSULT_COURRIER_DIRECTION');
 		});
 	}

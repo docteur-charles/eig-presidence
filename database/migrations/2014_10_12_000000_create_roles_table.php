@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('nom')->unique();
             $table->integer('grade')->unique();
-            $table->string('privileges');
+            $table->longText('privileges');
             $table->string('description');
             $table->timestamps();
         });

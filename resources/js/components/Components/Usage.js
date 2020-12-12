@@ -175,19 +175,26 @@ export default function Usage() {
                 }
             };
 
-            var chart = new window.ApexCharts(
-                document.querySelector("#daily-usage"),
-                options
-            );
+            let el = document.querySelector("#daily-usage");
+            if (el) {
+                var chart = new window.ApexCharts(
+                    document.querySelector("#daily-usage"),
+                    options
+                );
 
-            chart.render();
+                chart.render();
+                return chart;
+            }
         }
 
-        dailyUsage();
+        return dailyUsage();
     }
 
     useEffect(() => {
-        initialize();
+        let apex = initialize();
+        return () => {
+            apex && apex.destroy();
+        };
     }, []);
 
     return (

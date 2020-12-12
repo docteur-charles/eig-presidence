@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function RightSidebar() {
 	let $ = window.$;
-	let [wizardInitialized, setWizard] = useState(false);
 
+	let stats = useSelector(state => state.stats);
+	
     function openModal() {
         $("#SendCourrier").modal({
             backdrop: "static",
@@ -65,7 +67,7 @@ export default function RightSidebar() {
                                     </div>
                                     <div className=" d-flex align-items-center">
                                         <h3 className="text-primary m-0 p-0">
-                                            20
+                                            {stats?.entrants || 0}
                                         </h3>
                                     </div>
                                 </a>
@@ -97,7 +99,7 @@ export default function RightSidebar() {
                                     </div>
                                     <div className=" d-flex align-items-center">
                                         <h3 className="text-primary m-0 p-0">
-                                            5
+                                            {stats?.internes || 0}
                                         </h3>
                                     </div>
                                 </a>
@@ -126,7 +128,7 @@ export default function RightSidebar() {
                                     </div>
                                     <div className=" d-flex align-items-center">
                                         <h3 className="text-primary m-0 p-0">
-                                            12
+                                            {stats?.sortants || 0}
                                         </h3>
                                     </div>
                                 </a>

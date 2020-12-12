@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Direction;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -24,15 +25,34 @@ class UserSeeder extends Seeder
 		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 
-
-		if ($dirRole = Role::where('nom', 'DIR')->first())
-			User::create([
+		if ($dirRole = Role::where('nom', 'DIR')->first()) {
+			$dir = User::create([
 				'nom' => 'DIRECTEUR',
 				'prenom' => 'INFORMATIQUE',
 				'role_id' => $dirRole->id,
 				'email' => 'dir@presidence.ne',
 				'password' => Hash::make('Dir123'),
 			]);
+			Direction::create([
+				'nom' => 'Direction d\'informatique',
+				'directeur_id' => $dir->id
+			]);
+		}
+
+
+		if ($dirRole = Role::where('nom', 'DIR')->first()) {
+			$dir = User::create([
+				'nom' => 'DIRECTEUR',
+				'prenom' => 'GARDE PRESIDENTIELLE',
+				'role_id' => $dirRole->id,
+				'email' => 'garde@presidence.ne',
+				'password' => Hash::make('DirGarde123'),
+			]);
+			Direction::create([
+				'nom' => 'Direction de la Garde Présidentielle',
+				'directeur_id' => $dir->id
+			]);
+		}
 
 
 		if ($burOrdreRole = Role::where('nom', 'BUR_ORDRE')->first())
@@ -45,14 +65,19 @@ class UserSeeder extends Seeder
 			]);
 
 
-		if ($dirCourrierRole = Role::where('nom', 'DIR_COURRIER')->first())
-			User::create([
+		if ($dirCourrierRole = Role::where('nom', 'DIR_COURRIER')->first()) {
+			$dir = User::create([
 				'nom' => 'DIRECTRICE',
 				'prenom' => 'DES COURRIERS',
 				'role_id' => $dirCourrierRole->id,
 				'email' => 'dir_Courrier@presidence.ne',
 				'password' => Hash::make('DirCourrier123'),
 			]);
+			Direction::create([
+				'nom' => 'Direction des courriers',
+				'directeur_id' => $dir->id
+			]);
+		}
 
 
 		if ($sgpaRole = Role::where('nom', 'SGPA')->first())
@@ -116,7 +141,7 @@ class UserSeeder extends Seeder
 
 
 		if ($adminRole = Role::where('nom', 'ADMIN')->first())
-			echo 'ADMIN OK' && User::create([
+			User::create([
 				'nom' => 'AGENT',
 				'prenom' => 'ADMINISTRATEUR',
 				'role_id' => $adminRole->id,
@@ -126,7 +151,7 @@ class UserSeeder extends Seeder
 
 
 		if ($rootRole = Role::where('nom', 'ROOT')->first())
-			echo 'ROOT OK' && User::create([
+			User::create([
 				'nom' => 'ADMINISTRATEUR',
 				'prenom' => 'DU SYSTEME',
 				'role_id' => $rootRole->id,

@@ -18,8 +18,8 @@ class CreateOperationsTable extends Migration
             $table->string('type');
             $table->string('donnees');
             $table->string('description');
-            $table->integer('id_utilisateur');
-            $table->integer('id_courrier');
+            $table->integer('user_id');
+            $table->integer('courrier_id');
             $table->timestamps();
         });
     }
