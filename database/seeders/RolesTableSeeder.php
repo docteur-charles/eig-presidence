@@ -16,9 +16,15 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Role::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+		// MySQL.
+		// DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		// Role::truncate();
+		// DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+		// PostgresSQL
+		DB::statement("SET session_replication_role = 'replica';");
+		Role::truncate();
+		DB::statement("SET session_replication_role = 'origin';");
 
 
         Role::create([
