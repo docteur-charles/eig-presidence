@@ -56,7 +56,7 @@
 	<script src="{{asset('vendors/dropzone/dropzone.js')}}"></script>
 	<script src="{{asset('vendors/select2/js/select2.min.js')}}"></script>
 	<script src="{{asset('assets/js/app.min.js')}}"></script>
-	<script src="/js/app.js"></script>
+	<script src="{{asset('/js/app.js')}}"></script>
 	<script id="apex" src="{{asset('vendors/charts/apex/apexcharts.min.js')}}"></script>
 	<script>
 		toastr.options = {
