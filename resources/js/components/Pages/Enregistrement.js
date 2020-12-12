@@ -284,8 +284,8 @@ export default function Enregistrement() {
                                         className="select2-mention"
                                         multiple
                                     >
-                                        <option value="ORDINAIRE">
-                                            Ordinaire
+                                        <option value="STANDARD">
+                                            STANDARD
                                         </option>
                                         <option value="CONFIDENTIEL">
                                             Confidentiel
