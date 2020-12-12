@@ -22,9 +22,7 @@ class RolesTableSeeder extends Seeder
 		// DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 		// PostgresSQL
-		DB::statement("SET session_replication_role = 'replica';");
-		Role::truncate();
-		DB::statement("SET session_replication_role = 'origin';");
+		DB::statement("TRUNCATE TABLE roles RESTART IDENTITY CASCADE");
 
 
         Role::create([
