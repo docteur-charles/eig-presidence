@@ -43,21 +43,21 @@
 		</div>
 	</div>
 
-	<script src="/vendors/bundle.js"></script>
-	<script src="/assets/js/jquery.min.js"></script>
-	<script src="/js/raphael-min.js"></script>
-	<script src="/js/justgage.min.js"></script>
-	<script src="/vendors/prism/prism.js"></script>
-	<script src="/vendors/form-wizard/jquery.steps.min.js"></script>
-	<script src="/js/jquery.scrollTo.min.js"></script>
-	<script src="/js/kinetic.js"></script>
-	<script src="/vendors/enjoyhint/jquery.enjoyhint.js"></script>
-	<script src="/vendors/enjoyhint/enjoyhint.min.js"></script>
-	<script src="/vendors/dropzone/dropzone.js"></script>
-	<script src="/vendors/select2/js/select2.min.js"></script>
-	<script src="/assets/js/app.min.js"></script>
-	<script src="/js/app.js"></script>
-	<script id="apex" src="/vendors/charts/apex/apexcharts.min.js"></script>
+	<script defer src="/vendors/bundle.js"></script>
+	<script defer src="/assets/js/jquery.min.js"></script>
+	<script defer src="/js/raphael-min.js"></script>
+	<script defer src="/js/justgage.min.js"></script>
+	<script defer src="/vendors/prism/prism.js"></script>
+	<script defer src="/vendors/form-wizard/jquery.steps.min.js"></script>
+	<script defer src="/js/jquery.scrollTo.min.js"></script>
+	<script defer src="/js/kinetic.js"></script>
+	<script defer src="/vendors/enjoyhint/jquery.enjoyhint.js"></script>
+	<script defer src="/vendors/enjoyhint/enjoyhint.min.js"></script>
+	<script defer src="/vendors/dropzone/dropzone.js"></script>
+	<script defer src="/vendors/select2/js/select2.min.js"></script>
+	<script defer src="/assets/js/app.min.js"></script>
+	<script defer src="/js/app.js"></script>
+	<script defer id="apex" src="/vendors/charts/apex/apexcharts.min.js"></script>
 	<script>
 		toastr.options = {
 			timeOut: 3000,
