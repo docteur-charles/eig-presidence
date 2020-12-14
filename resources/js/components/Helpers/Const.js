@@ -92,6 +92,12 @@ export const REGISTER_COURRIER = [
     "ENREGIST_LETTRE_PRESIDENT"
 ];
 
+// Les privilèges donnant droit d'enregistrer un courrier.
+export const REGISTER_CONFIDENTIALS = [
+    "ENREGIST_COURRIER_CONFIDENT",
+    "ENREGIST_LETTRE_PRESIDENT"
+];
+
 // Les archives.
 export const LIST_ARCHIV = [
     "CONSULT_ARCHIVE_PERSO",

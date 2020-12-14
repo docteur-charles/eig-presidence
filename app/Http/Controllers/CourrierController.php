@@ -197,7 +197,7 @@ class CourrierController extends Controller
 		if (!$request->file('courrier')) {
 			return response()->json([
 				'success' => false,
-				'message' => "Le courrier numérique est attendu."
+				'message' => "Le courrier numérique doit être joint."
 			]);
 		}
 
@@ -210,20 +210,25 @@ class CourrierController extends Controller
 			'type_courrier' => $request->type_courrier,
 			'reference' => $numOrdre,
 			'mention' => $request->mention,
-			'url_fichier' => $path
+			'url_fichier' => $path,
+			'etat' => 'ATTENTE',
+			'etape_actuelle'=> 0
 		];
 
 
 		if ($courrier->type_courrier !== 'ENTRANT') {
-			return response()->json(['success' => false, 'message' => 'Pas de courriers internes']);
+			return response()->json(['success' => false, 'message' => 'Le courrier doit être interne']);
 		}
 
 		$user = Auth::user();
 		$courrier->etape_actuelle = $user->role->grade + 1;
-
+		
 		$nextUser = Role::where('grade', $courrier->etape_actuelle)->first();
-
+		
 		if (Gate::allows('Register', $courrier)) {
+			if(Gate::allows('ValidateOrReject')) {
+				$courrier->etat = 'VALIDE';
+			}
 			DB::beginTransaction();
 			try {
 				$c = Courrier::create((array)$courrier);
@@ -265,20 +270,19 @@ class CourrierController extends Controller
 				'created_at' => $operation->courrier->created_at,
 				'photo' => $operation->courrier->photo
 			];
-			if($op->type == 'ImputeTo') {
+			if ($op->type == 'ImputeTo') {
 				$dirs = [];
-				foreach(Direction::whereIn('id', explode('$', $operation->donnees))->select('nom')->get() as $dir) {
+				foreach (Direction::whereIn('id', explode('$', $operation->donnees))->select('nom')->get() as $dir) {
 					$dirs[] = $dir->nom;
 				}
 				$op->donnees = join(', ', $dirs);
 			}
-			if($op->type == 'Annotate') {
+			if ($op->type == 'Annotate') {
 				$op->donnees = join('; ', explode('$$', $operation->donnees));
 			}
 			unset($op->updated_at,
 			$op->courrier_id,
-			$op->user_id,
-		);
+			$op->user_id,);
 			$ops[] = $op;
 		}
 
@@ -329,7 +333,7 @@ class CourrierController extends Controller
 				])->update([
 					'etat' => $request->etat,
 					'statut' => $statut,
-					'observation' => $request->obervation ? $request->observation : '',
+					'observation' => $request->observation ? $request->observation : '',
 					'etape_actuelle' => $etape_actuelle
 				]);
 				if ($result == 1) {
@@ -453,7 +457,7 @@ class CourrierController extends Controller
 			'directions' => ['required']
 		]);
 
-		if (Gate::allows('ImputeTo')) {
+		if (Gate::allows('ImputeTo') && (mb_strlen($request->directions) > 0)) {
 
 			$user = Auth::user();
 

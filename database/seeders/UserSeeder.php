@@ -19,16 +19,18 @@ class UserSeeder extends Seeder
 	public function run()
 	{
 
-		// MySQL.
-		// DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-		// User::truncate();
-		// DB::table('role_user')->truncate();
-		// DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-		// PostgresSQL.
-		DB::statement("TRUNCATE TABLE users RESTART IDENTITY CASCADE");
-		DB::statement("TRUNCATE TABLE role_user RESTART IDENTITY CASCADE");
-
+		if (getenv('APP_ENV') != 'production') {
+			// MySQL. (Développement)
+			DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+			User::truncate();
+			DB::table('role_user')->truncate();
+			DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+		} else {
+			// PostgresSQL. (Production)
+			DB::statement("TRUNCATE TABLE users RESTART IDENTITY CASCADE");
+			DB::statement("TRUNCATE TABLE role_user RESTART IDENTITY CASCADE");
+		}
+		
 		if ($dirRole = Role::where('nom', 'DIR')->first()) {
 			$dir = User::create([
 				'nom' => 'DIRECTEUR',

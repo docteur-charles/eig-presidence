@@ -338,6 +338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_PDF__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/PDF */ "./resources/js/components/Components/PDF.js");
 /* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
 /* harmony import */ var _Helpers_Layout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Layout */ "./resources/js/components/Helpers/Layout.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -369,31 +370,41 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 function Enregistrement() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var auth = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
+    return state.auth;
+  });
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
-      preview = _useState2[0],
-      setPreview = _useState2[1];
+      isFetching = _useState2[0],
+      setFetching = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      register = _useState4[0],
-      setRegister = _useState4[1];
+      preview = _useState4[0],
+      setPreview = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      isLoading = _useState6[0],
-      setLoading = _useState6[1];
+      register = _useState6[0],
+      setRegister = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      file = _useState8[0],
-      setFile = _useState8[1];
+      isLoading = _useState8[0],
+      setLoading = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState10 = _slicedToArray(_useState9, 2),
-      dataURL = _useState10[0],
-      setDataURL = _useState10[1];
+      file = _useState10[0],
+      setFile = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState12 = _slicedToArray(_useState11, 2),
+      dataURL = _useState12[0],
+      setDataURL = _useState12[1];
 
   var $ = window.$;
   var swal = window.swal;
@@ -496,24 +507,31 @@ function Enregistrement() {
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (auth) {
+      setFetching(false);
+    }
+  }, [auth]);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     $(window).scrollTop(0);
 
-    if (preview && !register) {
-      setTimeout(function () {
-        $(".button-continue").css("top", "40px");
-      }, 1000);
-    } else if (register) {
-      $(".select2-courrier").select2({
-        placeholder: "Sélectionnez un type de courrier"
-      });
-      $(".select2-contenu").select2({
-        placeholder: "Sélectionnez un type de contenu"
-      });
-      $(".select2-mention").select2({
-        placeholder: "Sélectionnez une mention"
-      });
+    if (!isFetching) {
+      if (preview && !register) {
+        setTimeout(function () {
+          $(".button-continue").css("top", "40px");
+        }, 1000);
+      } else if (register) {
+        $(".select2-courrier").select2({
+          placeholder: "Sélectionnez un type de courrier"
+        });
+        $(".select2-contenu").select2({
+          placeholder: "Sélectionnez un type de contenu"
+        });
+        $(".select2-mention").select2({
+          placeholder: "Sélectionnez une mention"
+        });
+      }
     }
-  }, [preview, register]); // useEffect(() => {
+  }, [isFetching, preview, register]); // useEffect(() => {
   //     $(".header.d-print-none").css("z-index", "99999");
   //     return () => $(".header.d-print-none").css("z-index", "");
   // }, []);
@@ -603,7 +621,9 @@ function Enregistrement() {
     disabled: true
   }, "S\xE9lectionnez un type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "LETTRE_ORDINAIRE"
-  }, "Lettre ordinaire"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+  }, "Lettre ordinaire"), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_8__["REGISTER_CONFIDENTIALS"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "LETTRE_DU_PRESIDENT"
   }, "Lettre du Pr\xE9sident"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "ARRETE"
@@ -624,8 +644,10 @@ function Enregistrement() {
   }, "S\xE9lectionnez un type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "ENTRANT"
   }, "Entrant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    disabled: true,
     value: "SORTANT"
   }, "Sortant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    disabled: true,
     value: "INTERNE"
   }, "Interne")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
@@ -653,8 +675,10 @@ function Enregistrement() {
     className: "select2-mention",
     multiple: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-    value: "ORDINAIRE"
-  }, "Ordinaire"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+    value: "STANDARD"
+  }, "Standard"), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_8__["REGISTER_CONFIDENTIALS"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "CONFIDENTIEL"
   }, "Confidentiel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
     value: "URGENT"

@@ -1,13 +1,89 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/components/Pages/CourrierDetail.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/Pages/CourrierDetail.js ***!
-  \*********************************************************/
+/***/ "./resources/js/components/Pages/Utilisateurs.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Pages/Utilisateurs.js ***!
+  \*******************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /home/lahiyata/projects/laravel/eig-presidence/resources/js/components/Pages/CourrierDetail.js: Unexpected token, expected \",\" (1241:16)\n\n\u001b[0m \u001b[90m 1239 | \u001b[39m\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mtd\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 1240 | \u001b[39m\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mtr\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1241 | \u001b[39m\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t)}\u001b[0m\n\u001b[0m \u001b[90m      | \u001b[39m\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 1242 | \u001b[39m                                                    \u001b[33m<\u001b[39m\u001b[33mtr\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 1243 | \u001b[39m                                                        \u001b[33m<\u001b[39m\u001b[33mtd\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 1244 | \u001b[39m                                                            \u001b[33m<\u001b[39m\u001b[33mb\u001b[39m\u001b[33m>\u001b[39m\u001b[35m120988\u001b[39m\u001b[33m/\u001b[39m\u001b[35m2020\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mb\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at Object._raise (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:766:17)\n    at Object.raiseWithData (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:759:17)\n    at Object.raise (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:753:17)\n    at Object.unexpected (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:8966:16)\n    at Object.expect (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:8952:28)\n    at Object.parseCallExpressionArguments (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:10033:14)\n    at Object.parseCoverCallAndAsyncArrowHead (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9960:29)\n    at Object.parseSubscript (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9896:19)\n    at Object.parseSubscripts (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9867:19)\n    at Object.parseExprSubscripts (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9850:17)\n    at Object.parseUpdate (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Object.parseMaybeUnary (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Object.parseExprOps (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Object.parseMaybeConditional (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Object.parseMaybeAssign (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9620:21)\n    at Object.parseExpressionBase (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9564:23)\n    at /home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9558:39\n    at Object.allowInAnd (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:11303:12)\n    at Object.parseExpression (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9558:17)\n    at Object.jsxParseExpressionContainer (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4569:30)\n    at Object.jsxParseElementAt (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4663:36)\n    at Object.jsxParseElementAt (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4648:32)\n    at Object.jsxParseElementAt (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4648:32)\n    at Object.jsxParseElementAt (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4648:32)\n    at Object.jsxParseElementAt (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4648:32)\n    at Object.jsxParseElement (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4706:17)\n    at Object.parseExprAtom (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:4713:19)\n    at Object.parseExprSubscripts (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9844:23)\n    at Object.parseUpdate (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Object.parseMaybeUnary (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Object.parseExprOps (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Object.parseMaybeConditional (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Object.parseMaybeAssign (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9620:21)\n    at /home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9586:39\n    at Object.allowInAnd (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:11303:12)\n    at Object.parseMaybeAssignAllowIn (/home/lahiyata/projects/laravel/eig-presidence/node_modules/@babel/parser/lib/index.js:9586:17)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    window.$('.select2').select2({
+      placeholder: 'Sélectionnez un rôle'
+    });
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row mb-1 mr-2 animated fadeInRight"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-3 card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-header text-center"
+  }, "Nouvel utilisateur"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "card-body bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "mb-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    placeholder: "Nom & pr\xE9noms",
+    required: true,
+    autofocus: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "email",
+    className: "form-control",
+    placeholder: "Adresse e-mail",
+    required: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    required: true,
+    className: "select2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "ADMIN"
+  }, "Administrateur"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "DIR"
+  }, "Directeur"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "BUR_ORDRE"
+  }, "Bureau d'ordre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "DIR_COURRIER"
+  }, "Directrice des Courriers"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "password",
+    className: "form-control",
+    placeholder: "Nouveau mot de passe",
+    required: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "password",
+    className: "form-control",
+    placeholder: "Confirmation du mot de passe",
+    required: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn btn-primary btn-block"
+  }, "Enregister")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "box box-block bg-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+    className: "table table-striped table-bordered dataTable",
+    id: "registerTable",
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Noms"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "E-mail"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Fonction"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action")))))));
+});
 
 /***/ })
 
