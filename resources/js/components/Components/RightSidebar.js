@@ -188,7 +188,7 @@ export default function RightSidebar() {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <div id="steps">
+                            {/* <div id="steps">
                                 <h3>Personal Information</h3>
                                 <section className="card card-body border mb-0">
                                     <h5>Personal Information</h5>
@@ -210,9 +210,10 @@ export default function RightSidebar() {
                                         to navigate through your content.
                                     </p>
                                 </section>
-                            </div>
+                            </div> */}
+							<div className="alert alert-info">Développement en cours...</div>
                         </div>
-                        <div className="modal-footer">
+                        {/* <div className="modal-footer">
                             <button
                                 type="button"
                                 className="btn btn-secondary"
@@ -223,7 +224,7 @@ export default function RightSidebar() {
                             <button type="button" className="btn btn-primary">
                                 Envoyer
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
