@@ -4,18 +4,18 @@ import { Route } from 'react-router-dom';
 
 export default function FullRoute({ path, component, showSidebar }) {
 
-  useEffect(() => {
-    // side effects
-    showSidebar(false);
+	useEffect(() => {
+		// side effects
+		showSidebar(false);
 
-    // cleanup
-    return () => {
-      showSidebar(true);
-    }
-  }, [])
-  
-  return (
-    <Route path={path} component={component} />
-  );
-  
+		// cleanup
+		return () => {
+			showSidebar(true);
+		}
+	}, []);
+
+	return (
+		<Route path={path} component={component} />
+	);
+
 }

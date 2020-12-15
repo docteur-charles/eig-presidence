@@ -36701,9 +36701,9 @@ function App() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (!isLoading) {
       if (auth) {
-        console.log("Session initiale:", auth);
+        // console.log("Session initiale:", auth);
         checkSession().then(function (response) {
-          console.log(response);
+          // console.log(response);
           var isValid = response.isValid;
           setFetching(false);
 
@@ -36712,8 +36712,7 @@ function App() {
             dispatch({
               type: _Store_Actions__WEBPACK_IMPORTED_MODULE_4__["SET_AUTH"],
               data: null
-            });
-            console.log("Session invalide !");
+            }); // console.log("Session invalide !");
           } else {
             dispatch({
               type: _Store_Actions__WEBPACK_IMPORTED_MODULE_4__["SET_AUTH"],
@@ -36722,7 +36721,7 @@ function App() {
           }
         });
       } else {
-        console.log("Pas de session initiale !", auth);
+        // console.log("Pas de session initiale !", auth);
         setFetching(false);
       }
     }
@@ -36744,9 +36743,9 @@ function App() {
       if (_Helpers_Const__WEBPACK_IMPORTED_MODULE_9__["SVGPATHS"].includes(pathname)) $("#SvgjsSvg1001").remove();
     };
   }, [pathname]);
-  return isFetching || isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_PreLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, !auth ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Auth__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigators_Root__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return isFetching || isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_PreLoader__WEBPACK_IMPORTED_MODULE_6__["default"], null) : !auth ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Auth__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Navigators_Root__WEBPACK_IMPORTED_MODULE_8__["default"], {
     auth: auth
-  }));
+  });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
