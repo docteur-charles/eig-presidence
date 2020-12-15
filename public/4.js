@@ -20,10 +20,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 function Demo() {
+  var $ = window.$;
+
   function faireLeTour(e) {
     e.preventDefault();
     var enjoyhint_instance = new window.EnjoyHint({});
-    var options = {
+    var initOptions = [],
+        options = {
       nextButton: {
         text: "Suivant"
       },
@@ -31,27 +34,55 @@ function Demo() {
         text: "Ignorer"
       }
     };
-    enjoyhint_instance.set([_objectSpread({
-      'next .header': 'La barre des tâches.'
-    }, options), _objectSpread({
-      'next .navigation': 'Le menu de navigation vous permet de déclancher les opérations principales. Vous \'y trouverez que les opérations que vous êtes autorisés à effectuer !'
-    }, options), _objectSpread({
-      'next .gec-dashboard': 'Votre tableau de bord. Vous y retrouverez un resumé de l\'ensemble de courriers que vous avez traités et ceux qui vous sont destinés mais que vous n\'avez pas traités pour chaque mois l\'année en cours.'
-    }, options), _objectSpread({
-      'next .gec-enreg-courriers': "Enregistrement de nouveaux courriers par le bureau d'ordre ou la directrice."
-    }, options), _objectSpread({
-      'next .gec-courriers': "Liste de courriers qui vous sont destinés et que vous n'avez pas encore traités."
-    }, options), _objectSpread({
-      'next .gec-statistiques': 'Vos statistiques d\'utilisation.'
-    }, options), _objectSpread({
-      'next .gec-utilisateurs': "Ici, vous gérerez l'ensemble des utilisateurs, leurs rôles, leurs grades et leurs privilèges."
-    }, options), _objectSpread({
-      'next .gec-archives': 'Liste des archives. Vous ne verrez que les courriers que vous êtes autorisés à voir.'
-    }, options), _objectSpread({
-      'next .sidebar-content': 'Ici vous avez un aperçu de vos courriers en attente de traitement.'
-    }, options), _objectSpread({
-      'next .sidebar-footer': 'Téléversez et envoyez de nouveaux courriers. Avec ce button, on ne peut envoyer que des PDF ou des Images.'
-    }, options)]);
+    var data = [{
+      s: 'next .header',
+      d: 'La barre des tâches.'
+    }, {
+      s: 'next .navigation',
+      d: 'Le menu de navigation vous permet de déclancher les opérations principales. Vous \'y trouverez que les opérations que vous êtes autorisés à effectuer !'
+    }, {
+      s: 'next .gec-dashboard',
+      d: 'Votre tableau de bord. Vous y retrouverez un resumé de l\'ensemble de courriers que vous avez traités et ceux qui vous sont destinés mais que vous n\'avez pas traités pour chaque mois l\'année en cours.'
+    }, {
+      s: 'next .gec-enreg-courriers',
+      d: "Enregistrement de nouveaux courriers par le bureau d'ordre ou la directrice."
+    }, {
+      s: 'next .gec-courriers',
+      d: "Liste de courriers qui vous sont destinés et que vous n'avez pas encore traités."
+    }, {
+      s: 'next .gec-statistiques',
+      d: 'Vos statistiques d\'utilisation.'
+    }, {
+      s: 'next .gec-utilisateurs',
+      d: "Ici, vous gérerez l'ensemble des utilisateurs, leurs rôles, leurs grades et leurs privilèges."
+    }, {
+      s: 'next .gec-archives',
+      d: 'Liste des archives. Vous ne verrez que les courriers que vous êtes autorisés à voir.'
+    }, {
+      s: 'next .gec-params',
+      d: 'Paramétrez ici votre compte. Vous pouvez changer entre autre votre mot de passe, votre photo de profil etc.'
+    }, {
+      s: 'next .gec-disconnect',
+      d: 'Un clic ici fermera votre session et vous déconnectera.'
+    }, {
+      s: 'next .sidebar-content',
+      d: 'Ici vous avez un aperçu de vos courriers en attente de traitement.'
+    }, {
+      s: 'next .sidebar-footer',
+      d: 'Téléversez et envoyez de nouveaux courriers. Avec ce button, on ne peut envoyer que des PDF ou des Images.'
+    }];
+
+    for (var _i = 0, _data = data; _i < _data.length; _i++) {
+      var opt = _data[_i];
+
+      if ($(opt.s.substr(5)).length > 0) {
+        initOptions.push(_objectSpread(_defineProperty({}, opt.s, opt.d), options));
+      }
+    } // initOptions[initOptions.length-1].nextButton.text = 'Terminer';
+    // initOptions[initOptions.length - 1].skipButton = false;
+
+
+    enjoyhint_instance.set(initOptions);
     enjoyhint_instance.run();
     return false;
   }
