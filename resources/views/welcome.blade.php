@@ -2,17 +2,16 @@
 <html lang="fr">
 
 <head>
+	<title>GEC-PRN</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="shortcut icon" href="/assets/images/logo_transparent.png" />
 
-	<title>GEC-PRN</title>
 
 	<!-- Fonts -->
-	<link rel="stylesheet" href="/vendors/bundle.css">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
-
+	
 	<!-- Styles -->
 	<link rel="stylesheet" href="/vendors/prism/prism.css">
 	<link rel="stylesheet" href="/vendors/enjoyhint/enjoyhint.css">
@@ -20,21 +19,22 @@
 	<link rel="stylesheet" href="/vendors/dropzone/dropzone.css">
 	<link rel="stylesheet" href="/vendors/select2/css/select2.min.css">
 	<link rel="stylesheet" href="/assets/css/app.min.css">
+	<link rel="stylesheet" href="/vendors/bundle.css">
 
 	<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
-	<marquee behavior="scroll" direction="left">
-		Ceci est une version de démonstration,
-		veuillez noter qu'aucune transaction ne sera traitée
-	</marquee>
 
 </head>
 
 <body>
 
+	<marquee behavior="scroll" direction="left" style="position: absolute; top: 1em;">
+		Ceci est une version de démonstration,
+		veuillez noter qu'aucune transaction ne sera traitée.
+	</marquee>
 
 
 	<div id="app">
