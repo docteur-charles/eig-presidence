@@ -2,10 +2,10 @@
 <html lang="fr">
 
 <head>
-	<title>GEC-PRN</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<title>GEC-PRN</title>
+	<!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 	<link rel="shortcut icon" href="/assets/images/logo_transparent.png" />
 
 
@@ -13,13 +13,13 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
 	
 	<!-- Styles -->
+	<link rel="stylesheet" href="/vendors/bundle.css">
 	<link rel="stylesheet" href="/vendors/prism/prism.css">
 	<link rel="stylesheet" href="/vendors/enjoyhint/enjoyhint.css">
 	<link rel="stylesheet" href="/vendors/form-wizard/jquery.steps.css">
 	<link rel="stylesheet" href="/vendors/dropzone/dropzone.css">
 	<link rel="stylesheet" href="/vendors/select2/css/select2.min.css">
 	<link rel="stylesheet" href="/assets/css/app.min.css">
-	<link rel="stylesheet" href="/vendors/bundle.css">
 
 	<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
