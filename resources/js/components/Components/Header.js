@@ -58,7 +58,7 @@ export default function ({full = false, auth:{nom, prenom, photo, role:{descript
                                   </div>
                                   <div className="dropdown-scroll">
                                       <ul className="list-group list-group-flush">
-                                          <li>
+                                          {/* <li>
                                               <a
                                                   href="index.html#"
                                                   className="list-group-item d-flex hide-show-toggler"
@@ -174,16 +174,16 @@ export default function ({full = false, auth:{nom, prenom, photo, role:{descript
                                                       </span>
                                                   </div>
                                               </a>
-                                          </li>
+                                          </li> */}
                                       </ul>
                                   </div>
                                   <div className="px-3 py-2 text-right border-top">
                                       <ul className="list-inline small">
-                                          <li className="list-inline-item mb-0">
+                                          {/* <li className="list-inline-item mb-0">
                                               <a href="index.html#">
                                                   Mark All Read
                                               </a>
-                                          </li>
+                                          </li> */}
                                       </ul>
                                   </div>
                               </div>
@@ -210,7 +210,7 @@ export default function ({full = false, auth:{nom, prenom, photo, role:{descript
                                   </figure>
                               </a>
                               <div className="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                                  <div className="list-group list-group-flush">
+                                  {/* <div className="list-group list-group-flush">
                                       <Link
                                           to="/params/profil"
                                           className="list-group-item"
@@ -225,7 +225,7 @@ export default function ({full = false, auth:{nom, prenom, photo, role:{descript
                                       >
                                           Déconnexion
                                       </Link>
-                                  </div>
+                                  </div> */}
                               </div>
                           </li>
                       </ul>
