@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export const Locale = {
     defaultLocale: "fr",
     locales: [
@@ -168,3 +170,20 @@ export const ANNOTATIONS = [
     "M'en parler",
     "Pour saisir le(s) Ministère(s)"
 ];
+
+
+export const TRES_URGENT = "TRES_URGENT";
+export const URGENT = "URGENT";
+export const STANDARD = "STANDARD";
+
+export const Toast = Swal.mixin({
+	toast: true,
+	position: 'top-end',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})

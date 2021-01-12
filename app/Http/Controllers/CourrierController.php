@@ -20,8 +20,6 @@ class CourrierController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function sendStats()
-
-
 	{
 
 		$user = Auth::user();
@@ -212,7 +210,7 @@ class CourrierController extends Controller
 			'mention' => $request->mention,
 			'url_fichier' => $path,
 			'etat' => 'ATTENTE',
-			'etape_actuelle'=> 0
+			'etape_actuelle' => 0
 		];
 
 
@@ -222,11 +220,11 @@ class CourrierController extends Controller
 
 		$user = Auth::user();
 		$courrier->etape_actuelle = $user->role->grade + 1;
-		
+
 		$nextUser = Role::where('grade', $courrier->etape_actuelle)->first();
-		
+
 		if (Gate::allows('Register', $courrier)) {
-			if(Gate::allows('ValidateOrReject')) {
+			if (Gate::allows('ValidateOrReject')) {
 				$courrier->etat = 'VALIDE';
 			}
 			DB::beginTransaction();
@@ -298,7 +296,7 @@ class CourrierController extends Controller
 			'courrier_id' => ['required']
 		]);
 
-		if (Gate::allows('ValidateOrReject') && in_array($request->etat, ['VALIDE', 'REJETE', 'RENVOYE'])) {
+		if ((in_array($request->etat, ['VALIDE', 'REJETE', 'RENVOYE']) && Gate::allows('ValidateOrReject')) || (($request->etat === 'RETOURNE') && Gate::allows('ReturnTo'))) {
 
 			$user = Auth::user();
 
@@ -321,13 +319,18 @@ class CourrierController extends Controller
 				$statut = 'FERME';
 				$etape_actuelle = $user->role->grade - 1;
 				$message = "Courrier renvoyé au bureau d'ordre.";
+			} else if ($request->etat === 'RETOURNE') {
+				$description = 'Renvoi du courrier';
+				$statut = 'FERME';
+				$etape_actuelle = $user->role->grade;
+				$message = "Courrier retourné au bureau d'ordre.";
 			}
 
 			DB::beginTransaction();
 			try {
 				$result = Courrier::where([
 					['id', '=', $request->courrier_id],
-					['etat', '=', 'ATTENTE'],
+					['etat', '=', $request->etat === 'RETOURNE' ? 'VALIDE':'ATTENTE'],
 					['statut', '=', 'OUVERT'],
 					['etape_actuelle', '=', $user->role->grade]
 				])->update([
@@ -337,10 +340,13 @@ class CourrierController extends Controller
 					'etape_actuelle' => $etape_actuelle
 				]);
 				if ($result == 1) {
-					$prochain = Role::where('grade', $user->role->grade + 1)->first();
+					$prochain = null;
+					if ($request->etat === 'VALIDE') {
+						$prochain = Role::where('grade', $user->role->grade + 1)->first();
+					}
 					Operation::create([
 						'type' => 'ValidateOrReject',
-						'donnees' => $prochain->description,
+						'donnees' => $request->etat === 'VALIDE' ? $prochain->description : $request->observation,
 						'description' => $description,
 						'user_id' => $user->id,
 						'courrier_id' => $request->courrier_id
@@ -356,6 +362,11 @@ class CourrierController extends Controller
 				DB::rollBack();
 				return response()->json(['success' => false, 'message' => "Erreur interne, veuillez réessayer."]);
 			}
+		} else {
+			return response()->json([
+				'success' => false,
+				'message' => "Droits insuffisants pour effectuer cette opération."
+			]);
 		}
 	}
 
@@ -390,6 +401,11 @@ class CourrierController extends Controller
 				DB::rollBack();
 				return response()->json(['success' => false, 'message' => "Erreur interne, veuillez réessayer."]);
 			}
+		} else {
+			return response()->json([
+				'success' => false,
+				'message' => "Vous n'avez pas les droits nécéssaires pour effectuer cette opération."
+			]);
 		}
 	}
 
@@ -498,7 +514,11 @@ class CourrierController extends Controller
 	}
 
 
-
+	public function returnTo(Request $request)
+	{
+		if (Gate::allows('ReturnTo')) {
+		}
+	}
 
 	/**
 	 * Display the specified resource.

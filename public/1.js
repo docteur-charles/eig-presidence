@@ -339,6 +339,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -413,6 +421,47 @@ function Courriers() {
     }());
   }
 
+  function sortCourriers(_courriers) {
+    var courTemp = _courriers.reduce(function ($c, courrier) {
+      var date = new Date(courrier.updated_at);
+      var d = date.toISOString();
+
+      if (!$c[d] || !Array.isArray($c[d])) {
+        $c[d] = [_objectSpread({
+          heures: date.getHours(),
+          minutes: date.getMinutes()
+        }, courrier)];
+      } else {
+        $c[d].push(_objectSpread({
+          heures: date.getHours(),
+          minutes: date.getMinutes()
+        }, courrier));
+      }
+
+      $c[d].sort(function (c1, c2) {
+        return c1.updated_at < c2.updated_at ? 1 : c1.updated_at == c2.updated_at ? 0 : -1;
+      });
+      return $c;
+    }, {});
+
+    console.log(courTemp);
+    var courDate = Object.keys(courTemp).sort().reverse();
+    return courDate.reduce(function ($c, $d) {
+      var date = new Date($d);
+      var d = "".concat(date.getDate(), " ").concat(_Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["MOIS"][date.getMonth()], " ").concat(date.getFullYear());
+
+      if (!$c[d] || !Array.isArray($c[d])) {
+        $c[d] = _toConsumableArray(courTemp[$d]);
+      } else {
+        var _$c$d;
+
+        (_$c$d = $c[d]).push.apply(_$c$d, _toConsumableArray(courTemp[$d]));
+      }
+
+      return $c;
+    }, {});
+  }
+
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     setLoading(true);
     getCourriers().then(function (response) {
@@ -420,27 +469,18 @@ function Courriers() {
         return Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
       }
 
-      setCourriers(Object.values(response.courriers).reduce(function ($c, courrier) {
-        var date = new Date(courrier.updated_at);
-        var d = "".concat(date.getDate(), " ").concat(_Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["MOIS"][date.getMonth()], " ").concat(date.getFullYear());
-
-        if (!$c[d] || !Array.isArray($c[d])) {
-          $c[d] = [_objectSpread({
-            heures: date.getHours(),
-            minutes: date.getMinutes()
-          }, courrier)];
-        } else {
-          $c[d].push(_objectSpread({
-            heures: date.getHours(),
-            minutes: date.getMinutes()
-          }, courrier));
-        }
-
-        $c[d].sort(function (c1, c2) {
-          return c1.updated_at < c2.updated_at ? 1 : c1.updated_at == c2.updated_at ? 0 : -1;
-        });
-        return $c;
-      }, {}));
+      var $courriers = Object.values(response.courriers);
+      var tresUrgents = $courriers.filter(function (courrier) {
+        return courrier.mention === _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["TRES_URGENT"];
+      });
+      var urgents = $courriers.filter(function (courrier) {
+        return courrier.mention === _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["URGENT"];
+      });
+      var standards = $courriers.filter(function (courrier) {
+        return courrier.mention === _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["STANDARD"];
+      });
+      sortCourriers(tresUrgents);
+      setCourriers([sortCourriers(tresUrgents), sortCourriers(urgents), sortCourriers(standards)]);
       setLoading(false);
     });
   }, []);
@@ -451,53 +491,67 @@ function Courriers() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", {
-    className: "text-uppercase"
-  }, "Liste des courriers"), Object.keys(courriers).length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "text-uppercase mb-5"
+  }, "Liste des courriers"), courriers.length === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "alert alert-warning mt-5",
     role: "alert"
-  }, "Vous n'avez pas de nouveaux courriers."), Object.keys(courriers).map(function (jour, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      key: i + 1,
-      className: "timeline-data d-flex flex-column pt-4 position-relative",
-      style: {
-        width: "100%",
-        maxWidth: "950px"
-      }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      style: {
-        marginLeft: "-30px",
-        fontWeight: "bold"
-      },
-      className: "shadow timeline-date p-2 align-self-start rounded-circle border-warning"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", null, jour)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      className: "timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4"
-    }, courriers[jour].map(function (courrier, index) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-        key: index + 1,
-        className: "timeline-content d-flex align-items-start position-relative"
+  }, "Vous n'avez pas de nouveaux courriers."), Object.values(courriers).map(function ($courriers, mentionIndex) {
+    return Object.keys($courriers).map(function (jour, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, i === 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "row d-flex align-items-center col-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-        className: "content-hr border-bottom border-warning",
+        className: "col"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("hr", {
+        className: "border ".concat(mentionIndex === 0 ? "border-danger" : mentionIndex === 1 ? 'border-warning' : 'border-info')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "col-auto border rounded ".concat(mentionIndex === 0 ? "border-danger text-danger" : mentionIndex === 1 ? 'border-warning text-warning' : 'border-info text-info')
+      }, mentionIndex === 0 ? "Courriers  très urgents" : mentionIndex === 1 ? 'Courriers urgents' : 'Courriers standards'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "col"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("hr", {
+        className: "border ".concat(mentionIndex === 0 ? "border-danger" : mentionIndex === 1 ? 'border-warning' : 'border-info')
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        key: i + 1,
+        className: "timeline-data d-flex flex-column pt-4 position-relative",
         style: {
-          width: "150px",
-          marginTop: "-1px",
-          paddingLeft: "30px"
+          width: "100%",
+          maxWidth: "950px"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("small", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
         style: {
-          fontSize: "2.5em",
-          fontFamily: "monospace",
-          fontWeight: "bold",
-          position: "relative"
-        }
-      }, courrier.heures < 10 ? "0".concat(courrier.heures) : courrier.heures, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", {
-        className: "d-inline-block position-absolute",
-        style: {
-          top: "5px",
-          fontWeight: "normal",
-          fontSize: "0.4em"
-        }
-      }, courrier.minutes < 10 ? "0".concat(courrier.minutes) : courrier.minutes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_4__["default"], courrier));
-    })));
+          marginLeft: "-30px",
+          fontWeight: "bold"
+        },
+        className: "shadow timeline-date p-2 align-self-start rounded-circle border-warning"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", null, jour)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+        className: "timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4"
+      }, $courriers[jour] && $courriers[jour].map(function (courrier, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+          key: index + 1,
+          className: "timeline-content d-flex align-items-start position-relative"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+          className: "content-hr border-bottom border-warning",
+          style: {
+            width: "150px",
+            marginTop: "-1px",
+            paddingLeft: "30px"
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("small", {
+          style: {
+            fontSize: "2.5em",
+            fontFamily: "monospace",
+            fontWeight: "bold",
+            position: "relative"
+          }
+        }, courrier.heures < 10 ? "0".concat(courrier.heures) : courrier.heures, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", {
+          className: "d-inline-block position-absolute",
+          style: {
+            top: "5px",
+            fontWeight: "normal",
+            fontSize: "0.4em"
+          }
+        }, courrier.minutes < 10 ? "0".concat(courrier.minutes) : courrier.minutes))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Components_Courrier__WEBPACK_IMPORTED_MODULE_4__["default"], courrier));
+      }))));
+    });
   })));
 }
 

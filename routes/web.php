@@ -24,18 +24,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//Gestion des utilisateurs 
+// Gestion des utilisateurs 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
 	Route::get('/users', [UserController::class, 'index']);
 	Route::post('/register', [UserController::class, 'store']);
 });
 
 
-//enregistrement des courriers Entrants
+// enregistrement des courriers Entrants
 Route::post('/registerIncoming', [App\Http\Controllers\CourrierController::class, 'store'])->middleware('web');
 
 
-//enregistrement des courriers Interne
+// enregistrement des courriers Interne
 Route::post('/sendToOthers', [App\Http\Controllers\CourrierInterneController::class, 'store'])->middleware('can:ENREGIST_COURRIER_CONFIDENT,ENREGIST_COURRIER_ORDINAIRE');
 
 
@@ -51,6 +51,9 @@ Route::post('/validateOrReject', [App\Http\Controllers\CourrierController::class
 
 
 Route::post('/imputeTo', [App\Http\Controllers\CourrierController::class, 'imputeTo'])->middleware('auth');
+
+
+Route::post('/terminateIncoming', [App\Http\Controllers\CourrierController::class, 'terminateIncoming'])->middleware('auth');
 
 
 Route::post('/transfertTo', [App\Http\Controllers\CourrierController::class, 'forwardIncoming'])->middleware('auth');

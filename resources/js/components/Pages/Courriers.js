@@ -3,134 +3,216 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Courrier from "../Components/Courrier";
 import Loader from "../Components/Loader";
-import { MOIS } from "../Helpers/Const";
+import { MOIS, STANDARD, TRES_URGENT, URGENT } from "../Helpers/Const";
 import { manageResponse } from "../Helpers/Func";
 
 export default function Courriers() {
-    const dispatch = useDispatch();
-    let [courriers, setCourriers] = useState({});
-    let [isLoading, setLoading] = useState(true);
+	const dispatch = useDispatch();
+	let [courriers, setCourriers] = useState({});
+	let [isLoading, setLoading] = useState(true);
 
 	function getCourriers() {
-        return fetch("/consultExternalReceived").then(async res => ({
-            status: res.status,
-            ...(await res.json())
-        }));
-    }
+		return fetch("/consultExternalReceived").then(async res => ({
+			status: res.status,
+			...(await res.json())
+		}));
+	}
 
-    useEffect(() => {
-        setLoading(true);
-        getCourriers().then(response => {
-            if (!response.success) {
-                return manageResponse(response, dispatch);
-            }
-            setCourriers(
-                Object.values(response.courriers).reduce(($c, courrier) => {
-                    let date = new Date(courrier.updated_at);
-                    let d = `${date.getDate()} ${
-                        MOIS[date.getMonth()]
-                    } ${date.getFullYear()}`;
 
-                    if (!$c[d] || !Array.isArray($c[d])) {
-                        $c[d] = [
-                            {
-                                heures: date.getHours(),
-                                minutes: date.getMinutes(),
-                                ...courrier
-                            }
-                        ];
-                    } else {
-                        $c[d].push({
-                            heures: date.getHours(),
-                            minutes: date.getMinutes(),
-                            ...courrier
-                        });
-                    }
+	function sortCourriers(_courriers) {
+		let courTemp = _courriers.reduce(($c, courrier) => {
+			let date = new Date(courrier.updated_at);
 
-                    $c[d].sort((c1, c2) =>
-                        c1.updated_at < c2.updated_at
-                            ? 1
-                            : c1.updated_at == c2.updated_at
-                            ? 0
-                            : -1
-                    );
+			let d = date.toISOString();
 
-                    return $c;
-                }, {})
-            );
-            setLoading(false);
-        });
-    }, []);
+			if (!$c[d] || !Array.isArray($c[d])) {
+				$c[d] = [
+					{
+						heures: date.getHours(),
+						minutes: date.getMinutes(),
+						...courrier
+					}
+				];
+			} else {
+				$c[d].push({
+					heures: date.getHours(),
+					minutes: date.getMinutes(),
+					...courrier
+				});
+			}
 
-    return isLoading ? (
-        <Loader normal="40px" />
-    ) : (
-        <div className="timeline">
-            <div className="timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative">
-                <h4 className="text-uppercase">Liste des courriers</h4>
+			$c[d].sort((c1, c2) =>
+				c1.updated_at < c2.updated_at
+					? 1
+					: c1.updated_at == c2.updated_at
+						? 0
+						: -1
+			);
 
-                {Object.keys(courriers).length === 0 && (
-                    <div className="alert alert-warning mt-5" role="alert">
-                        Vous n'avez pas de nouveaux courriers.
-                    </div>
-                )}
+			return $c;
+		}, {});
 
-                {Object.keys(courriers).map((jour, i) => (
-                    <div
-                        key={i + 1}
-                        className="timeline-data d-flex flex-column pt-4 position-relative"
-                        style={{ width: "100%", maxWidth: "950px" }}
-                    >
-                        <div
-                            style={{ marginLeft: "-30px", fontWeight: "bold" }}
-                            className="shadow timeline-date p-2 align-self-start rounded-circle border-warning"
-                        >
-                            <span>{jour}</span>
-                        </div>
+		console.log(courTemp)
 
-                        <div className="timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4">
-                            {courriers[jour].map((courrier, index) => (
-                                <div
-                                    key={index + 1}
-                                    className="timeline-content d-flex align-items-start position-relative"
-                                >
-                                    <div
-                                        className="content-hr border-bottom border-warning"
-                                        style={{
-                                            width: "150px",
-                                            marginTop: "-1px",
-                                            paddingLeft: "30px"
-                                        }}
-                                    >
-                                        <small
-                                            style={{
-                                                fontSize: "2.5em",
-                                                fontFamily: "monospace",
-                                                fontWeight: "bold",
-                                                position: "relative"
-                                            }}
-                                        >
-											{courrier.heures < 10 ? `0${courrier.heures}`:courrier.heures}
-                                            <h4
-                                                className="d-inline-block position-absolute"
-                                                style={{
-                                                    top: "5px",
-                                                    fontWeight: "normal",
-                                                    fontSize: "0.4em"
-                                                }}
-                                            >
-                                                {courrier.minutes < 10 ? `0${courrier.minutes}`:courrier.minutes}
-                                            </h4>
-                                        </small>
-                                    </div>
+		let courDate = Object.keys(courTemp).sort().reverse();
 
-                                    <Courrier {...courrier} />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+		return courDate.reduce(($c, $d) => {
+			let date = new Date($d);
+			let d = `${date.getDate()} ${MOIS[date.getMonth()]
+				} ${date.getFullYear()}`;
+			if (!$c[d] || !Array.isArray($c[d])) {
+				$c[d] = [...courTemp[$d]];
+			} else {
+				$c[d].push(...courTemp[$d]);
+			}
+			return $c;
+		}, {});
+	}
+
+
+	useEffect(() => {
+		setLoading(true);
+		getCourriers().then(response => {
+			if (!response.success) {
+				return manageResponse(response, dispatch);
+			}
+
+
+			let $courriers = Object.values(response.courriers);
+
+
+			let tresUrgents = $courriers.filter(courrier => courrier.mention === TRES_URGENT);
+			let urgents = $courriers.filter(courrier => courrier.mention === URGENT);
+			let standards = $courriers.filter(courrier => courrier.mention === STANDARD);
+
+			sortCourriers(tresUrgents)
+
+			setCourriers(
+				[
+					sortCourriers(tresUrgents),
+					sortCourriers(urgents),
+					sortCourriers(standards)
+				]
+			);
+
+			setLoading(false);
+		});
+	}, []);
+
+	return isLoading ? (
+		<Loader normal="40px" />
+	) : (
+			<div className="timeline">
+				<div className="timeline-container d-flex flex-column align-items-center h-100p ml-3 position-relative">
+					<h4 className="text-uppercase mb-5">Liste des courriers</h4>
+
+					{courriers.length === 0 && (
+						<div className="alert alert-warning mt-5" role="alert">
+							Vous n'avez pas de nouveaux courriers.
+						</div>
+					)}
+
+					{Object.values(courriers).map(($courriers, mentionIndex) => (
+						Object.keys($courriers).map((jour, i) => (
+							<>
+								{i === 0 && (
+									<div className="row d-flex align-items-center col-12">
+										<div className="col"><hr className={`border ${mentionIndex === 0 ? (
+											"border-danger"
+										) : (
+												mentionIndex === 1 ? (
+													'border-warning'
+												) : (
+														'border-info'
+													)
+											)}`}/></div>
+										<div className={`col-auto border rounded ${mentionIndex === 0 ? (
+											"border-danger text-danger"
+										) : (
+												mentionIndex === 1 ? (
+													'border-warning text-warning'
+												) : (
+														'border-info text-info'
+													)
+											)}`}>{
+											mentionIndex === 0 ? (
+												"Courriers  très urgents"
+											) : (
+													mentionIndex === 1 ? (
+														'Courriers urgents'
+													) : (
+															'Courriers standards'
+														)
+												)
+										}</div>
+										<div className="col"><hr className={`border ${mentionIndex === 0 ? (
+											"border-danger"
+										) : (
+												mentionIndex === 1 ? (
+													'border-warning'
+												) : (
+														'border-info'
+													)
+											)}`} /></div>
+									</div>
+								)}
+								<div
+									key={i + 1}
+									className="timeline-data d-flex flex-column pt-4 position-relative"
+									style={{ width: "100%", maxWidth: "950px" }}
+								>
+									<div
+										style={{ marginLeft: "-30px", fontWeight: "bold" }}
+										className="shadow timeline-date p-2 align-self-start rounded-circle border-warning"
+									>
+										<span>{jour}</span>
+									</div>
+
+									<div className="timeline-contents border-left p-4 p-l-0 m-l-4 m-r-4">
+										{$courriers[jour] && $courriers[jour].map((courrier, index) => (
+											<div
+												key={index + 1}
+												className="timeline-content d-flex align-items-start position-relative"
+											>
+												<div
+													className="content-hr border-bottom border-warning"
+													style={{
+														width: "150px",
+														marginTop: "-1px",
+														paddingLeft: "30px"
+													}}
+												>
+													<small
+														style={{
+															fontSize: "2.5em",
+															fontFamily: "monospace",
+															fontWeight: "bold",
+															position: "relative"
+														}}
+													>
+														{courrier.heures < 10 ? `0${courrier.heures}` : courrier.heures}
+														<h4
+															className="d-inline-block position-absolute"
+															style={{
+																top: "5px",
+																fontWeight: "normal",
+																fontSize: "0.4em"
+															}}
+														>
+															{courrier.minutes < 10 ? `0${courrier.minutes}` : courrier.minutes}
+														</h4>
+													</small>
+												</div>
+
+												<Courrier {...courrier} />
+											</div>
+										))}
+									</div>
+								</div>
+							</>
+						))
+					))}
+				</div>
+			</div>
+		);
 }

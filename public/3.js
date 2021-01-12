@@ -1,5 +1,24 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Styles/SweetDefault.css":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/Styles/SweetDefault.css ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".swal2-textarea {\n\tborder-color: #fa7d00 !important;\n\t/* box-shadow: inset 0 1px 1px rgba(255, 166, 0, 0.16) !important; */\n}\n\n.swal2-confirm.swal2-styled {\n\tbackground-color: #fa7d00;\n}\n\n.swal2-cancel.swal2-styled {\n\tbackground-color: #fff;\n\tcolor: #fa7d00;\n\tborder: 1px solid #fa7d00;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Components/PDF.js":
 /*!***************************************************!*\
   !*** ./resources/js/components/Components/PDF.js ***!
@@ -122,10 +141,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
-/* harmony import */ var _Components_PDF__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/PDF */ "./resources/js/components/Components/PDF.js");
-/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
-/* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
+/* harmony import */ var _Components_PDF__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/PDF */ "./resources/js/components/Components/PDF.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
+/* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
+/* harmony import */ var _Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Styles/SweetDefault.css */ "./resources/js/components/Styles/SweetDefault.css");
+/* harmony import */ var _Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9__);
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -149,6 +172,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -269,7 +294,7 @@ function CourrierDetail() {
           switch (_context6.prev = _context6.next) {
             case 0:
               _context6.next = 2;
-              return Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["getToken"])();
+              return Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])();
 
             case 2:
               token = _context6.sent;
@@ -300,7 +325,7 @@ function CourrierDetail() {
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (auth) {
       setLoading(true);
-      Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["getToken"])().then( /*#__PURE__*/function () {
+      Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then( /*#__PURE__*/function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(token) {
           var response;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -318,7 +343,7 @@ function CourrierDetail() {
                       history.replace('/courriers');
                     }
 
-                    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
+                    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
                     setLoading(false);
                   } else {
                     setFile(response.courrier);
@@ -358,7 +383,9 @@ function CourrierDetail() {
       track().then(function (tracks) {
         console.log(tracks);
         setFetching(false);
-        setOperations(tracks);
+        setOperations(tracks.sort(function (t1, t2) {
+          return t1.id < t2.id ? 1 : t1.id === t2.id ? 0 : -1;
+        }));
       });
     });
     $("#ModalSuivi").on("hidden.bs.modal", function () {
@@ -420,7 +447,7 @@ function CourrierDetail() {
       return a !== false;
     }).join("$$");
     setSending(true);
-    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["getToken"])().then(function (token) {
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
       fetch("/transfertTo", {
         method: "POST",
         headers: {
@@ -462,16 +489,20 @@ function CourrierDetail() {
         };
       }()).then(function (response) {
         setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
 
         if (!response.success) {
-          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
         } else {
           $("#ModalTransfer").modal("hide");
-          $(".floating_action_buttons").css("right", "20px");
-          swal("Opération réussie", response.message, "success").then(function () {
-            swal.close();
-            history.push("/courriers");
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
           });
+          history.push("/courriers");
         }
       });
     });
@@ -481,7 +512,7 @@ function CourrierDetail() {
     var noeud = $(e.target).parent();
     var index = noeud.data("index");
     noeud.toggleClass("chosen");
-    SelectedAnnotations[index] = noeud.hasClass("chosen") ? _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"][index] : false;
+    SelectedAnnotations[index] = noeud.hasClass("chosen") ? _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"][index] : false;
   }
 
   function selectCel(e) {
@@ -494,9 +525,9 @@ function CourrierDetail() {
   } // Valider le courrier.
 
 
-  function validate(etat) {
+  function validate(etat, text) {
     setSending(true);
-    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["getToken"])().then(function (token) {
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
       fetch("/validateOrReject", {
         method: "POST",
         headers: {
@@ -506,7 +537,8 @@ function CourrierDetail() {
         },
         body: JSON.stringify({
           courrier_id: params.courrier,
-          etat: etat
+          etat: etat,
+          observation: text
         })
       }).then( /*#__PURE__*/function () {
         var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(res) {
@@ -538,14 +570,19 @@ function CourrierDetail() {
         };
       }()).then(function (response) {
         setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
 
         if (!response.success) {
-          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
         } else {
-          swal("Opération réussie", response.message, "success").then(function () {
-            swal.close();
-            history.push("/courriers");
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
           });
+          history.replace('/courriers');
         }
       });
     });
@@ -560,7 +597,7 @@ function CourrierDetail() {
       return d !== false;
     }).join("$");
     setSending(true);
-    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["getToken"])().then(function (token) {
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
       fetch("/imputeTo", {
         method: "POST",
         headers: {
@@ -603,16 +640,20 @@ function CourrierDetail() {
         };
       }()).then(function (response) {
         setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
 
         if (!response.success) {
-          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_7__["manageResponse"])(response, dispatch);
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
         } else {
           $("#ModalImputation").modal("hide");
-          $(".floating_action_buttons").css("right", "20px");
-          swal("Opération réussie", response.message, "success").then(function () {
-            swal.close();
-            history.push("/courriers");
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
           });
+          history.replace('/courriers');
         }
       });
     });
@@ -623,22 +664,260 @@ function CourrierDetail() {
     $("#imputer").css("display", "");
     $("#_annoter").hide();
     $("#_imputer").show();
+  } // Responsable du service courrier qui valide le courrier.
+
+
+  function validateCourrier(e) {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+      title: 'Veuillez confirmer',
+      text: "Vous êtes sur le point de valider ce courrier et de le transmettre directement au Sécrétaire Général Adjoint. Cette opération est irréversible, êtes-vous sûr de vouloir continuer ?",
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: "Oui, valider",
+      cancelButtonText: "Non",
+      icon: 'question'
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        validate("VALIDE");
+      }
+    });
   } // Retourner le courrier.
 
 
-  function returnTo() {} // Renvoyer le courrier pour correction.
+  function returnTo() {
+    return _returnTo.apply(this, arguments);
+  } // Renvoyer le courrier pour correction.
 
+
+  function _returnTo() {
+    _returnTo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+      var _yield$Swal$fire, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context7.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du renvoi',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du renvoi'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire = _context7.sent;
+              text = _yield$Swal$fire.value;
+              validate('RETOURNE', text);
+
+            case 6:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+    return _returnTo.apply(this, arguments);
+  }
 
   function invalidate() {
-    validate("RENVOYE");
+    return _invalidate.apply(this, arguments);
   } // Rejeter le courrier.
 
 
-  function reject() {
-    validate("REJETE");
+  function _invalidate() {
+    _invalidate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+      var _yield$Swal$fire2, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context8.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du renvoi',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du renvoi'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire2 = _context8.sent;
+              text = _yield$Swal$fire2.value;
+              validate("RENVOYE", text);
+
+            case 6:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+    return _invalidate.apply(this, arguments);
   }
 
-  function terminate() {}
+  function reject() {
+    return _reject.apply(this, arguments);
+  }
+
+  function _reject() {
+    _reject = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+      var _yield$Swal$fire3, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context9.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du rejet',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du rejet'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire3 = _context9.sent;
+              text = _yield$Swal$fire3.value;
+              // if (text) {
+              // 	Swal.fire(text)
+              // }
+              validate("REJETE", text);
+
+            case 6:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+    return _reject.apply(this, arguments);
+  }
+
+  function terminate() {
+    return _terminate.apply(this, arguments);
+  }
+
+  function _terminate() {
+    _terminate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+      var _yield$Swal$fire4, isConfirmed;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context11.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                title: 'Veuillez confirmer',
+                text: "Vous êtes sur le point de vous désigner comme le destinataire final de ce courrier. Il ne vous sera plus possible de le transférer ou de l'imputer. Êtes-vous sûr de vouloir continuer ?",
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: "Oui, terminer",
+                cancelButtonText: "Non",
+                icon: 'question'
+              });
+
+            case 3:
+              _yield$Swal$fire4 = _context11.sent;
+              isConfirmed = _yield$Swal$fire4.isConfirmed;
+
+              if (isConfirmed) {
+                setSending(true);
+                Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
+                  fetch("/terminateIncoming", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "Application/json",
+                      Accept: "Application/json",
+                      "X-CSRF-TOKEN": token
+                    },
+                    body: JSON.stringify({
+                      courrier_id: params.courrier
+                    })
+                  }).then( /*#__PURE__*/function () {
+                    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(res) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+                        while (1) {
+                          switch (_context10.prev = _context10.next) {
+                            case 0:
+                              _context10.t0 = _objectSpread;
+                              _context10.t1 = {
+                                status: res.status
+                              };
+                              _context10.next = 4;
+                              return res.json();
+
+                            case 4:
+                              _context10.t2 = _context10.sent;
+                              return _context10.abrupt("return", (0, _context10.t0)(_context10.t1, _context10.t2));
+
+                            case 6:
+                            case "end":
+                              return _context10.stop();
+                          }
+                        }
+                      }, _callee10);
+                    }));
+
+                    return function (_x6) {
+                      return _ref6.apply(this, arguments);
+                    };
+                  }()).then(function (response) {
+                    setSending(false);
+                    $(".floating_action_buttons").css("right", "20px");
+
+                    if (!response.success) {
+                      Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+                    } else {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 4000
+                      });
+                      history.replace('/courriers');
+                    }
+                  });
+                });
+              } else {
+                $(".floating_action_buttons").css("right", "20px");
+              }
+
+            case 6:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
+    }));
+    return _terminate.apply(this, arguments);
+  }
 
   function openStatsModal() {
     $("#ModalSuivi").modal({
@@ -647,7 +926,7 @@ function CourrierDetail() {
     });
   }
 
-  return isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
     normal: "50px"
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "d-flex flex-column align-items-center"
@@ -657,7 +936,7 @@ function CourrierDetail() {
     src: file.url_fichier.replace(/^public/, "/storage"),
     width: "100%",
     height: "auto"
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_PDF__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_PDF__WEBPACK_IMPORTED_MODULE_6__["default"], {
     url: file.url_fichier.replace(/^public/, "/storage"),
     pagination: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -669,7 +948,7 @@ function CourrierDetail() {
       top: "40%"
     }
   }, (auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["STAT_COURRIER"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["STAT_COURRIER"].includes(privilege);
   }) || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -684,7 +963,7 @@ function CourrierDetail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-stats-up"
   }))), file.statut === "OUVERT" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, (auth.role.grade == file.etape_actuelle || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["TRANSM_COURRIER"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["TRANSM_COURRIER"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -701,7 +980,7 @@ function CourrierDetail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-new-window"
   }))), auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["IMPUT_COURRIER"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["IMPUT_COURRIER"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -713,7 +992,7 @@ function CourrierDetail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-share"
   }))), auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["RENVOI_ENVOYEUR"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["RENVOI_ENVOYEUR"].includes(privilege);
   }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -725,7 +1004,7 @@ function CourrierDetail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-back-left"
   }))), (auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["TERM_COURRIER"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["TERM_COURRIER"].includes(privilege);
   }) || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
@@ -737,16 +1016,14 @@ function CourrierDetail() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-download"
   })))), auth.role.privileges.some(function (privilege) {
-    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["VALID_REJET"].includes(privilege);
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["VALID_REJET"].includes(privilege);
   }) && file.etat === "ATTENTE" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "button d-flex align-items-center mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
   }, "VALIDER LE COURRIER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "button",
-    onClick: function onClick() {
-      return validate("VALIDE");
-    },
+    onClick: validateCourrier,
     className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "ti-stats-up"
@@ -814,7 +1091,7 @@ function CourrierDetail() {
       height: "40vh",
       overflow: "auto"
     }
-  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
       key: index + 1,
       "data-index": index,
@@ -855,9 +1132,9 @@ function CourrierDetail() {
       height: "40vh",
       overflow: "auto"
     }
-  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length).map(function (annotation, index) {
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length).map(function (annotation, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2 + index,
+      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2 + index,
       className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
       style: {
         marginLeft: "20px",
@@ -960,7 +1237,7 @@ function CourrierDetail() {
       height: "40vh",
       overflow: "auto"
     }
-  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
       key: index + 1,
       "data-index": index,
@@ -1001,9 +1278,9 @@ function CourrierDetail() {
       height: "40vh",
       overflow: "auto"
     }
-  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length).map(function (annotation, index) {
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length).map(function (annotation, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
-      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_6__["ANNOTATIONS"].length / 2 + index,
+      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2 + index,
       className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
       style: {
         marginLeft: "20px"
@@ -1249,6 +1526,36 @@ function CourrierDetail() {
     }, operation.donnees));
   })))))))))));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/Styles/SweetDefault.css":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Styles/SweetDefault.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/postcss-loader/src??ref--6-2!./SweetDefault.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Styles/SweetDefault.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
