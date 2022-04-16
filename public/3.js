@@ -1,0 +1,1617 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Styles/SweetDefault.css":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/components/Styles/SweetDefault.css ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".swal2-textarea {\n\tborder-color: #fa7d00 !important;\n\t/* box-shadow: inset 0 1px 1px rgba(255, 166, 0, 0.16) !important; */\n}\n\n.swal2-confirm.swal2-styled {\n\tbackground-color: #fa7d00;\n}\n\n.swal2-cancel.swal2-styled {\n\tbackground-color: #fff;\n\tcolor: #fa7d00;\n\tborder: 1px solid #fa7d00;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Components/PDF.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/Components/PDF.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PDF; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_pdf__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-pdf */ "./node_modules/react-pdf/dist/esm/entry.js");
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+react_pdf__WEBPACK_IMPORTED_MODULE_1__["pdfjs"].GlobalWorkerOptions.workerSrc = "/js/pdf.worker.js";
+function PDF(_ref) {
+  var url = _ref.url,
+      _ref$pagination = _ref.pagination,
+      pagination = _ref$pagination === void 0 ? false : _ref$pagination,
+      _ref$onLoaded = _ref.onLoaded,
+      handleLoaded = _ref$onLoaded === void 0 ? function () {} : _ref$onLoaded;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      numPages = _useState2[0],
+      setNumPages = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      allowPagination = _useState4[0],
+      setPagination = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(1),
+      _useState6 = _slicedToArray(_useState5, 2),
+      pageNumber = _useState6[0],
+      setPageNumber = _useState6[1];
+
+  function onDocumentLoadSuccess(_ref2) {
+    var numPages = _ref2.numPages;
+    setNumPages(numPages);
+    setPagination(true);
+    handleLoaded(); // setTimeout(() => {
+    // }, 5000);
+  }
+
+  function suivant() {
+    window.$(window).scrollTop(0);
+    setPageNumber(pageNumber + 1);
+  }
+
+  function precedent() {
+    setPageNumber(pageNumber - 1);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      position: "relative"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "border m-b-30",
+    style: {
+      minHeight: '500px',
+      justifyContent: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pdf__WEBPACK_IMPORTED_MODULE_1__["Document"], {
+    renderMode: "svg",
+    file: url,
+    loading: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      normal: "50px"
+    }),
+    onLoadSuccess: onDocumentLoadSuccess
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pdf__WEBPACK_IMPORTED_MODULE_1__["Page"], {
+    pageNumber: pageNumber
+  }))), pagination && allowPagination && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Page ", pageNumber, " sur ", numPages), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, pageNumber !== 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-outline-primary btn-lg mr-2",
+    onClick: precedent
+  }, "Page pr\xE9c\xE9dente"), pageNumber !== numPages && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-primary btn-lg",
+    onClick: suivant
+  }, "Page suivante"))));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Pages/CourrierDetail.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Pages/CourrierDetail.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CourrierDetail; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Components_Loader__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Loader */ "./resources/js/components/Components/Loader.js");
+/* harmony import */ var _Components_PDF__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/PDF */ "./resources/js/components/Components/PDF.js");
+/* harmony import */ var _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Helpers/Const */ "./resources/js/components/Helpers/Const.js");
+/* harmony import */ var _Helpers_Func__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Helpers/Func */ "./resources/js/components/Helpers/Func.js");
+/* harmony import */ var _Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../Styles/SweetDefault.css */ "./resources/js/components/Styles/SweetDefault.css");
+/* harmony import */ var _Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_Styles_SweetDefault_css__WEBPACK_IMPORTED_MODULE_9__);
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+function CourrierDetail() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      file = _useState2[0],
+      setFile = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      roles = _useState4[0],
+      setRoles = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isLoading = _useState6[0],
+      setLoading = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isFetching = _useState8[0],
+      setFetching = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      isSending = _useState10[0],
+      setSending = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({}),
+      _useState12 = _slicedToArray(_useState11, 2),
+      SelectedCellules = _useState12[0],
+      setCellules = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      directions = _useState14[0],
+      setDirections = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState16 = _slicedToArray(_useState15, 2),
+      operations = _useState16[0],
+      setOperations = _useState16[1];
+
+  var SelectedAnnotations = {}; // let SelectedCellules = {};
+
+  var auth = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
+    return state.auth;
+  });
+  var $ = window.$;
+  var swal = window.swal;
+  var params = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useParams"])();
+  var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["useHistory"])();
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useDispatch"])();
+
+  function getCourrier(id, token) {
+    return fetch("/consultExternalOne", {
+      method: "POST",
+      headers: {
+        Accept: "Application/json",
+        "X-CSRF-TOKEN": token,
+        "Content-Type": "Application/json"
+      },
+      body: JSON.stringify({
+        courrier: id
+      })
+    }).then( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.t0 = _objectSpread;
+                _context.t1 = {
+                  status: res.status
+                };
+                _context.next = 4;
+                return res.json();
+
+              case 4:
+                _context.t2 = _context.sent;
+                return _context.abrupt("return", (0, _context.t0)(_context.t1, _context.t2));
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }());
+  }
+
+  function getDirections() {
+    return fetch("/getDirectionsList").then(function (res) {
+      return res.json();
+    });
+  }
+
+  function track() {
+    return _track.apply(this, arguments);
+  }
+
+  function _track() {
+    _track = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+      var token;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])();
+
+            case 2:
+              token = _context6.sent;
+              return _context6.abrupt("return", fetch("/getOperations", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "Application/json",
+                  Accept: "Application/json",
+                  "X-CSRF-TOKEN": token
+                },
+                body: JSON.stringify({
+                  courrier_id: params.courrier
+                })
+              }).then(function (res) {
+                return res.json();
+              }));
+
+            case 4:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+    return _track.apply(this, arguments);
+  }
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    if (auth) {
+      setLoading(true);
+      Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then( /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(token) {
+          var response;
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return getCourrier(params.courrier, token);
+
+                case 2:
+                  response = _context2.sent;
+
+                  if (!response.success) {
+                    if (~response.message.indexOf('introuvable')) {
+                      history.replace('/courriers');
+                    }
+
+                    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+                    setLoading(false);
+                  } else {
+                    setFile(response.courrier);
+                    setRoles(response.roles);
+                    setLoading(false);
+                  }
+
+                case 4:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2);
+        }));
+
+        return function (_x2) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+    }
+
+    $('[data-toggle="tooltip"]').tooltip();
+  }, [auth]);
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    $("#ModalTransfer").on("show.bs.modal", function () {
+      $(".floating_action_buttons").css({
+        right: "-2020px",
+        transition: "0.5s"
+      });
+    });
+    $("#ModalSuivi").on("show.bs.modal", function () {
+      $(".floating_action_buttons").css({
+        right: "-2020px",
+        transition: "0.5s"
+      });
+      setFetching(true);
+      track().then(function (tracks) {
+        console.log(tracks);
+        setFetching(false);
+        setOperations(tracks.sort(function (t1, t2) {
+          return t1.id < t2.id ? 1 : t1.id === t2.id ? 0 : -1;
+        }));
+      });
+    });
+    $("#ModalSuivi").on("hidden.bs.modal", function () {
+      $(".floating_action_buttons").css("right", "20px");
+    });
+    $("#ModalTransfer").on("hidden.bs.modal", function () {
+      SelectedAnnotations = {};
+      $(this).find("li.chosen").removeClass("chosen");
+      $(".floating_action_buttons").css("right", "20px");
+    });
+    $("#ModalImputation").on("show.bs.modal", function () {
+      $(".floating_action_buttons").css({
+        right: "-2020px",
+        transition: "0.5s"
+      });
+      $("#_annoter").show();
+      $("#_imputer").hide();
+      $("#imputer").css("display", "none");
+      $("#imputer").prev().show();
+      setFetching(true);
+      getDirections().then(function (dir) {
+        setFetching(false);
+        setDirections(dir);
+      });
+    });
+    $("#ModalImputation").on("hidden.bs.modal", function () {
+      SelectedAnnotations = {};
+      setCellules({});
+      $(this).find("li.chosen").removeClass("chosen");
+      $(".floating_action_buttons").css("right", "20px");
+    });
+  });
+
+  function openTransferModal() {
+    $("#ModalTransfer").modal({
+      backdrop: "static",
+      keyboard: false
+    });
+  }
+
+  function openImputeModal() {
+    $("#ModalImputation").modal({
+      backdrop: "static",
+      keyboard: false
+    });
+  }
+
+  function normalize(h) {
+    return "".concat(h > 10 ? "" : "0").concat(h);
+  }
+
+  function normalizeRef(reference) {
+    return reference < 10 ? "00000".concat(reference) : reference < 100 ? "0000".concat(reference) : reference < 1000 ? "000".concat(reference) : reference < 10000 ? "00".concat(reference) : reference < 100000 ? "0".concat(reference) : reference;
+  } // Valider au niveau supérieur.
+
+
+  function transferTo() {
+    var annotation = Object.values(SelectedAnnotations).filter(function (a) {
+      return a !== false;
+    }).join("$$");
+    setSending(true);
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
+      fetch("/transfertTo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          Accept: "Application/json",
+          "X-CSRF-TOKEN": token
+        },
+        body: JSON.stringify({
+          courrier_id: params.courrier,
+          annotation: annotation
+        })
+      }).then( /*#__PURE__*/function () {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(res) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+              switch (_context3.prev = _context3.next) {
+                case 0:
+                  _context3.t0 = _objectSpread;
+                  _context3.t1 = {
+                    status: res.status
+                  };
+                  _context3.next = 4;
+                  return res.json();
+
+                case 4:
+                  _context3.t2 = _context3.sent;
+                  return _context3.abrupt("return", (0, _context3.t0)(_context3.t1, _context3.t2));
+
+                case 6:
+                case "end":
+                  return _context3.stop();
+              }
+            }
+          }, _callee3);
+        }));
+
+        return function (_x3) {
+          return _ref3.apply(this, arguments);
+        };
+      }()).then(function (response) {
+        setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
+
+        if (!response.success) {
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+        } else {
+          $("#ModalTransfer").modal("hide");
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
+          });
+          history.push("/courriers");
+        }
+      });
+    });
+  }
+
+  function selectAnnot(e) {
+    var noeud = $(e.target).parent();
+    var index = noeud.data("index");
+    noeud.toggleClass("chosen");
+    SelectedAnnotations[index] = noeud.hasClass("chosen") ? _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"][index] : false;
+  }
+
+  function selectCel(e) {
+    var noeud = $(e.target).parent();
+    var index = noeud.data("index");
+    noeud.toggleClass("chosen");
+    SelectedCellules[index] = noeud.hasClass("chosen") ? directions[index].id : false;
+    setCellules(_objectSpread({}, SelectedCellules));
+    console.log(SelectedCellules);
+  } // Valider le courrier.
+
+
+  function validate(etat, text) {
+    setSending(true);
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
+      fetch("/validateOrReject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          Accept: "Application/json",
+          "X-CSRF-TOKEN": token
+        },
+        body: JSON.stringify({
+          courrier_id: params.courrier,
+          etat: etat,
+          observation: text
+        })
+      }).then( /*#__PURE__*/function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(res) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.t0 = _objectSpread;
+                  _context4.t1 = {
+                    status: res.status
+                  };
+                  _context4.next = 4;
+                  return res.json();
+
+                case 4:
+                  _context4.t2 = _context4.sent;
+                  return _context4.abrupt("return", (0, _context4.t0)(_context4.t1, _context4.t2));
+
+                case 6:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4);
+        }));
+
+        return function (_x4) {
+          return _ref4.apply(this, arguments);
+        };
+      }()).then(function (response) {
+        setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
+
+        if (!response.success) {
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+        } else {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
+          });
+          history.replace('/courriers');
+        }
+      });
+    });
+  } // Imputer le courrier.
+
+
+  function imputeTo() {
+    var annotation = Object.values(SelectedAnnotations).filter(function (a) {
+      return a !== false;
+    }).join("$$");
+    var directions = Object.values(SelectedCellules).filter(function (d) {
+      return d !== false;
+    }).join("$");
+    setSending(true);
+    Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
+      fetch("/imputeTo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+          Accept: "Application/json",
+          "X-CSRF-TOKEN": token
+        },
+        body: JSON.stringify({
+          courrier_id: params.courrier,
+          annotation: annotation,
+          directions: directions
+        })
+      }).then( /*#__PURE__*/function () {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(res) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.t0 = _objectSpread;
+                  _context5.t1 = {
+                    status: res.status
+                  };
+                  _context5.next = 4;
+                  return res.json();
+
+                case 4:
+                  _context5.t2 = _context5.sent;
+                  return _context5.abrupt("return", (0, _context5.t0)(_context5.t1, _context5.t2));
+
+                case 6:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5);
+        }));
+
+        return function (_x5) {
+          return _ref5.apply(this, arguments);
+        };
+      }()).then(function (response) {
+        setSending(false);
+        $(".floating_action_buttons").css("right", "20px");
+
+        if (!response.success) {
+          Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+        } else {
+          $("#ModalImputation").modal("hide");
+          sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: response.message,
+            showConfirmButton: false,
+            timer: 4000
+          });
+          history.replace('/courriers');
+        }
+      });
+    });
+  }
+
+  function showImpute(e) {
+    $(e.target).hide();
+    $("#imputer").css("display", "");
+    $("#_annoter").hide();
+    $("#_imputer").show();
+  } // Responsable du service courrier qui valide le courrier.
+
+
+  function validateCourrier(e) {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+      title: 'Veuillez confirmer',
+      text: "Vous êtes sur le point de valider ce courrier et de le transmettre directement au Sécrétaire Général Adjoint. Cette opération est irréversible, êtes-vous sûr de vouloir continuer ?",
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: "Oui, valider",
+      cancelButtonText: "Non",
+      icon: 'question'
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        validate("VALIDE");
+      }
+    });
+  } // Retourner le courrier.
+
+
+  function returnTo() {
+    return _returnTo.apply(this, arguments);
+  } // Renvoyer le courrier pour correction.
+
+
+  function _returnTo() {
+    _returnTo = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+      var _yield$Swal$fire, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context7.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du renvoi',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du renvoi'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire = _context7.sent;
+              text = _yield$Swal$fire.value;
+              validate('RETOURNE', text);
+
+            case 6:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+    return _returnTo.apply(this, arguments);
+  }
+
+  function invalidate() {
+    return _invalidate.apply(this, arguments);
+  } // Rejeter le courrier.
+
+
+  function _invalidate() {
+    _invalidate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+      var _yield$Swal$fire2, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context8.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du renvoi',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du renvoi'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire2 = _context8.sent;
+              text = _yield$Swal$fire2.value;
+              validate("RENVOYE", text);
+
+            case 6:
+            case "end":
+              return _context8.stop();
+          }
+        }
+      }, _callee8);
+    }));
+    return _invalidate.apply(this, arguments);
+  }
+
+  function reject() {
+    return _reject.apply(this, arguments);
+  }
+
+  function _reject() {
+    _reject = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+      var _yield$Swal$fire3, text;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context9.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                input: 'textarea',
+                inputLabel: 'Raison',
+                inputPlaceholder: 'Veuillez indiquer la raison du rejet',
+                inputAttributes: {
+                  'aria-label': 'Veuillez indiquer la raison du rejet'
+                },
+                showCancelButton: true
+              });
+
+            case 3:
+              _yield$Swal$fire3 = _context9.sent;
+              text = _yield$Swal$fire3.value;
+              // if (text) {
+              // 	Swal.fire(text)
+              // }
+              validate("REJETE", text);
+
+            case 6:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, _callee9);
+    }));
+    return _reject.apply(this, arguments);
+  }
+
+  function terminate() {
+    return _terminate.apply(this, arguments);
+  }
+
+  function _terminate() {
+    _terminate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee11() {
+      var _yield$Swal$fire4, isConfirmed;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              $(".floating_action_buttons").css({
+                right: "-2020px",
+                transition: "0.5s"
+              });
+              _context11.next = 3;
+              return sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                title: 'Veuillez confirmer',
+                text: "Vous êtes sur le point de vous désigner comme le destinataire final de ce courrier. Il ne vous sera plus possible de le transférer ou de l'imputer. Êtes-vous sûr de vouloir continuer ?",
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: "Oui, terminer",
+                cancelButtonText: "Non",
+                icon: 'question'
+              });
+
+            case 3:
+              _yield$Swal$fire4 = _context11.sent;
+              isConfirmed = _yield$Swal$fire4.isConfirmed;
+
+              if (isConfirmed) {
+                setSending(true);
+                Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["getToken"])().then(function (token) {
+                  fetch("/terminateIncoming", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "Application/json",
+                      Accept: "Application/json",
+                      "X-CSRF-TOKEN": token
+                    },
+                    body: JSON.stringify({
+                      courrier_id: params.courrier
+                    })
+                  }).then( /*#__PURE__*/function () {
+                    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10(res) {
+                      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+                        while (1) {
+                          switch (_context10.prev = _context10.next) {
+                            case 0:
+                              _context10.t0 = _objectSpread;
+                              _context10.t1 = {
+                                status: res.status
+                              };
+                              _context10.next = 4;
+                              return res.json();
+
+                            case 4:
+                              _context10.t2 = _context10.sent;
+                              return _context10.abrupt("return", (0, _context10.t0)(_context10.t1, _context10.t2));
+
+                            case 6:
+                            case "end":
+                              return _context10.stop();
+                          }
+                        }
+                      }, _callee10);
+                    }));
+
+                    return function (_x6) {
+                      return _ref6.apply(this, arguments);
+                    };
+                  }()).then(function (response) {
+                    setSending(false);
+                    $(".floating_action_buttons").css("right", "20px");
+
+                    if (!response.success) {
+                      Object(_Helpers_Func__WEBPACK_IMPORTED_MODULE_8__["manageResponse"])(response, dispatch);
+                    } else {
+                      sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 4000
+                      });
+                      history.replace('/courriers');
+                    }
+                  });
+                });
+              } else {
+                $(".floating_action_buttons").css("right", "20px");
+              }
+
+            case 6:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
+    }));
+    return _terminate.apply(this, arguments);
+  }
+
+  function openStatsModal() {
+    $("#ModalSuivi").modal({
+      backdrop: "static",
+      keyboard: false
+    });
+  }
+
+  return isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_Loader__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    normal: "50px"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex flex-column align-items-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-md-10 pl-2 bg-gray position-relative"
+  }, file.url_fichier.substr(-4).toLowerCase() != ".pdf" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    src: file.url_fichier.replace(/^public/, "/storage"),
+    width: "100%",
+    height: "auto"
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Components_PDF__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    url: file.url_fichier.replace(/^public/, "/storage"),
+    pagination: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "floating_action_buttons d-flex flex-column align-items-end",
+    style: {
+      position: "fixed",
+      zIndex: 999990,
+      right: "20px",
+      top: "40%"
+    }
+  }, (auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["STAT_COURRIER"].includes(privilege);
+  }) || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white",
+    style: {
+      maxWidth: "300px"
+    }
+  }, "STATISTIQUES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: openStatsModal,
+    type: "button",
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-stats-up"
+  }))), file.statut === "OUVERT" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, (auth.role.grade == file.etape_actuelle || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["TRANSM_COURRIER"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white",
+    style: {
+      maxWidth: "300px"
+    }
+  }, "ENVOYER AU", " ", roles.find(function (r) {
+    return r.grade === auth.role.grade + 1;
+  }).description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: openTransferModal,
+    type: "button",
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-new-window"
+  }))), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["IMPUT_COURRIER"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "IMPUTER AUX CELLULES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: openImputeModal,
+    type: "button",
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-share"
+  }))), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["RENVOI_ENVOYEUR"].includes(privilege);
+  }) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "RENVOYER AU BUREAU D'ORDRE"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    onClick: returnTo,
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-back-left"
+  }))), (auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["TERM_COURRIER"].includes(privilege);
+  }) || file.etat == "IMPUTE") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "TERMINER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    onClick: terminate,
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-download"
+  })))), auth.role.privileges.some(function (privilege) {
+    return _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["VALID_REJET"].includes(privilege);
+  }) && file.etat === "ATTENTE" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "VALIDER LE COURRIER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    onClick: validateCourrier,
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-stats-up"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "RENVOYER LE COURRIER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    onClick: invalidate,
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-back-left"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "button d-flex align-items-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "shadow text-uppercase p-5 p-l-20 p-r-20 rounded-pill m-r-5 text-primary bg-white"
+  }, "REJETER LE COURRIER"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: reject,
+    type: "button",
+    className: "shadow align-items-center justify-content-center d-flex btn btn-outline-primary btn-lg btn-floating"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-trash"
+  }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal slide",
+    id: "ModalTransfer",
+    tabIndex: -1,
+    role: "dialog",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-dialog modal-dialog-centered",
+    role: "document",
+    style: {
+      minWidth: "80%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-content",
+    style: {
+      minHeight: "80vh"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "modal-title",
+    id: "exampleModalCenterTitle"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Observations / Instructions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-close"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "col-12"
+  }, "Cliquez pour cocher les options \xE0 joindre au courrier"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row col-12",
+    style: {
+      width: "100%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      key: index + 1,
+      "data-index": index,
+      className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
+      onClick: selectAnnot
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, annotation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false,
+      onClick: selectAnnot
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true,
+      onClick: selectAnnot
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length).map(function (annotation, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2 + index,
+      className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
+      style: {
+        marginLeft: "20px",
+        pointerEvents: isSending ? "none" : ""
+      },
+      onClick: selectAnnot
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, annotation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-end",
+    style: {
+      width: "100%",
+      paddingRight: "20px"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    disabled: isSending,
+    className: "btn btn-lg btn-outline-light",
+    "data-dismiss": "modal"
+  }, "Annuler l'envoi du courrier"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    onClick: transferTo,
+    className: "btn ml-2 mr-5 btn-outline-primary btn-lg",
+    disabled: isSending
+  }, isSending ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "spinner-border spinner-border-sm mr-2",
+    role: "status",
+    "aria-hidden": "true"
+  }), "Envoi en cours...") : "Envoyer avec le courrier")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal fade",
+    id: "ModalImputation",
+    tabIndex: -1,
+    role: "dialog",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-dialog modal-dialog-centered",
+    role: "document",
+    style: {
+      minWidth: "80%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-content",
+    style: {
+      minHeight: "80vh"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "modal-title",
+    id: "exampleModalCenterTitle"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Observations / Instructions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-close"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    id: "_annoter"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "m-0 p-0"
+  }, "Cliquez pour cocher les options \xE0 joindre au courrier"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Vous pouvez aussi directement valider sans annoter"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row",
+    style: {
+      width: "70%",
+      margin: "auto"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(0, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2).map(function (annotation, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      key: index + 1,
+      "data-index": index,
+      className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
+      onClick: selectAnnot
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, annotation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false,
+      onClick: selectAnnot
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true,
+      onClick: selectAnnot
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].slice(_Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2, _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length).map(function (annotation, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      "data-index": _Helpers_Const__WEBPACK_IMPORTED_MODULE_7__["ANNOTATIONS"].length / 2 + index,
+      className: Object.keys(SelectedAnnotations).includes(index) ? "chosen" : "",
+      style: {
+        marginLeft: "20px"
+      },
+      onClick: selectAnnot
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, annotation), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      "data-index": index,
+      "data-text": annotation,
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    id: "_imputer",
+    style: {
+      height: "100%"
+    }
+  }, isFetching ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "spinner-border spinner-border-sm",
+    title: "Chargement en cours, veuillez patienter !",
+    style: {
+      color: "orange",
+      width: "50px",
+      height: "50px",
+      margin: "20% auto",
+      display: "block"
+    },
+    role: "status"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Chargement en cours ...")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+    className: "m-0 p-0"
+  }, "Cliquez pour s\xE9lectionner les cellules h\xF4tes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "row",
+    style: {
+      width: "70%",
+      margin: "auto"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, directions.slice(0, Math.ceil(directions.length / 2)).map(function (cellule, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      key: index + 1,
+      "data-index": index,
+      className: "",
+      onClick: selectCel
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, cellule.nom), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false,
+      onChange: selectCel
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true,
+      onClick: selectCel
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+    className: "annotations col-6",
+    style: {
+      height: "40vh",
+      overflow: "auto"
+    }
+  }, directions.slice(Math.ceil(directions.length / 2), directions.length).map(function (cellule, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
+      "data-index": Math.ceil(directions.length / 2) + index,
+      className: "",
+      style: {
+        marginLeft: "20px"
+      },
+      onClick: selectCel
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text"
+    }, cellule.nom), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control green custom-checkbox d-inline"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "customCheck-unselected",
+      checked: false
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck-unselected"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "custom-control light d-inline custom-checkbox custom-checkbox-dark"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "customCheck6-selected",
+      checked: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "customCheck6-selected"
+    })));
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "d-flex justify-content-end",
+    style: {
+      width: "100%",
+      paddingRight: "20px"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    disabled: isSending,
+    className: "btn btn-lg btn-light",
+    "data-dismiss": "modal"
+  }, "Annuler l'imputation du courrier"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    disabled: isSending,
+    onClick: showImpute,
+    className: "ml-2 mr-5 btn btn-lg btn-primary"
+  }, "S\xE9lectionner les cellules"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    id: "imputer",
+    style: {
+      display: "none"
+    },
+    onClick: imputeTo,
+    className: "btn ml-2 mr-5 btn-outline-primary btn-lg",
+    disabled: isSending || Object.values(SelectedCellules).filter(function (v) {
+      return v !== false;
+    }).length == 0
+  }, isSending ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "spinner-border spinner-border-sm mr-2",
+    role: "status",
+    "aria-hidden": "true"
+  }), "Validation...") : "Imputer le courrier")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal fade",
+    id: "ModalSuivi",
+    tabIndex: -1,
+    role: "dialog",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-dialog modal-dialog-centered",
+    role: "document",
+    style: {
+      minWidth: "80%"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-content",
+    style: {
+      minHeight: "80vh"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+    className: "modal-title",
+    id: "exampleModalCenterTitle"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, "Suivi du courrier")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "ti-close"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "modal-body"
+  }, isFetching ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "spinner-border spinner-border-sm",
+    title: "Chargement en cours, veuillez patienter !",
+    style: {
+      color: "orange",
+      width: "50px",
+      height: "50px",
+      margin: "20% auto",
+      display: "block"
+    },
+    role: "status"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "sr-only"
+  }, "Chargement en cours ...")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", null, "Historique des op\xE9rations")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "table-responsive pr-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+    id: "table-files",
+    className: "table table-borderless table-hover"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "N\xB0 d'ordre"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Op\xE9ration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "D\xE9tails"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, operations.map(function (operation, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+      key: index + 1
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", null, normalize(new Date(operation.created_at).getDate()), "/", normalize(new Date(operation.created_at).getMonth() + 1), "/", new Date(operation.created_at).getFullYear(), ",", " ", normalize(new Date(operation.created_at).getHours()), ":", normalize(new Date(operation.created_at).getMinutes()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "#/",
+      className: "d-flex align-items-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("figure", {
+      className: "avatar avatar-sm mr-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "avatar-title bg-warning text-black-50 rounded-pill"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+      className: "ti-folder"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "d-flex flex-column"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text-primary"
+    }, operation.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "small font-italic"
+    }, operation.user)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+      style: {
+        display: 'block',
+        height: 'auto',
+        overflow: 'hidden',
+        'whiteSpace': 'wrap',
+        maxWidth: '250px'
+      }
+    }, operation.donnees));
+  })))))))))));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Styles/SweetDefault.css":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Styles/SweetDefault.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/postcss-loader/src??ref--6-2!./SweetDefault.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/components/Styles/SweetDefault.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ 1:
+/*!**********************!*\
+  !*** zlib (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 2:
+/*!********************!*\
+  !*** fs (ignored) ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 3:
+/*!**********************!*\
+  !*** http (ignored) ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 4:
+/*!***********************!*\
+  !*** https (ignored) ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 5:
+/*!*********************!*\
+  !*** url (ignored) ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ })
+
+}]);

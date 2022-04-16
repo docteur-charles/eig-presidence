@@ -1,0 +1,135 @@
+Les acteurs 
+
+Les directeurs 
+
+Bureau d’ordre 
+
+Directrice courriers 
+
+Les responsables  
+
+Le président 
+
+L’administrateur 
+
+Actions 
+
+ 
+
+Les Directeurs 
+
+peuvent envoyer des courriers  au bureau d’ordre ou la directrice 
+
+peuvent envoyer un courrier à un directeur 
+
+recevoir un courrier amputé. 
+
+recevoir un courrier venant d’un directeur 
+
+se connecter, déconnecter, mettre a jour son profil,  
+
+ consulter ses statistiques  
+
+Consulter ses archives  
+
+
+
+Le bureau d’ordre  
+
+Enregistrer des courriers  entrants ordinaires  
+
+Enregistrer des courriers sortants  ordinaires  
+
+Le suivi  
+
+Consultation des archives traditionnelles 
+
+Consultations des statistiques  
+
+se connecter, déconnecter, mettre a jour son profil,  
+
+ 
+
+La directrice des courriers  
+
+Peut faire tout ce le bureau d’ordre fait 
+
+Enregistrer des courriers confidentiels 
+
+Enregistrer les lettres du président 
+
+Validation et rejet des courriers entrants 
+
+Consultations des archives confidentielles  
+
+
+
+Les responsables (SGPA, SGP, DIRCABAT 1, DIRCABAT 2,  DIRCABAT) 
+
+L’annotation du courrier  
+
+L’amputation du courrier  
+
+Validation au niveau supérieur 
+
+
+
+Le Président 
+
+annotation du courrier  
+
+amputation du  courrier  
+
+
+
+
+Conception. 
+
+Responsable (id, nom role) ; 
+
+direction (id, nom, id_directeur, rattachement) 
+
+utilisateur (id, nom , email, password,id_role) 
+
+directeur (id, id_utilsateur, fonction) 
+
+role(id, nom, privileges) 
+
+mention_courrier(id, nom, description) 
+
+courrier (id, numero_d’ordre, origine, objet, reference, id_type , id_mention, type contenu, date_arrive, date_retour,observation, url_fichier, status) 
+
+operation( id, privileges, id_ressource, id_utilisateur, commentaires,  date)  
+
+annotation (id, id_courrier, id_utilisateur, fonction, date) 
+
+amputation(id, id_courrier, direction, id_utilisateur, status) 
+
+
+/*****************
+*   OPERATIONS   *
+*****************/
+
+
+***** ENREGISTRER UN COURRIER ORDINAIRE *****
+
+1. Vérifier que le rôle de l'utilisateur a le privilège ENREGISTRER_COURRIER_ORDINAIRE.
+2. Vérifier que le fichier a bien été uplodé via le formulaire (PDF | IMAGE) et que toutes les informations du courrier sont valides.
+3. Récupérer le dernier numéro des courriers ordinaires de l'année courrante.
+4. Incrémenter ce numéro et l'attribuer au courrier.
+5. Enregistrer le courrier.
+6. Notifier le courrier à l'utilisateur ayant le grade immédiatement supérieur (2).
+
+
+***** ENREGISTER UN COURRIER CONFIDENTIEL *****
+
+1. Vérifier que le rôle de l'utilisateur a le privilège ENREGISTRER_COURRIER_CONFIDENTIEL.
+2. Vérifier que le fichier a bien été uplodé via le formulaire (PDF | IMAGE) et que toutes les informations du courrier sont valides.
+3. Récupérer le dernier numéro des courriers confidentiels de l'année courrante.
+4. Incrémenter ce numéro et l'attribuer au courrier.
+5. Enregistrer le courrier.
+6. Notifier le courrier à l'utilisateur ayant le grade immédiatement supérieur (3).
+
+
+***** RENVOYER LE COURRIER *****
+
