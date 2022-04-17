@@ -57,7 +57,7 @@
 	<script defer src="/vendors/dropzone/dropzone.js"></script>
 	<script defer src="/vendors/select2/js/select2.min.js"></script>
 	<script defer src="/assets/js/app.min.js"></script>
-	<script defer id="apex" src="/vendors/charts/apex/apexcharts.min.js"></script>s
+	<script defer id="apex" src="/vendors/charts/apex/apexcharts.min.js"></script>
 	<script defer src="/js/app.js"></script>
 </body>
 
