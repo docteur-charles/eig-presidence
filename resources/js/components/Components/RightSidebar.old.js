@@ -1,29 +1,29 @@
-import React from "react";
-import { useSession } from "../Context/Session";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function RightSidebar() {
-    let $ = window.$;
+	let $ = window.$;
 
-    const { stats } = useSession();
-
-    const openModal = React.useCallback(() => {
+	let stats = useSelector(state => state.stats);
+	
+    function openModal() {
         $("#SendCourrier").modal({
             backdrop: "static",
             keyboard: false
         });
-    }, []);
+    }
 
-    const initWizard = React.useCallback(() => {
+    function initWizard() {
         $("#steps").steps({
             headerTag: "h3",
             bodyTag: "section",
             autoFocus: true,
             titleTemplate: '<span class="wizard-index">#index#</span> #title#'
         });
-    }, []);
+    }
 
-    React.useEffect(() => {
-        initWizard();
+    useEffect(() => {
+		initWizard();
         $("#SendCourrier").niceScroll();
     }, []);
 
@@ -211,9 +211,7 @@ export default function RightSidebar() {
                                     </p>
                                 </section>
                             </div> */}
-                            <div className="alert alert-info">
-                                Développement en cours...
-                            </div>
+							<div className="alert alert-info">Développement en cours...</div>
                         </div>
                         {/* <div className="modal-footer">
                             <button

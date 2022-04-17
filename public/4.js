@@ -285,12 +285,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Dashboard() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
-      _useState2 = _slicedToArray(_useState, 2),
-      isLoading = _useState2[0],
-      setLoading = _useState2[1];
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(true),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      isLoading = _React$useState2[0],
+      setLoading = _React$useState2[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.useEffect(function () {
     setTimeout(function () {
       setLoading(false);
     }, 200);

@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSession } from "../Context/Session";
 
-export default function({ full = false }) {
-    let {
-        user: {
-            nom,
-            prenom,
-            photo,
-            role: { description }
-        }
-    } = useSession();
-
+export default function({
+    full = false,
+    auth: {
+        nom,
+        prenom,
+        photo,
+        role: { description }
+    }
+}) {
     return (
         <div
             className="header d-print-none"
@@ -29,6 +27,25 @@ export default function({ full = false }) {
                                     <i className="ti-menu" />
                                 </a>
                             </li>
+                            {/* <li className="nav-item">
+                <div className="header-search-form">
+                  <form>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <button className="btn">
+                          <i className="ti-search" />
+                        </button>
+                      </div>
+                      <input type="text" className="form-control" placeholder="Rechercher..." />
+                      <div className="input-group-append">
+                        <button className="btn header-search-close-btn">
+                          <i data-feather="x" />
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li> */}
                         </ul>
                     </div>
                     <div className="header-body-right">

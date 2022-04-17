@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import Loader from "./Loader";
-import PreLoader from "./PreLoader";
-import { getToken, manageResponse } from "../Helpers/Func";
-import { useIterable } from "../Helpers/Hooks";
-import { SET_AUTH } from "../Store/Actions";
 
 import palais from "../Ressources/palais.jpg";
+import { useMutation } from "react-query";
+import AuthService from "../Services/Auth";
+import { useSession } from "../Context/Session";
 
 export default function() {
-    let dispatch = useDispatch();
-    let [isLoading, setLoading] = useState(false);
-    let [isFetching, setFetching] = useState(true);
+    const { mutateAsync: login, isLoading, isSuccess } = useMutation(
+        AuthService.Login
+    );
+
+    const { setSessionData } = useSession();
+
     let $ = window.$;
 
-    useEffect(() => {
+    React.useEffect(() => {
         document.body.classList.add("form-membership");
         document.body.style.background = `url(${palais}) no-repeat center center`;
         document.body.style.backgroundSize = "cover";
@@ -24,9 +25,7 @@ export default function() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center"
-		});
-		
-		setFetching(false);
+        });
 
         return () => {
             document.body.classList.remove("form-membership");
@@ -41,119 +40,96 @@ export default function() {
         };
     }, []);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        setLoading(true);
+    const handleSubmit = React.useCallback(
+        async e => {
+            e.preventDefault();
 
-        let data = useIterable(new FormData(e.target));
-
-        getToken().then(async token => {
-            let response = await fetch("/login", {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": token,
-                    "Content-Type": "Application/json",
-                    Accept: "Application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(async res => ({
-                status: res.status,
-                ...(await res.json())
-            }));
-            setLoading(false);
-            if (!response.success) {
-                manageResponse(response, dispatch);
-            } else {
-                response.data.role.privileges = response.data.role.privileges.split(
-                    "$"
-                );
-                localStorage.setItem("auth", JSON.stringify(response.data));
-                localStorage.setItem("roles", JSON.stringify(response.roles));
-                localStorage.setItem("stats", JSON.stringify(response.stats));
-                dispatch({
-                    type: SET_AUTH,
-                    data: response.data
+            try {
+                let response = await login({
+                    data: Object.fromEntries(new FormData(e.target))
                 });
+                console.log("RESPONSE", response);
+                const { user, roles, stats } = response;
+                user.role.privileges = user.role.privileges.split("$");
+                setSessionData({ user, roles, stats });
+                console.log("TERMINATED");
+            } catch (err) {
+                console.log(err);
             }
-        });
-    }
+        },
+        [login, setSessionData]
+    );
 
     return (
-        <>
-            {isFetching && <PreLoader normal="50px" />}
-            <div className="form-wrapper">
-                <div id="logo">
-                    <img
-                        width="150px"
-                        src="/assets/images/logo_transparent.png"
-                        alt="image"
+        <div className="form-wrapper">
+            <div id="logo">
+                <img
+                    width="150px"
+                    src="/assets/images/logo_transparent.png"
+                    alt="image"
+                />
+            </div>
+
+            {/* ./ logo */}
+            <h4>Authentification</h4>
+            {/* form */}
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="email"
+                        placeholder="Utilisateur"
+                        required
+                        autoFocus
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        placeholder="Mot de passe"
+                        required
                     />
                 </div>
 
-                {/* ./ logo */}
-                <h4>Authentification</h4>
-                {/* form */}
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control"
-                            name="email"
-                            placeholder="Utilisateur"
-                            required
-                            autoFocus
-                        />
-                    </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            className="form-control"
-                            name="password"
-                            placeholder="Mot de passe"
-                            required
-                        />
-                    </div>
-                    {/* <div className="form-group d-flex justify-content-between">
-		  <div className="custom-control custom-checkbox">
-			<input type="checkbox" className="custom-control-input" defaultChecked id="customCheck1" />
-			<label className="custom-control-label" htmlFor="customCheck1">Rester connecté</label>
-		  </div>
-		</div> */}
-                    <button
-                        disabled={isLoading}
-                        className="btn btn-primary btn-block"
-                        type="submit"
-                        style={{ backgroundColor: isLoading ? "#fff" : "" }}
-                    >
-                        {isLoading ? (
-                            <span className="d-flex align-items-center justify-content-center">
-                                <Loader
-                                    style={{
-                                        padding: 0,
-                                        margin: 0,
-                                        marginLeft: -15,
-                                        background: "transparent",
-                                        zIndex: 11000
-                                    }}
-                                    normal="15px"
-                                />
-                                <span
-                                    className="d-inline-block"
-                                    style={{
-                                        whiteSpace: "nowrap",
-                                        color: "orange"
-                                    }}
-                                >
-                                    connexion en cours...
-                                </span>
+                <button
+                    disabled={isLoading || isSuccess}
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    style={{
+                        backgroundColor: isLoading || isSuccess ? "#fff" : ""
+                    }}
+                >
+                    {isLoading || isSuccess ? (
+                        <span className="d-flex align-items-center justify-content-center">
+                            <Loader
+                                style={{
+                                    padding: 0,
+                                    margin: 0,
+                                    marginLeft: -15,
+                                    background: "transparent",
+                                    zIndex: 11000
+                                }}
+                                normal="15px"
+                            />
+                            <span
+                                className="d-inline-block"
+                                style={{
+                                    whiteSpace: "nowrap",
+                                    color: "orange"
+                                }}
+                            >
+                                connexion en cours...
                             </span>
-                        ) : (
-                            <span>Se connecter</span>
-                        )}
-                    </button>
-                </form>
-                {/* ./ form */}
-            </div>
-        </>
+                        </span>
+                    ) : (
+                        <span>Se connecter</span>
+                    )}
+                </button>
+            </form>
+            {/* ./ form */}
+        </div>
     );
 }

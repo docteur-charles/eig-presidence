@@ -14,16 +14,18 @@ export default function PDF({
     const [allowPagination, setPagination] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
 
+    console.log(url);
+
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
         setPagination(true);
-		handleLoaded();
-		// setTimeout(() => {
-		// }, 5000);
+        handleLoaded();
+        // setTimeout(() => {
+        // }, 5000);
     }
 
-	function suivant() {
-		window.$(window).scrollTop(0);
+    function suivant() {
+        window.$(window).scrollTop(0);
         setPageNumber(pageNumber + 1);
     }
 
@@ -33,7 +35,16 @@ export default function PDF({
 
     return (
         <div style={{ position: "relative" }}>
-			<div className="border m-b-30" style={{minHeight: '500px', justifyContent: 'center', display: 'flex', flexDirection: 'column', width: '100%'}}>
+            <div
+                className="border m-b-30"
+                style={{
+                    minHeight: "500px",
+                    justifyContent: "center",
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%"
+                }}
+            >
                 <Document
                     renderMode="svg"
                     file={url}

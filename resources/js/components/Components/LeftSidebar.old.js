@@ -1,48 +1,47 @@
 import React, { useEffect } from "react";
-import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSession } from "../Context/Session";
 import {
     LIST_ARCHIV,
     LIST_COURRIER,
     MANAGE_USERS,
     REGISTER_COURRIER
 } from "../Helpers/Const";
-import AuthService from "../Services/Auth";
+import { SET_AUTH } from "../Store/Actions";
 
-export default function() {
-    let {
-        user: {
-            role: { privileges }
-        },
-        clearSessionData
-    } = useSession();
-
-    const { mutateAsync: logout } = useMutation(AuthService.Logout);
-
+export default function({
+    auth: {
+        role: { privileges }
+    }
+}) {
+    let dispatch = useDispatch();
     let $ = window.$;
 
     useEffect(() => {
         $(".navigation .header-list").niceScroll();
     }, []);
 
-    const handleDisconnect = React.useCallback(
-        async e => {
-            e.preventDefault();
-            try {
-                await logout();
-                console.log("Deconnecté !");
-                await clearSessionData();
-            } catch (err) {
+    function logout(e) {
+        e.preventDefault();
+
+        fetch("/logout", {
+            method: "GET"
+        }).then(res => {
+            if (res.ok && res.status === 200) {
+                localStorage.clear();
+                document.location.replace("/");
+                dispatch({
+                    type: SET_AUTH,
+                    data: null
+                });
+            } else {
                 toastr["error"](
-                    err.message ||
-                        "Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !",
+                    "Nous n'arrivons pas à vous déconnecter. Merci de réessayer dans quelques instants !",
                     "Erreur interne"
                 );
             }
-        },
-        [logout, clearSessionData]
-    );
+        });
+    }
 
     return (
         <div className="navigation">
@@ -120,7 +119,7 @@ export default function() {
                     </Link>
                 </li>
                 <li className="gec-disconnect">
-                    <Link to="/auth/logout" onClick={handleDisconnect}>
+                    <Link to="/auth/logout" onClick={logout}>
                         <i className="nav-link-icon ti-power-off" />
                         <span className="nav-link-label">Déconnexion</span>
                     </Link>

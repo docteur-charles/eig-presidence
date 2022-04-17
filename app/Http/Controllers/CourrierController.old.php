@@ -75,11 +75,11 @@ class CourrierController extends Controller
 	public function consultReceived()
 	{
 		if (Gate::allows('ConsultReceived')) {
-			//$user = Auth::user();
+			// $user = Auth::user();
 			$listCourrier = Courrier::where([
 				['statut', '=', 'OUVERT'],
 				['type_courrier', '=', 'ENTRANT'],
-				//['etape_actuelle', '=', $user->role->grade]
+				// ['etape_actuelle', '=', $user->role->grade]
 			])->where(function ($query) {
 				if (!Gate::allows('ConsultConfidential')) {
 					$query->where([
@@ -100,12 +100,11 @@ class CourrierController extends Controller
 					} else if (!($courrier->etat == 'IMPUTE')) {
 						return $courrier->etape_actuelle == $user->role->grade;
 					}
-					return false;
 				});
 
 			return  response()->json([
 				'success' => true,
-				'data' => $listCourrier->isEmpty() ? [] : $listCourrier
+				'courriers' => $listCourrier->isEmpty() ? [] : $listCourrier
 			]);
 		}
 
@@ -130,13 +129,10 @@ class CourrierController extends Controller
 		}
 
 		if (Gate::allows('Consult', $courrier)) {
-			// $courrier->url_fichier = storage_path('app/public');
 			return  response()->json([
 				'success' => true,
-				'data' => [
-					'courrier' => $courrier,
-					'roles' => Role::all()
-				]
+				'courrier' => $courrier,
+				'roles' => Role::all()
 			]);
 		}
 
@@ -242,13 +238,7 @@ class CourrierController extends Controller
 					'courrier_id' => $c->id
 				]);
 				DB::commit();
-				return response()->json([
-					'success' => true,
-					'data' => [
-						'courrier' => $c->id, 'message' => 'Courrier transféré au ' . $nextUser->description
-					]
-
-				]);
+				return response()->json(['success' => true, 'courrier' => $c->id, 'message' => 'Courrier transféré au ' . $nextUser->description]);
 			} catch (Exception $e) {
 				// @TODO: IL faut aussi supprimer le fichier uploadé après le rollBack.
 				DB::rollBack();
@@ -288,19 +278,13 @@ class CourrierController extends Controller
 			if ($op->type == 'Annotate') {
 				$op->donnees = join('; ', explode('$$', $operation->donnees));
 			}
-			unset(
-				$op->updated_at,
-				$op->courrier_id,
-				$op->user_id,
-			);
+			unset($op->updated_at,
+			$op->courrier_id,
+			$op->user_id,);
 			$ops[] = $op;
 		}
 
-		return response()->json([
-			'success' => true, 'data' => [
-				'tracks' => $ops
-			]
-		]);
+		return response()->json($ops);
 	}
 
 
@@ -346,7 +330,7 @@ class CourrierController extends Controller
 			try {
 				$result = Courrier::where([
 					['id', '=', $request->courrier_id],
-					['etat', '=', $request->etat === 'RETOURNE' ? 'VALIDE' : 'ATTENTE'],
+					['etat', '=', $request->etat === 'RETOURNE' ? 'VALIDE':'ATTENTE'],
 					['statut', '=', 'OUVERT'],
 					['etape_actuelle', '=', $user->role->grade]
 				])->update([
@@ -468,11 +452,7 @@ class CourrierController extends Controller
 						'courrier_id' => $request->courrier_id
 					]);
 					DB::commit();
-					return response()->json([
-						'success' => true, 'data' => [
-							'message' => "Courrier validé et transféré au niveau supérieur."
-						]
-					]);
+					return response()->json(['success' => true, 'message' => "Courrier validé et transféré au niveau supérieur."]);
 				}
 				return response()->json([
 					'success' => false,
@@ -520,11 +500,7 @@ class CourrierController extends Controller
 						'courrier_id' => $request->courrier_id
 					]);
 					DB::commit();
-					return response()->json([
-						'success' => true, 'data' => [
-							'message' => "Courrier imputé aux cellules sélectionnées."
-						]
-					]);
+					return response()->json(['success' => true, 'message' => "Courrier imputé aux cellules sélectionnées."]);
 				}
 				return response()->json([
 					'success' => false,
@@ -581,11 +557,7 @@ class CourrierController extends Controller
 
 	public function sendDirectionsList()
 	{
-		return response()->json([
-			'success' => true, 'data' => [
-				'dir' => Direction::all()
-			]
-		]);
+		return response()->json(Direction::all());
 	}
 
 	/**
