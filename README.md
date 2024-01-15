@@ -94,7 +94,14 @@ php artisan migrate:fresh --seed
 
 Ceci a pour effet de créer les tables de la base de données et des données nécessaires à la configuration initiale de l'application. Nous en avons profité pour ajouter des utilisateurs et des rôles. Vous pouvez personaliser tout ça plus tard dans l'interface admin qui sera créée à cet effet. 
 
-Tapez la commande:
+Une fois que cela est fait, il nous reste maintenant à créer des liens symboliques pour le stockage des fichiers.
+
+
+```sh
+php artisan storage:link
+```
+
+Tapez enfin la commande:
 
 ```sh
 php artisan serve
